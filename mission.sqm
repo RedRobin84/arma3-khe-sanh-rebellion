@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=110;
+		nextID=117;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=32;
+		nextID=34;
 	};
 	class Camera
 	{
-		pos[]={14269.52,201.97807,1893.5883};
-		dir[]={-0.039812643,-0.67936629,0.73271853};
-		up[]={-0.036859348,0.73379928,0.67836559};
-		aside[]={0.99852705,0,0.054255486};
+		pos[]={14923.732,113.85842,2058.5132};
+		dir[]={-1.2363449e-007,-0.70710683,0.70710683};
+		up[]={-1.2363449e-007,0.70710671,0.70710683};
+		aside[]={1,0,1.7484557e-007};
 	};
 };
 binarizationWanted=0;
@@ -35,13 +35,14 @@ addons[]=
 	"A3_Modules_F",
 	"characters_f_vietnam_c",
 	"sounds_f_vietnam_c",
-	"A3_Ui_F"
+	"A3_Ui_F",
+	"A3_Modules_F_Curator_Curator"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=5;
+		items=6;
 		class Item0
 		{
 			className="weapons_f_vietnam_c";
@@ -74,6 +75,13 @@ class AddonsMetaData
 		{
 			className="A3_Ui_F";
 			name="Arma 3 - User Interface";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item5
+		{
+			className="A3_Modules_F_Curator";
+			name="Arma 3 Zeus Update - Scripted Modules";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -136,7 +144,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=21;
+		items=22;
 		class Item0
 		{
 			dataType="Object";
@@ -451,7 +459,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="Old_debris";
+							value="oldDebris";
 						};
 					};
 				};
@@ -601,12 +609,13 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={14545.574,31.684534,2248.5422};
+						position[]={14545.574,31.684576,2248.542};
 					};
 					side="East";
 					flags=7;
 					class Attributes
 					{
+						name="playa";
 						isPlayer=1;
 						class Inventory
 						{
@@ -1018,28 +1027,28 @@ class Mission
 		class Item13
 		{
 			dataType="Marker";
-			position[]={15271.225,35.687256,3311.4053};
+			position[]={14637.316,3.3056641,2922.8416};
 			name="Naxok0";
 			type="mil_start";
 			id=94;
-			atlOffset=-2.8682709;
+			atlOffset=-2.9819283;
 		};
 		class Item14
 		{
 			dataType="Marker";
-			position[]={14662.437,37.292236,3001.3667};
+			position[]={15243.79,33.521481,3379.0117};
 			name="Naxok1";
 			type="mil_start";
 			id=99;
-			atlOffset=33.780743;
 		};
 		class Item15
 		{
 			dataType="Marker";
-			position[]={15325.606,70.643188,2651.1792};
+			position[]={15316.452,66.750977,2627.6812};
 			name="Naxok2";
 			type="mil_start";
 			id=100;
+			atlOffset=-3.9914932;
 		};
 		class Item16
 		{
@@ -1062,29 +1071,29 @@ class Mission
 		class Item17
 		{
 			dataType="Marker";
-			position[]={14470.563,161.638,1824.495};
-			name="0ld_debris0";
+			position[]={15215.234,55.992378,2186.8523};
+			name="oldDebris0";
 			type="mil_start";
 			id=104;
-			atlOffset=33.780563;
+			atlOffset=-32.820381;
 		};
 		class Item18
 		{
 			dataType="Marker";
-			position[]={15081.746,124.826,2154.8459};
-			name="0ld_debris1";
+			position[]={14423.733,140.92044,1774.5447};
+			name="oldDebris1";
 			type="mil_start";
 			id=105;
-			atlOffset=33.781036;
+			atlOffset=16.304016;
 		};
 		class Item19
 		{
 			dataType="Marker";
-			position[]={14151.827,42.213001,2017.411};
-			name="0ld_debris2";
+			position[]={14149.855,56.148998,2027.9834};
+			name="oldDebris2";
 			type="mil_start";
 			id=106;
-			atlOffset=33.780491;
+			atlOffset=47.51033;
 		};
 		class Item20
 		{
@@ -1104,6 +1113,97 @@ class Mission
 			id=107;
 			type="EmptyDetector";
 			atlOffset=0.017000198;
+		};
+		class Item21
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={14540.46,40.880211,2210.845};
+			};
+			id=111;
+			type="ModuleCurator_F";
+			atlOffset=3.8146973e-006;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ModuleCurator_F_Owner";
+					expression="_this setVariable ['Owner',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="playa";
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="ModuleCurator_F_Forced";
+					expression="_this setVariable ['Forced',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property="ModuleCurator_F_Name";
+					expression="_this setVariable ['Name',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="";
+						};
+					};
+				};
+				class Attribute3
+				{
+					property="ModuleCurator_F_Addons";
+					expression="_this setVariable ['Addons',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=2;
+						};
+					};
+				};
+				nAttributes=4;
+			};
 		};
 	};
 	class Connections
