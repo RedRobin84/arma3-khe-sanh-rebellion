@@ -1,0 +1,125 @@
+class CfgNotifications {
+
+	class Warning {
+		color[] = {"(profilenamespace getvariable ['IGUI_WARNING_RGB_R',0.8])","(profilenamespace getvariable ['IGUI_WARNING_RGB_G',0.5])","(profilenamespace getvariable ['IGUI_WARNING_RGB_B',0.0])",1};
+		iconPicture = "\a3\Ui_f\data\Map\Markers\Military\warning_ca.paa";
+		description = "%1";
+		sound = "defaultNotification";
+		soundClose = "defaultNotificationClose";
+		title = "Warning";
+	};
+
+};
+
+class CfgGroups {
+
+    class West {
+		name = "BLUFOR";
+		side = 1;
+
+        class VN_MACV {
+			name = "MACV";
+
+            class Infantry {
+				name = "Infantry";
+
+                class war_status_one {
+					faction = "B_MACV";
+					icon = "\A3\ui_f\data\map\markers\nato\b_recon.paa";
+					name = "Recon Team Columbia";
+					rarityGroup = 0.5;
+					side = 1;
+
+						class unit1 {
+							position[] = {0,-5,0};
+							rank = "SERGEANT";
+							side = 1;
+							vehicle = "vn_b_men_sog_01";
+						};
+						
+						class unit2 {
+							position[] = {0,-10,0};
+							rank = "SERGEANT";
+							side = 1;
+							vehicle = "vn_b_men_sog_02";
+						};
+						
+						class unit3 {
+							position[] = {0,-15,0};
+							rank = "SERGEANT";
+							side = 1;
+							vehicle = "vn_b_men_sog_03";
+						};
+						
+						class unit4 {
+							position[] = {0,-20,0};
+							rank = "CORPORAL";
+							side = 1;
+							vehicle = "vn_b_men_sog_04";
+						};
+						
+						class unit5 {
+							position[] = {0,-25,0};
+							rank = "CORPORAL";
+							side = 1;
+							vehicle = "vn_b_men_sog_05";
+						};
+						
+						class unit6 {
+							position[] = {0,-30,0};
+							rank = "PRIVATE";
+							side = 1;
+							vehicle = "vn_b_men_sog_06";
+						};
+						
+						class unit7 {
+							position[] = {0,-35,0};
+							rank = "PRIVATE";
+							side = 1;
+							vehicle = "vn_b_men_sog_07";
+						};
+						
+						class unit8 {
+							position[] = {0,-40,0};
+							rank = "PRIVATE";
+							side = 1;
+							vehicle = "vn_b_men_sog_08";
+						};
+						
+						class unit9 {
+							position[] = {0,-45,0};
+							rank = "PRIVATE";
+							side = 1;
+							vehicle = "vn_b_men_sog_09";
+						};
+
+						class unit10 {
+							position[] = {0,-50,0};
+							rank = "PRIVATE";
+							side = 1;
+							vehicle = "vn_b_men_sog_10";
+						};
+						
+						class unit11 {
+							position[] = {0,-55,0};
+							rank = "PRIVATE";
+							side = 1;
+							vehicle = "vn_b_men_sog_11";
+						};
+						
+						class unit12 {
+							position[] = {0,-60,0};
+							rank = "PRIVATE";
+							side = 1;
+							vehicle = "vn_b_men_sog_12";
+						};
+
+                };
+            };
+
+            class Motorized {};     //SpawnAI module looks for this class
+            class Mechanized {};    //SpawnAI module looks for this class
+            class Armored {};       //SpawnAI module looks for this class
+        };
+    };
+};
