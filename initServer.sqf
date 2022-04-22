@@ -33,13 +33,41 @@ recruitUnit = {
 	};
 	systemChat ("Random recruit ID: " + _randomUnitId);
 	_myUnitName = "vn_c_men_" + _randomUnitId;
-	_myUnitName createUnit [position player, group player, "removeAllAssignedItems this;"];
+	_myUnitName createUnit [position player, group player, "removeAllAssignedItems this; this call addActionStayHere; this call addRemoveAllActionsFromCorpseHandler"];
+
 	manpower = manpower - 1;
+};
+
+addRemoveAllActionsFromCorpseHandler = {
+	params["_unit"];
+	_unit addEventHandler ["Killed", {
+		params ["_unit"];
+		removeAllActions _unit;
+	}];
+};
+
+addActionStayHere = {
+	params["_unit"];
+	_unit addAction["Stay here.", removeUnit, [_unit]];
+};
+
+removeUnit = {
+	params["_unit"];
+	[_unit] joinSilent grpNull;
+	removeAllActions _unit;
+	_unit addAction["Join me.", joinPlayer, [_unit]];
+};
+
+joinPlayer = {
+	params["_unit"];
+	removeAllActions _unit;
+	_unit call addActionStayHere;
+	[_unit] join (group player);
 };
 
 attackRandomSettlement = {
 _units = [
-	"vn_b_men_sog_09",0.5, "vn_b_men_sog_10",0.4,"vn_b_men_sog_04",0.1
+	"vn_b_men_sog_09",0.5, "vn_b_men_sog_10",0.4,"vn_b_men_sog_04",0.1 //random like in recruitUnit instead of an array
 ];
 _allSectors = true call BIS_fnc_moduleSector;
 if (count _allSectors == 0) exitwith {systemChat "No sector found. Exiting.";};
