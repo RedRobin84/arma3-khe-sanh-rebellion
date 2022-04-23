@@ -1,9 +1,12 @@
-_executeTime = 600; // 600 seconds, aka 10 minutes.
+_executeTime = 10; // 600 seconds, aka 10 minutes.
 manpower = 0;
+
+//AKA Influence
 totalPOVL = 0;
 
 
 0 spawn {
+	call initGUI;
 	call makeAllSpawnPointMarkersInvisible;
 	sleep 2;
 	call displayInitialTask;
@@ -35,7 +38,13 @@ recruitUnit = {
 	_myUnitName = "vn_c_men_" + _randomUnitId;
 	_myUnitName createUnit [position player, group player, "removeAllAssignedItems this; this call addActionStayHere; this call addRemoveAllActionsFromCorpseHandler"];
 
-	manpower = manpower - 1;
+	call decreaseManpower;
+};
+
+decreaseManpower = {
+	if (manpower > 0) then {
+		manpower = manpower - 1;
+	};
 };
 
 addRemoveAllActionsFromCorpseHandler = {
@@ -102,13 +111,24 @@ updateManpower = {
 };
 
 showReport = {
-	strToDisplay = "Manpower: " + str (manpower) + "TotalPOVL: " + str (totalPOVL);
+	strToDisplay = "Manpower: " + str (manpower) + " Influence: " + str (totalPOVL);
 	["ScoreAdded", [strToDisplay]] call BIS_fnc_showNotification;
 };
 
 _globalScriptsRun = {
 	call updateManpower;
 	call showReport;
+	call updateGui;
+};
+
+initGUI = {
+	("ManpowerTitle_layer" call BIS_fnc_rscLayer) cutRsc ["ManpowerTitle","PLAIN"];
+	("TotalPOVL_layer" call BIS_fnc_rscLayer) cutRsc ["TotalPOVLTitle","PLAIN"];
+};
+
+updateGUI = {
+	(uiNameSpace getVariable "myUI_manpower") ctrlSetText format["Manpower: %1",manpower];
+	(uiNameSpace getVariable "myUI_totalPOVL") ctrlSetText format["Influence: %1",totalPOVL];
 };
 
 realTickTime = 0; // declare the local variable for the loop compare.
