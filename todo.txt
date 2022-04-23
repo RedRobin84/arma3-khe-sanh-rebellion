@@ -1,0 +1,1 @@
+Add more civilian types to description.ext CfgVehicles >> UnitTypes

@@ -1,4 +1,4 @@
-_executeTime = 10; // 600 seconds, aka 10 minutes.
+_executeTime = 600; // 600 seconds, aka 10 minutes.
 manpower = 0;
 
 //AKA Influence

@@ -175,3 +175,18 @@ class RscTitles
                }; 
        }; 
 };
+
+class CivilianPresence_Presets 
+{
+	class Civ_Vietnamese
+	{
+		name = "Men (Vietnamese)";
+		picture = "\a3\Data_f_enoch\flags\flag_Enoch_CO.paa";
+		value = "Civ_Vietnamese";
+		defaultValue = "Civ_Vietnamese";
+		class UnitTypes
+		{
+			bis_units[]	= {"vn_c_men_01", "vn_c_men_02", "vn_c_men_03", "vn_c_men_04", "vn_c_men_05", "vn_c_men_06", "vn_c_men_07"};
+		};
+	};
+};
