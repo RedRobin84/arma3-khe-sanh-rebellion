@@ -79,10 +79,8 @@ _units = [
 	"vn_b_men_sog_09",0.5, "vn_b_men_sog_10",0.4,"vn_b_men_sog_04",0.1 //random like in recruitUnit instead of an array
 ];
 _allSectors = true call BIS_fnc_moduleSector;
-if (count _allSectors == 0) exitwith {systemChat "No sector found. Exiting.";};
-systemChat str(count(_allSectors));
 _ownedSectors = [_allSectors, { str(_x getVariable "owner") == "EAST" }] call BIS_fnc_conditionalSelect;
-if (count _ownedSectors == 0) exitwith {systemChat "No owned sector found. Exiting.";};
+if (count _ownedSectors == 0) exitwith {systemChat "No owned sector found. Exiting.";}; //TODO: replace with getSectorsOwnedBySide
 systemChat str(count(_ownedSectors));
 _randomOwnedSector = selectRandom _ownedSectors;
 systemChat "random sector selected";
