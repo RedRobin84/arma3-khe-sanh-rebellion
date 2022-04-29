@@ -8,22 +8,21 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=134;
+		nextID=139;
 	};
 	class MarkerIDProvider
 	{
-		nextID=6;
+		nextID=11;
 	};
 	class LayerIndexProvider
 	{
-		nextID=56;
+		nextID=60;
 	};
 	class Camera
 	{
 		pos[]={14923.732,113.85842,2058.5132};
-		dir[]={-1.2363449e-007,-0.70710683,0.70710683};
-		up[]={-1.2363449e-007,0.70710671,0.70710683};
-		aside[]={1,0,1.7484557e-007};
+		dir[]={0,-0.70710683,0.70710683};
+		up[]={0,0.70710671,0.70710683};
 	};
 };
 binarizationWanted=0;
@@ -570,23 +569,6 @@ class Mission
 		};
 		class Item8
 		{
-			dataType="Trigger";
-			position[]={14559.372,22.454302,2285.7549};
-			class Attributes
-			{
-				name="tr_presence_oldDebris";
-				condition="this && round (time %600) == 600 && sectorOldDebris getVariable ""owner"" == WEST && (count (allunits select { _x inArea thisTrigger && { side group _x isEqualTo west } })) < sectorOldDebris getVariable ""max"" && (count (allunits select { _x inArea thisTrigger && { side group _x isEqualTo west } })) < totalPOVL;";
-				sizeA=250;
-				sizeB=250;
-				repeatable=1;
-				activationType="NOT PRESENT";
-				activationBy="EAST";
-			};
-			id=42;
-			type="EmptyDetectorAreaR250";
-		};
-		class Item9
-		{
 			dataType="Group";
 			side="West";
 			class Entities
@@ -613,7 +595,7 @@ class Mission
 			};
 			id=64;
 		};
-		class Item10
+		class Item9
 		{
 			dataType="Group";
 			side="East";
@@ -726,7 +708,7 @@ class Mission
 			};
 			id=27;
 		};
-		class Item11
+		class Item10
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -758,7 +740,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="1";
+							value="0";
 						};
 					};
 				};
@@ -1031,7 +1013,7 @@ class Mission
 				nAttributes=15;
 			};
 		};
-		class Item12
+		class Item11
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1041,7 +1023,7 @@ class Mission
 			id=81;
 			type="LocationArea_F";
 		};
-		class Item13
+		class Item12
 		{
 			dataType="Marker";
 			position[]={14637.316,3.3056641,2922.8416};
@@ -1050,7 +1032,7 @@ class Mission
 			id=94;
 			atlOffset=-2.9819283;
 		};
-		class Item14
+		class Item13
 		{
 			dataType="Marker";
 			position[]={15243.79,33.521481,3379.0117};
@@ -1058,7 +1040,7 @@ class Mission
 			type="mil_start";
 			id=99;
 		};
-		class Item15
+		class Item14
 		{
 			dataType="Marker";
 			position[]={15316.452,66.750977,2627.6812};
@@ -1067,7 +1049,7 @@ class Mission
 			id=100;
 			atlOffset=-3.9914932;
 		};
-		class Item16
+		class Item15
 		{
 			dataType="Trigger";
 			position[]={14432.587,0.0001745224,2556.1089};
@@ -1085,7 +1067,7 @@ class Mission
 			type="EmptyDetector";
 			atlOffset=9.882;
 		};
-		class Item17
+		class Item16
 		{
 			dataType="Marker";
 			position[]={15215.234,55.992378,2186.8523};
@@ -1094,7 +1076,7 @@ class Mission
 			id=104;
 			atlOffset=-32.820381;
 		};
-		class Item18
+		class Item17
 		{
 			dataType="Marker";
 			position[]={14423.733,140.92044,1774.5447};
@@ -1103,7 +1085,7 @@ class Mission
 			id=105;
 			atlOffset=16.304016;
 		};
-		class Item19
+		class Item18
 		{
 			dataType="Marker";
 			position[]={14149.855,56.148998,2027.9834};
@@ -1112,12 +1094,13 @@ class Mission
 			id=106;
 			atlOffset=47.51033;
 		};
-		class Item20
+		class Item19
 		{
 			dataType="Trigger";
 			position[]={14569.468,22.530834,2290.063};
 			class Attributes
 			{
+				name="sectortest";
 				condition="this && str(([true call BIS_fnc_moduleSector, thisTrigger] call BIS_fnc_nearestPosition) getVariable ""owner"") == ""EAST"";";
 				onActivation="player addaction [""Recruit volunteer"", recruitUnit];";
 				onDeactivation="removeAllActions player;";
@@ -1131,7 +1114,7 @@ class Mission
 			type="EmptyDetector";
 			atlOffset=0.017000198;
 		};
-		class Item21
+		class Item20
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1222,7 +1205,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item22
+		class Item21
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1296,7 +1279,7 @@ class Mission
 				nAttributes=3;
 			};
 		};
-		class Item23
+		class Item22
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1447,7 +1430,7 @@ class Mission
 				nAttributes=7;
 			};
 		};
-		class Item24
+		class Item23
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1541,7 +1524,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item25
+		class Item24
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1634,7 +1617,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item26
+		class Item25
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1727,7 +1710,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item27
+		class Item26
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1740,7 +1723,7 @@ class Mission
 			id=122;
 			type="ModuleCivilianPresenceUnit_F";
 		};
-		class Item28
+		class Item27
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1833,7 +1816,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item29
+		class Item28
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1926,7 +1909,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item30
+		class Item29
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -2019,13 +2002,25 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item31
+		class Item30
 		{
 			dataType="Marker";
 			position[]={14554.042,22.804621,2273.4844};
 			name="marker_2";
 			type="respawn_inf";
 			id=130;
+		};
+		class Item31
+		{
+			dataType="Marker";
+			position[]={14566.788,22.495001,2287.3301};
+			name="oldDebris_spawn";
+			markerType="ELLIPSE";
+			type="";
+			a=30;
+			b=30;
+			id=138;
+			atlOffset=-0.00021743774;
 		};
 	};
 	class Connections

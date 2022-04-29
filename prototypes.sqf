@@ -1,4 +1,4 @@
-populateEnemySectors = {
+/*populateEnemySectors = {
 	_enemySectors = "WEST" call getSectorsOwnedBySide;
 	if (isNil _enemySectors) exitwith {};
 	{
@@ -34,4 +34,4 @@ getSectorsOwnedBySide = {
 		};
 	systemChat ("Found " + _sideSectorsCount + " sector(s) owned by " + _sideName);
 	_sideSectors
-};
+};*/

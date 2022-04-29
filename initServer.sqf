@@ -34,9 +34,11 @@ populateEnemySectors = {
 		_allUnitsInEnemySector = allUnits inAreaArray _enemySector;
 		_enemySectorUnitCount = west countSide _allUnitsInEnemySector;
 		if (((west countSide _allUnitsInEnemySector) < _maxEnemySectorUnits) && (east countSide _allUnitsInEnemySector) == 0) then {
-			_enemySectorTrigger = (_enemySector getVariable "areas") select 0 (getVariable "markers") select 0;
-			systemChat(str(allMapMarkers inAreaArray _enemySectorTrigger));
-			_allStaticSpawnPointsInEnemySector = [(allMapMarkers inAreaArray _enemySectorTrigger), { getMarkerType _x == "respawn_inf" }] call BIS_fnc_conditionalSelect;
+			_enemySectorSpawnAreaName = (_enemySector getVariable "name") + "_spawne";
+			systemChat(str(count(getMarkerPos _enemySectorSpawnAreaName)));
+			if (_enemySectorSpawnAreaName call ) exitWith { systemChat(" spawn area not found") };
+			systemChat("test");
+			_allStaticSpawnPointsInEnemySector = allMapMarkers select {(getMarkerPos _x) inArea _enemySectorSpawnAreaName && (getMarkerType _x) == "respawn_inf"};
 			if (count _allStaticSpawnPointsInEnemySector == 0) exitWith {
 				systemChat("ERROR: No spawn points set for sector " + str(_enemySector));
 			};
@@ -49,6 +51,11 @@ populateEnemySectors = {
 			};
 		};		
 	} forEach _enemySectors;
+};
+
+MarkerNotExist = {
+	_position = getMarkerPos(_this select 0);
+	(_position select 0) == 0 && (_position select 1) == 0 && (_position select 2) == 0
 };
 
 getSectorsOwnedBySide = {
@@ -159,6 +166,7 @@ _globalScriptsRun = {
 	call updateManpower;
 	call showReport;
 	call updateGui;
+	call attackRandomSettlement;
 };
 
 initGUI = {
