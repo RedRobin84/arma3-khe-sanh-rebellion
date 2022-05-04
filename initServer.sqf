@@ -46,16 +46,23 @@ populateEnemySectors = {
 			_allUnoccupiedStaticSpawnPointsInEnemySector = [_allStaticSpawnPointsInEnemySector, { count(_allEnemyUnitsInSector inAreaArray _x) == 0 }] call BIS_fnc_conditionalSelect;
 			if ((count _allUnoccupiedStaticSpawnPointsInEnemySector) != 0) then {
 				_chosenSpawnPoint = selectRandom _allUnoccupiedStaticSpawnPointsInEnemySector;
-				_unit = "vn_b_men_sog_09";
-				systemChat("Creating unit " + str(_unit) + " on spawn point " + str(_chosenSpawnPoint));
-				_unit createUnit [getMarkerPos(_chosenSpawnPoint), grpNull];
+				_chosenSpawnPointPos = getMarkerPos(_chosenSpawnPoint);
+				_chosenSpawnPointPos set [2, parseNumber(markerText _chosenSpawnPoint)];
+				_unitType = "vn_b_men_sog_09";
+				systemChat("Creating unit " +_unitType + " on spawn point " + _chosenSpawnPoint);
+				
+				_unit = (createGroup west) createUnit [_UnitType,_chosenSpawnPointPos, [], 0, "NONE"];
+				_unit setposATL [_chosenSpawnPointPos select 0, _chosenSpawnPointPos select 1, _chosenSpawnPointPos select 2];
+				_chosenSpawnPointDirection = markerDir _chosenSpawnPoint;
+				_unit setDir _chosenSpawnPointDirection;
+				_unit setFormDir _chosenSpawnPointDirection;
 			};
 		};		
 	} forEach _enemySectors;
 };
 
 markerNotExist = {
-	_position = getMarkerPos(_this select 0);
+	_position = _this;
 	(_position select 0) == 0 && (_position select 1) == 0 && (_position select 2) == 0
 };
 

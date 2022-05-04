@@ -8,21 +8,22 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=139;
+		nextID=148;
 	};
 	class MarkerIDProvider
 	{
-		nextID=11;
+		nextID=12;
 	};
 	class LayerIndexProvider
 	{
-		nextID=60;
+		nextID=66;
 	};
 	class Camera
 	{
-		pos[]={14923.732,113.85842,2058.5132};
-		dir[]={0,-0.70710683,0.70710683};
-		up[]={0,0.70710671,0.70710683};
+		pos[]={14552.278,32.236568,2288.6013};
+		dir[]={-0.73084325,-0.0013095154,0.68254411};
+		up[]={-0.00095705147,0.99999923,0.00089380291};
+		aside[]={0.68254477,0,0.7308439};
 	};
 };
 binarizationWanted=0;
@@ -2005,14 +2006,6 @@ class Mission
 		class Item30
 		{
 			dataType="Marker";
-			position[]={14554.042,22.804621,2273.4844};
-			name="marker_2";
-			type="respawn_inf";
-			id=130;
-		};
-		class Item31
-		{
-			dataType="Marker";
 			position[]={14566.788,22.495001,2287.3301};
 			name="oldDebris_spawn";
 			markerType="ELLIPSE";
@@ -2021,6 +2014,17 @@ class Mission
 			b=30;
 			id=138;
 			atlOffset=-0.00021743774;
+		};
+		class Item31
+		{
+			dataType="Marker";
+			position[]={14550.372,22.434999,2290.439};
+			name="marker_2";
+			text="8.381";
+			type="respawn_inf";
+			angle=112.21661;
+			id=140;
+			atlOffset=0.04067421;
 		};
 	};
 	class Connections
