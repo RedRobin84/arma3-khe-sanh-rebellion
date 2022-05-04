@@ -1,4 +1,5 @@
 _executeTime = 600; // 600 seconds, aka 10 minutes.
+defcon = 0;
 manpower = 0;
 
 //AKA Influence
@@ -6,12 +7,35 @@ totalPOVL = 0;
 
 
 0 spawn {
-	call initGUI;
 	call makeAllSpawnPointMarkersInvisible;
-	sleep 2;
+	sleep 1;
+	call initGUI;
+	sleep 1;
 	call displayInitialTask;
-	sleep 3;
-	call populateEnemySectors;
+	sleep 5;
+	call updateDefCon;
+};
+
+updateDefCon = {
+	defcon = call calculateWarLevel;
+	_msg = "DEFCON at level " + str(defcon);
+	["Warning", [_msg]] call BIS_fnc_showNotification;
+};
+
+calculateWarLevel = {
+	if (totalPOVL < 2) exitWith {
+		6
+	};
+	if (totalPOVL < 4) exitWith {
+		5
+	};
+	if (totalPOVL < 6) exitWith {
+		4
+	};
+	if (totalPOVL < 8) exitWith {
+		3
+	};
+	2
 };
 
 makeAllSpawnPointMarkersInvisible =  {
@@ -155,6 +179,7 @@ new_wp setWaypointType "GUARD";
 warningMsg = "Enemy is attacking " + _randomOwnedSectorName;
 [warningMsg, 1] call BIS_fnc_3DENNotification;
 ["Warning", [warningMsg]] call BIS_fnc_showNotification;
+call _updateDefCon;
 };
 
 
@@ -170,11 +195,17 @@ showReport = {
 	["ScoreAdded", [strToDisplay]] call BIS_fnc_showNotification;
 };
 
-_globalScriptsRun = {
+globalScriptsRun = {
 	call updateManpower;
 	call showReport;
 	call updateGui;
-	call attackRandomSettlement;
+
+	defcon = _defcon - 1;
+	if (defcon == 0) then {
+		call attackRandomSettlement;
+	};
+
+	call populateEnemySectors;
 };
 
 initGUI = {
@@ -194,7 +225,7 @@ while {true} do // loops for entire duration that mission/server is running.
 	ticksBegin = round(diag_TickTime); // tick time begin.
 	if (realTickTime >= _executeTime) then // check _realTickTime against executeTime.
 	{
-		call _globalScriptsRun; // call the function.
+		call globalScriptsRun; // call the function.
 		realTickTime = 0; // reset the timer back to 0 to allow counting to 300 again.
 	};
 	uiSleep 1; // sleep for one second.
