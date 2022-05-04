@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=148;
+		nextID=167;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,13 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=68;
+		nextID=75;
 	};
 	class Camera
 	{
-		pos[]={14552.278,32.236568,2288.6013};
-		dir[]={-0.73084325,-0.0013095154,0.68254411};
-		up[]={-0.00095705147,0.99999923,0.00089380291};
-		aside[]={0.68254477,0,0.7308439};
+		pos[]={0,25,-25};
+		dir[]={0,-0.70710683,0.70710683};
+		up[]={0,0.70710671,0.70710683};
 	};
 };
 binarizationWanted=0;
@@ -160,7 +159,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=32;
+		items=36;
 		class Item0
 		{
 			dataType="Object";
@@ -556,20 +555,6 @@ class Mission
 		};
 		class Item6
 		{
-			dataType="Layer";
-			name="BLUEFOR_respawn_site";
-			id=38;
-			atlOffset=-36.689999;
-		};
-		class Item7
-		{
-			dataType="Layer";
-			name="BLUEFOR_respawn_site";
-			id=40;
-			atlOffset=-36.689999;
-		};
-		class Item8
-		{
 			dataType="Group";
 			side="West";
 			class Entities
@@ -596,7 +581,7 @@ class Mission
 			};
 			id=64;
 		};
-		class Item9
+		class Item7
 		{
 			dataType="Group";
 			side="East";
@@ -709,7 +694,7 @@ class Mission
 			};
 			id=27;
 		};
-		class Item10
+		class Item8
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -741,7 +726,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="0";
+							value="1";
 						};
 					};
 				};
@@ -893,7 +878,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="2";
+							value="1";
 						};
 					};
 				};
@@ -1014,7 +999,7 @@ class Mission
 				nAttributes=15;
 			};
 		};
-		class Item11
+		class Item9
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1024,7 +1009,7 @@ class Mission
 			id=81;
 			type="LocationArea_F";
 		};
-		class Item12
+		class Item10
 		{
 			dataType="Marker";
 			position[]={14637.316,3.3056641,2922.8416};
@@ -1033,7 +1018,7 @@ class Mission
 			id=94;
 			atlOffset=-2.9819283;
 		};
-		class Item13
+		class Item11
 		{
 			dataType="Marker";
 			position[]={15243.79,33.521481,3379.0117};
@@ -1041,7 +1026,7 @@ class Mission
 			type="mil_start";
 			id=99;
 		};
-		class Item14
+		class Item12
 		{
 			dataType="Marker";
 			position[]={15316.452,66.750977,2627.6812};
@@ -1050,7 +1035,7 @@ class Mission
 			id=100;
 			atlOffset=-3.9914932;
 		};
-		class Item15
+		class Item13
 		{
 			dataType="Trigger";
 			position[]={14432.587,0.0001745224,2556.1089};
@@ -1068,7 +1053,7 @@ class Mission
 			type="EmptyDetector";
 			atlOffset=9.882;
 		};
-		class Item16
+		class Item14
 		{
 			dataType="Marker";
 			position[]={15215.234,55.992378,2186.8523};
@@ -1077,7 +1062,7 @@ class Mission
 			id=104;
 			atlOffset=-32.820381;
 		};
-		class Item17
+		class Item15
 		{
 			dataType="Marker";
 			position[]={14423.733,140.92044,1774.5447};
@@ -1086,7 +1071,7 @@ class Mission
 			id=105;
 			atlOffset=16.304016;
 		};
-		class Item18
+		class Item16
 		{
 			dataType="Marker";
 			position[]={14149.855,56.148998,2027.9834};
@@ -1095,13 +1080,13 @@ class Mission
 			id=106;
 			atlOffset=47.51033;
 		};
-		class Item19
+		class Item17
 		{
 			dataType="Trigger";
 			position[]={14569.468,22.530834,2290.063};
 			class Attributes
 			{
-				name="sectortest";
+				name="sector_recruit";
 				condition="this && str(([true call BIS_fnc_moduleSector, thisTrigger] call BIS_fnc_nearestPosition) getVariable ""owner"") == ""EAST"";";
 				onActivation="player addaction [""Recruit volunteer"", recruitUnit];";
 				onDeactivation="removeAllActions player;";
@@ -1115,7 +1100,7 @@ class Mission
 			type="EmptyDetector";
 			atlOffset=0.017000198;
 		};
-		class Item20
+		class Item18
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1206,7 +1191,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item21
+		class Item19
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1280,7 +1265,7 @@ class Mission
 				nAttributes=3;
 			};
 		};
-		class Item22
+		class Item20
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1431,7 +1416,7 @@ class Mission
 				nAttributes=7;
 			};
 		};
-		class Item23
+		class Item21
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1525,7 +1510,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item24
+		class Item22
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1618,7 +1603,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item25
+		class Item23
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1711,7 +1696,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item26
+		class Item24
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1724,7 +1709,7 @@ class Mission
 			id=122;
 			type="ModuleCivilianPresenceUnit_F";
 		};
-		class Item27
+		class Item25
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1817,7 +1802,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item28
+		class Item26
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -1910,7 +1895,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item29
+		class Item27
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -2003,7 +1988,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item30
+		class Item28
 		{
 			dataType="Marker";
 			position[]={14566.788,22.495001,2287.3301};
@@ -2015,16 +2000,96 @@ class Mission
 			id=138;
 			atlOffset=-0.00021743774;
 		};
-		class Item31
+		class Item29
 		{
 			dataType="Marker";
 			position[]={14550.372,22.434999,2290.439};
 			name="marker_2";
 			text="8.381";
 			type="respawn_inf";
-			angle=112.21661;
+			angle=112.21652;
 			id=140;
 			atlOffset=0.04067421;
+		};
+		class Item30
+		{
+			dataType="Layer";
+			name="BLUEFOR_respawn_site";
+			id=151;
+			atlOffset=-36.689999;
+		};
+		class Item31
+		{
+			dataType="Layer";
+			name="BLUEFOR_respawn_site";
+			id=153;
+			atlOffset=-36.689999;
+		};
+		class Item32
+		{
+			dataType="Layer";
+			name="BLUEFOR_respawn_site";
+			id=155;
+			atlOffset=-36.689999;
+		};
+		class Item33
+		{
+			dataType="Layer";
+			name="Recruitment trigger";
+			id=157;
+			atlOffset=-36.689999;
+		};
+		class Item34
+		{
+			dataType="Layer";
+			name="AI spawn area";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={15055.61,56.764,2843.291};
+					name="Naxok_spawn";
+					markerType="ELLIPSE";
+					type="";
+					a=50;
+					b=50;
+					id=163;
+					atlOffset=1.5258789e-005;
+				};
+			};
+			id=164;
+			atlOffset=1.5258789e-005;
+		};
+		class Item35
+		{
+			dataType="Layer";
+			name="Recruitment trigger";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Trigger";
+					position[]={15052.075,56.720127,2844.1289};
+					class Attributes
+					{
+						name="sector_recruit_1";
+						condition="this && str(([true call BIS_fnc_moduleSector, thisTrigger] call BIS_fnc_nearestPosition) getVariable ""owner"") == ""EAST"";";
+						onActivation="player addaction [""Recruit volunteer"", recruitUnit];";
+						onDeactivation="removeAllActions player;";
+						repeatable=1;
+						activationBy="ANYPLAYER";
+						triggerInterval=5;
+					};
+					id=165;
+					type="EmptyDetector";
+					atlOffset=0.017002106;
+				};
+			};
+			id=166;
+			atlOffset=0.017002106;
 		};
 	};
 	class Connections
