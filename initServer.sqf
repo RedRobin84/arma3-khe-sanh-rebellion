@@ -5,15 +5,34 @@ manpower = 0;
 //AKA Influence
 totalPOVL = 0;
 
-
 0 spawn {
 	call makeAllSpawnPointMarkersInvisible;
+	call initWinConditionForSectorsEventHandlers;
 	sleep 1;
 	call initGUI;
 	sleep 1;
 	call displayInitialTask;
 	sleep 5;
 	call updateDefCon;
+};
+
+initWinConditionForSectorsEventHandlers = {
+{
+	[ _x, "ownerChanged", {
+		params[ "_sector", "_owner", "_ownerOld" ];
+
+		if ( _owner isEqualTo EAST ) then {
+			call checkIfAllSectorsOwnedByEast;
+		};
+	}] call BIS_fnc_addScriptedEventHandler; 
+}forEach ( true call BIS_fnc_moduleSector );
+};
+
+checkIfAllSectorsOwnedByEast = {
+	_enemySectorNumber = west call BIS_fnc_moduleSector;
+	if (_enemySectorNumber == 0) then {
+		["end1", true, 20, true, false] call BIS_fnc_endMission;
+	};
 };
 
 updateDefCon = {
@@ -40,7 +59,8 @@ calculateWarLevel = {
 
 makeAllSpawnPointMarkersInvisible =  {
 	{
-	if (getMarkerType _x  == "mil_start") then { _x setMarkerAlpha 0;} 	
+	if (getMarkerType _x  == "mil_start" || getMarkerType _x  == "respawn_inf") 
+	then { _x setMarkerAlpha 0;} 	
 	} forEach allMapMarkers
 };
 
