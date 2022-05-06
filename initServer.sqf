@@ -1,4 +1,5 @@
 _executeTime = 600; // 600 seconds, aka 10 minutes.
+defcon = 0;
 manpower = 0;
 
 //AKA Influence
@@ -6,10 +7,35 @@ totalPOVL = 0;
 
 
 0 spawn {
-	call initGUI;
 	call makeAllSpawnPointMarkersInvisible;
-	sleep 2;
+	sleep 1;
+	call initGUI;
+	sleep 1;
 	call displayInitialTask;
+	sleep 5;
+	call updateDefCon;
+};
+
+updateDefCon = {
+	defcon = call calculateWarLevel;
+	_msg = "DEFCON at level " + str(defcon);
+	["Warning", [_msg]] call BIS_fnc_showNotification;
+};
+
+calculateWarLevel = {
+	if (totalPOVL < 2) exitWith {
+		6
+	};
+	if (totalPOVL < 4) exitWith {
+		5
+	};
+	if (totalPOVL < 6) exitWith {
+		4
+	};
+	if (totalPOVL < 8) exitWith {
+		3
+	};
+	2
 };
 
 makeAllSpawnPointMarkersInvisible =  {
@@ -20,6 +46,61 @@ makeAllSpawnPointMarkersInvisible =  {
 
 displayInitialTask = {
 	["ScoreAdded", ["Capture the ruins to the north"]] call BIS_fnc_showNotification;
+};
+
+populateEnemySectors = {
+	_enemySectors = "WEST" call getSectorsOwnedBySide;
+	if (count _enemySectors == 0) exitwith {};
+	{
+		_enemySector = _x;
+		_enemySectorName = _enemySector getVariable ["name", "undefined"];
+		if (_enemySectorName == "undefined") exitWith {systemChat("ERROR: Name not defined for sector" + _enemySectorName);};
+		_maxEnemySectorUnits = _enemySector getVariable["max", 0];
+		if (_maxEnemySectorUnits == 0) then {systemChat("WARN: Max units not set for sector " + _enemySectorName);};
+		_enemySectorSpawnAreaMarkerName = (_enemySector getVariable "name") + "_spawn";
+		_enemySectorSpawnAreaMarkerPos = getMarkerPos(_enemySectorSpawnAreaMarkerName);
+		if (_enemySectorSpawnAreaMarkerPos call markerNotExist) exitWith {systemChat("ERROR: Spawn marker not found for sector" + _enemySectorName);};
+		_allUnitsInEnemySector = allUnits inAreaArray _enemySectorSpawnAreaMarkerName;
+		_allEnemyUnitsInSector = [_allUnitsInEnemySector, { side _x == west }] call BIS_fnc_conditionalSelect;
+		if (((count(_allUnitsInEnemySector)) < _maxEnemySectorUnits) && (east countSide _allUnitsInEnemySector) == 0) then {
+			_allStaticSpawnPointsInEnemySector = allMapMarkers select {((getMarkerPos _x) inArea _enemySectorSpawnAreaMarkerName) && ((getMarkerType _x) == "respawn_inf")};
+			if (count(_allStaticSpawnPointsInEnemySector) == 0) exitWith {
+				systemChat("ERROR: No spawn points set for sector " + _enemySectorName);
+			};
+			_allUnoccupiedStaticSpawnPointsInEnemySector = [_allStaticSpawnPointsInEnemySector, { count(_allEnemyUnitsInSector inAreaArray _x) == 0 }] call BIS_fnc_conditionalSelect;
+			if ((count _allUnoccupiedStaticSpawnPointsInEnemySector) != 0) then {
+				_chosenSpawnPoint = selectRandom _allUnoccupiedStaticSpawnPointsInEnemySector;
+				_chosenSpawnPointPos = getMarkerPos(_chosenSpawnPoint);
+				_chosenSpawnPointPos set [2, parseNumber(markerText _chosenSpawnPoint)];
+				_unitType = "vn_b_men_sog_09";
+				systemChat("Creating unit " +_unitType + " on spawn point " + _chosenSpawnPoint);
+				
+				_unit = (createGroup west) createUnit [_UnitType,_chosenSpawnPointPos, [], 0, "NONE"];
+				_unit setposATL [_chosenSpawnPointPos select 0, _chosenSpawnPointPos select 1, _chosenSpawnPointPos select 2];
+				_chosenSpawnPointDirection = markerDir _chosenSpawnPoint;
+				_unit setDir _chosenSpawnPointDirection;
+				_unit setFormDir _chosenSpawnPointDirection;
+			};
+		};		
+	} forEach _enemySectors;
+};
+
+markerNotExist = {
+	_position = _this;
+	(_position select 0) == 0 && (_position select 1) == 0 && (_position select 2) == 0
+};
+
+getSectorsOwnedBySide = {
+	_sideName = _this;
+	_allSectors = true call BIS_fnc_moduleSector;
+	_sideSectors = [_allSectors, { str(_x getVariable "owner") == _sideName }] call BIS_fnc_conditionalSelect;
+	_sideSectorsCount = count _sideSectors;
+	if (_sideSectorsCount == 0) exitwith {
+		systemChat ("No sector owned by " + _sideName + " found. Exiting.");
+		[]
+		};
+	systemChat ("Found " + str(_sideSectorsCount) + " sector(s) owned by " + str(_sideName));
+	_sideSectors
 };
 
 calculateTotalPOVL = {
@@ -98,6 +179,7 @@ new_wp setWaypointType "GUARD";
 warningMsg = "Enemy is attacking " + _randomOwnedSectorName;
 [warningMsg, 1] call BIS_fnc_3DENNotification;
 ["Warning", [warningMsg]] call BIS_fnc_showNotification;
+call _updateDefCon;
 };
 
 
@@ -113,10 +195,17 @@ showReport = {
 	["ScoreAdded", [strToDisplay]] call BIS_fnc_showNotification;
 };
 
-_globalScriptsRun = {
+globalScriptsRun = {
 	call updateManpower;
 	call showReport;
 	call updateGui;
+
+	defcon = _defcon - 1;
+	if (defcon == 0) then {
+		call attackRandomSettlement;
+	};
+
+	call populateEnemySectors;
 };
 
 initGUI = {
@@ -136,7 +225,7 @@ while {true} do // loops for entire duration that mission/server is running.
 	ticksBegin = round(diag_TickTime); // tick time begin.
 	if (realTickTime >= _executeTime) then // check _realTickTime against executeTime.
 	{
-		call _globalScriptsRun; // call the function.
+		call globalScriptsRun; // call the function.
 		realTickTime = 0; // reset the timer back to 0 to allow counting to 300 again.
 	};
 	uiSleep 1; // sleep for one second.
