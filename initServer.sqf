@@ -205,9 +205,12 @@ call _updateDefCon;
 
 
 updateManpower = {
- allSectors = true call BIS_fnc_moduleSector;
  call calculateTotalPOVL;
- manpower = manpower + totalPOVL;
+ if ((manpower + totalPOVL) > totalPOVL) then {
+	 manpower = totalPOVL; //TODO: send info manpower cap reached to player
+ } else {
+	  manpower = manpower + totalPOVL;
+ };
 };
 
 showReport = {
