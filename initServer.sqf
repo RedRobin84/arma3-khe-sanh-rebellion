@@ -30,6 +30,7 @@ initWinConditionForSectorsEventHandlers = {
 
 checkIfAllSectorsOwnedByEast = {
 	_enemySectorNumber = west call BIS_fnc_moduleSector;
+	systemChat("Number of owned WEST sectors " + str(_enemySectorNumber));
 	if (_enemySectorNumber == 0) then {
 		["end1", true, 20, true, false] call BIS_fnc_endMission;
 	};
