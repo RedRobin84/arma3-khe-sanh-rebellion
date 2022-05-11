@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=169;
+		nextID=210;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=82;
+		nextID=101;
 	};
 	class Camera
 	{
-		pos[]={0,31.920967,-25};
-		dir[]={-1.2363449e-007,-0.70710683,0.70710683};
-		up[]={-1.2363449e-007,0.70710671,0.70710683};
-		aside[]={1,0,1.7484557e-007};
+		pos[]={15070.697,73.697311,2879.6401};
+		dir[]={-0.88548392,-0.40122709,0.23438266};
+		up[]={-0.38786948,0.91597861,0.10266688};
+		aside[]={0.25588223,0,0.96670806};
 	};
 };
 binarizationWanted=0;
@@ -152,7 +152,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=34;
+		items=45;
 		class Item0
 		{
 			dataType="Object";
@@ -178,7 +178,7 @@ class Mission
 				angles[]={0,0,0.0079936078};
 			};
 			name="sectorOldDebris";
-			init="this setVariable [""max"", 3, true];";
+			init="this setVariable [""max"", 3, true];" \n "this setVariable [""min"", 1, true];";
 			areaSize[]={30,0,30};
 			flags=1;
 			id=16;
@@ -668,7 +668,7 @@ class Mission
 				angles[]={0.053284902,0,0.0053232545};
 			};
 			name="sectorNaxok";
-			init="this setVariable [""max"", 5, true];";
+			init="this setVariable [""max"", 5, true];" \n "this setVariable [""min"", 3, true];";
 			areaSize[]={50,0,50};
 			flags=1;
 			id=80;
@@ -1957,17 +1957,210 @@ class Mission
 				class Item0
 				{
 					dataType="Marker";
-					position[]={14630.516,35.953217,2320.1047};
+					position[]={14553.763,22.438,2294.4209};
 					name="inf_respawn_marker";
-					text="attitude as number";
+					text="0";
 					type="respawn_inf";
-					angle=112.21694;
+					angle=41.948002;
 					id=167;
-					atlOffset=-0.00053024292;
+					atlOffset=0.027963638;
 				};
 			};
 			id=168;
-			atlOffset=-0.00053024292;
+			atlOffset=0.027963638;
+		};
+		class Item34
+		{
+			dataType="Layer";
+			name="Conquer sector";
+			id=170;
+			atlOffset=-36.689999;
+		};
+		class Item35
+		{
+			dataType="Layer";
+			name="Infantry respawn marker";
+			id=179;
+			atlOffset=-36.689999;
+		};
+		class Item36
+		{
+			dataType="Layer";
+			name="Attack Infantry respawn point";
+			id=181;
+			atlOffset=-36.689999;
+		};
+		class Item37
+		{
+			dataType="Layer";
+			name="Infantry respawn marker";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={15071.777,57.384998,2833.3259};
+					name="inf_respawn_marker_1";
+					text="0";
+					type="respawn_inf";
+					angle=285.27591;
+					id=182;
+					atlOffset=-0.0001449585;
+				};
+			};
+			id=183;
+			atlOffset=-0.0001449585;
+		};
+		class Item38
+		{
+			dataType="Layer";
+			name="Infantry respawn marker";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={15048.238,57.250999,2833.561};
+					name="inf_respawn_marker_2";
+					text="0";
+					type="respawn_inf";
+					angle=194.81096;
+					id=184;
+					atlOffset=-3.4332275e-005;
+				};
+			};
+			id=185;
+			atlOffset=-3.4332275e-005;
+		};
+		class Item39
+		{
+			dataType="Layer";
+			name="Infantry respawn marker";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={15063.927,55.016998,2874.4651};
+					name="inf_respawn_marker_3";
+					text="0";
+					type="respawn_inf";
+					angle=356.92093;
+					id=186;
+					atlOffset=-0.00054168701;
+				};
+			};
+			id=187;
+			atlOffset=-0.00054168701;
+		};
+		class Item40
+		{
+			dataType="Layer";
+			name="Infantry respawn marker";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={15081.129,58.373001,2836.4929};
+					name="inf_respawn_marker_4";
+					text="1.073";
+					type="respawn_inf";
+					angle=106.05397;
+					id=190;
+					atlOffset=1.0740128;
+				};
+			};
+			id=191;
+			atlOffset=1.0740128;
+		};
+		class Item41
+		{
+			dataType="Layer";
+			name="Infantry respawn marker";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={15076.681,59.827583,2819.5696};
+					name="inf_respawn_marker_5";
+					text="1.512";
+					type="respawn_inf";
+					angle=111.56782;
+					id=194;
+				};
+			};
+			id=195;
+		};
+		class Item42
+		{
+			dataType="Layer";
+			name="Infantry respawn marker";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={15048.798,57.000431,2837.9319};
+					name="inf_respawn_marker_6";
+					text="1.411";
+					type="respawn_inf";
+					angle=70.80909;
+					id=198;
+				};
+			};
+			id=199;
+		};
+		class Item43
+		{
+			dataType="Layer";
+			name="Infantry respawn marker";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={15017.643,59.009998,2834.8569};
+					name="inf_respawn_marker_7";
+					text="1.556";
+					type="respawn_inf";
+					angle=61.754791;
+					id=206;
+					atlOffset=1.5403862;
+				};
+			};
+			id=207;
+			atlOffset=1.5403862;
+		};
+		class Item44
+		{
+			dataType="Layer";
+			name="Infantry respawn marker";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={15042.148,55.466,2866.749};
+					name="inf_respawn_marker_8";
+					text="0";
+					type="respawn_inf";
+					angle=323.37601;
+					id=208;
+					atlOffset=-0.00022888184;
+				};
+			};
+			id=209;
+			atlOffset=-0.00022888184;
 		};
 	};
 	class Connections
