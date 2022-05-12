@@ -8,6 +8,7 @@ totalPOVL = 0;
 0 spawn {
 	call makeAllSpawnPointMarkersInvisible;
 	call initWinConditionForSectorsEventHandlers;
+	call populateEnemySectors;
 	sleep 1;
 	call initGUI;
 	sleep 1;
@@ -70,39 +71,59 @@ displayInitialTask = {
 };
 
 populateEnemySectors = {
-	_enemySectors = "WEST" call getSectorsOwnedBySide;
-	if (count _enemySectors == 0) exitwith {};
-	{
-		_enemySector = _x;
-		_enemySectorName = _enemySector getVariable ["name", "undefined"];
-		if (_enemySectorName == "undefined") exitWith {systemChat("ERROR: Name not defined for sector" + _enemySectorName);};
-		_maxEnemySectorUnits = _enemySector getVariable["max", 0];
-		if (_maxEnemySectorUnits == 0) then {systemChat("WARN: Max units not set for sector " + _enemySectorName);};
-		_enemySectorSpawnAreaMarkerName = (_enemySector getVariable "name") + "_spawn";
-		_enemySectorSpawnAreaMarkerPos = getMarkerPos(_enemySectorSpawnAreaMarkerName);
-		if (_enemySectorSpawnAreaMarkerPos call markerNotExist) exitWith {systemChat("ERROR: Spawn marker not found for sector" + _enemySectorName);};
-		_allUnitsInEnemySector = allUnits inAreaArray _enemySectorSpawnAreaMarkerName;
-		_allEnemyUnitsInSector = [_allUnitsInEnemySector, { side _x == west }] call BIS_fnc_conditionalSelect;
-		if (((count(_allUnitsInEnemySector)) < _maxEnemySectorUnits) && (east countSide _allUnitsInEnemySector) == 0) then {
-			_allStaticSpawnPointsInEnemySector = allMapMarkers select {((getMarkerPos _x) inArea _enemySectorSpawnAreaMarkerName) && ((getMarkerType _x) == "respawn_inf")};
-			if (count(_allStaticSpawnPointsInEnemySector) == 0) exitWith {
-				systemChat("ERROR: No spawn points set for sector " + _enemySectorName);
-			};
-			_allUnoccupiedStaticSpawnPointsInEnemySector = [_allStaticSpawnPointsInEnemySector, { count(_allEnemyUnitsInSector inAreaArray _x) == 0 }] call BIS_fnc_conditionalSelect;
-			if ((count _allUnoccupiedStaticSpawnPointsInEnemySector) != 0) then {
-				_chosenSpawnPoint = selectRandom _allUnoccupiedStaticSpawnPointsInEnemySector;
-				_chosenSpawnPointPos = getMarkerPos(_chosenSpawnPoint);
-				_chosenSpawnPointPos set [2, parseNumber(markerText _chosenSpawnPoint)];
-				_unitType = "vn_b_men_sog_09";
-				systemChat("Creating unit " +_unitType + " on spawn point " + _chosenSpawnPoint);
-				
-				_unit = (createGroup west) createUnit [_UnitType,_chosenSpawnPointPos, [], 0, "NONE"];
-				_unit setposATL [_chosenSpawnPointPos select 0, _chosenSpawnPointPos select 1, _chosenSpawnPointPos select 2];
-				_chosenSpawnPointDirection = markerDir _chosenSpawnPoint;
-				_unit setDir _chosenSpawnPointDirection;
-				_unit setFormDir _chosenSpawnPointDirection;
-			};
-		};		
+    _enemySectors = "west" call getSectorsOwnedByside;
+    if (count _enemySectors == 0) exitwith {};
+    {
+	    _enemySector = _x;
+	    _enemySectorname = _enemySector getVariable ["name", "undefined"];
+	    if (_enemySectorname == "undefined") exitwith {
+	        systemChat("ERRor: name not defined for sector" + _enemySectorname);
+	    };
+	    _maxEnemySectorunits = _enemySector getVariable["max", 0];
+	    if (_maxEnemySectorunits == 0) then {
+	        systemChat("WARN: max units not set for sector " + _enemySectorname);
+	    };
+	    _enemySectorspawnAreaMarkername = (_enemySector getVariable "name") + "_spawn";
+	    _enemySectorspawnAreamarkerPos = getmarkerPos(_enemySectorspawnAreaMarkername);
+	    if (_enemySectorspawnAreamarkerPos call markernotExist) exitwith {
+	        systemChat("ERRor: spawn marker not found for sector" + _enemySectorname);
+	    };
+	    _allunitsinEnemySector = allunits inAreaArray _enemySectorspawnAreaMarkername;
+	    _allEnemyunitsinSector = [_allunitsinEnemySector, {
+	        side _x == west
+	    }] call BIS_fnc_conditionalselect;
+	    _numberOfEnemyunitsinSector = count(_allunitsinEnemySector);
+	    if ((_numberOfEnemyunitsinSector < _maxEnemySectorunits) && (east countside _allunitsinEnemySector) == 0) then {
+	        _allStaticspawnPointsinEnemySector = allMapMarkers select {
+	            ((getmarkerPos _x) inArea _enemySectorspawnAreaMarkername) && ((getmarkertype _x) == "respawn_inf")
+	        };
+	        if (count(_allStaticspawnPointsinEnemySector) == 0) exitwith {
+	            systemChat("ERRor: No spawn points set for sector " + _enemySectorname);
+	        };
+	        _minEnemySectorunits = _enemySector getVariable["min", 0];
+	        _difference = _minEnemySectorunits - _numberOfEnemyunitsinSector;
+	        _numberOfIterations = if (_difference > 0) then [{_difference}, { 0}];
+	        for [{_i = 0}, {_i < _difference}, {_i = _i + 1}] do {
+				_allUnoccupiedStaticspawnPointsinEnemySector = [_allStaticspawnPointsinEnemySector, {
+					count(_allEnemyunitsinSector inAreaArray _x) == 0
+				}] call BIS_fnc_conditionalselect;	
+				if ((count _allUnoccupiedStaticspawnPointsinEnemySector) != 0) then {
+					_chosenspawnPoint = selectRandom _allUnoccupiedStaticspawnPointsinEnemySector;
+					_chosenspawnPointPos = getmarkerPos(_chosenspawnPoint);
+					_chosenspawnPointPos set [2, parseNumber(markertext _chosenspawnPoint)];
+					_unittype = "vn_b_men_sog_09";
+					systemChat("Creating unit " +_unittype + " on spawn point " + _chosenspawnPoint + " at sector" + _enemySectorname);
+					_group = createGroup west;
+					_group setBehaviour "SAFE";
+					_unit = _group createUnit [_Unittype, _chosenspawnPointPos, [], 0, "NONE"];
+					_unit setPosATL [_chosenspawnPointPos select 0, _chosenspawnPointPos select 1, _chosenspawnPointPos select 2];
+					_chosenspawnPointdirection = markerDir _chosenspawnPoint;
+					_unit setDir _chosenspawnPointdirection;
+					_unit setFormDir _chosenspawnPointdirection;
+					_allEnemyunitsinSector pushBack _unit;
+	        	};
+	    };
+	};
 	} forEach _enemySectors;
 };
 
