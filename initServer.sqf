@@ -5,6 +5,13 @@ manpower = 0;
 //AKA Influence
 totalPOVL = 0;
 
+//War level enum
+defConSix = 6;
+defConFive = 5;
+defConFour = 4;
+defConThree = 3;
+defConTwo = 2;
+
 0 spawn {
 	call makeAllSpawnPointMarkersInvisible;
 	call initWinConditionForSectorsEventHandlers;
@@ -45,18 +52,18 @@ updateDefCon = {
 
 calculateWarLevel = {
 	if (totalPOVL < 2) exitWith {
-		6
+		defConSix
 	};
 	if (totalPOVL < 4) exitWith {
-		5
+		defConFive
 	};
 	if (totalPOVL < 6) exitWith {
-		4
+		defConFour
 	};
 	if (totalPOVL < 8) exitWith {
-		3
+		defConThree
 	};
-	2
+	defConTwo
 };
 
 makeAllSpawnPointMarkersInvisible =  {
@@ -92,7 +99,7 @@ populateEnemySectors = {
 	    _allEnemyunitsinSector = [_allunitsinEnemySector, {
 	        side _x == west
 	    }] call BIS_fnc_conditionalselect;
-	    _numberOfEnemyunitsinSector = count(_allunitsinEnemySector);
+	    _numberOfEnemyunitsinSector = count(_allEnemyunitsinSector);
 	    if ((_numberOfEnemyunitsinSector < _maxEnemySectorunits) && (east countside _allunitsinEnemySector) == 0) then {
 	        _allStaticspawnPointsinEnemySector = allMapMarkers select {
 	            ((getmarkerPos _x) inArea _enemySectorspawnAreaMarkername) && ((getmarkertype _x) == "respawn_inf")
@@ -101,13 +108,18 @@ populateEnemySectors = {
 	            systemChat("ERRor: No spawn points set for sector " + _enemySectorname);
 	        };
 	        _minEnemySectorunits = _enemySector getVariable["min", 0];
+			_maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
 	        _difference = _minEnemySectorunits - _numberOfEnemyunitsinSector;
 	        _numberOfIterations = if (_difference > 0) then [{_difference}, { 0}];
-	        for [{_i = 0}, {_i < _difference}, {_i = _i + 1}] do {
+			_i = 0;
+			_currentWarLevel = call calculateWarLevel;
+	        while {_i  < _difference} do {
 				_allUnoccupiedStaticspawnPointsinEnemySector = [_allStaticspawnPointsinEnemySector, {
 					count(_allEnemyunitsinSector inAreaArray _x) == 0
-				}] call BIS_fnc_conditionalselect;	
-				if ((count _allUnoccupiedStaticspawnPointsinEnemySector) != 0) then {
+				}] call BIS_fnc_conditionalselect;
+				_unoccupiedStaticUnitNumber = count(_allUnoccupiedStaticspawnPointsinEnemySector);
+				_occupiedStaticUnitNumber = _numberOfEnemyunitsinSector - _unoccupiedStaticUnitNumber;	
+				if (_maxEnemySectorStaticUnits > _occupiedStaticUnitNumber && _unoccupiedStaticUnitNumber != 0) then {
 					_chosenspawnPoint = selectRandom _allUnoccupiedStaticspawnPointsinEnemySector;
 					_chosenspawnPointPos = getmarkerPos(_chosenspawnPoint);
 					_chosenspawnPointPos set [2, parseNumber(markertext _chosenspawnPoint)];
@@ -121,7 +133,12 @@ populateEnemySectors = {
 					_unit setDir _chosenspawnPointdirection;
 					_unit setFormDir _chosenspawnPointdirection;
 					_allEnemyunitsinSector pushBack _unit;
+					_i = _i + 1;
 	        	};
+				if (_i > _difference && _currentWarLevel >= defConFive) then {
+					
+					_i = _i + 1;
+				};
 	    };
 	};
 	} forEach _enemySectors;
