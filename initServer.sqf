@@ -31,6 +31,8 @@ initWinConditionForSectorsEventHandlers = {
 
 		if ( _owner isEqualTo EAST ) then {
 			call checkIfAllSectorsOwnedByEast;
+			call calculateTotalPOVL;
+			call updateGui;
 		};
 	}] call BIS_fnc_addScriptedEventHandler; 
 }forEach ( true call BIS_fnc_moduleSector );
@@ -84,7 +86,7 @@ populateEnemySectors = {
 	    _enemySector = _x;
 	    _enemySectorname = _enemySector getVariable ["name", "undefined"];
 	    if (_enemySectorname == "undefined") exitwith {
-	        systemChat("ERRor: name not defined for sector" + _enemySectorname);
+	        systemChat("Error: name not defined for sector" + _enemySectorname);
 	    };
 	    _maxEnemySectorunits = _enemySector getVariable["max", 0];
 	    if (_maxEnemySectorunits == 0) then {
@@ -93,7 +95,7 @@ populateEnemySectors = {
 	    _enemySectorspawnAreaMarkername = (_enemySector getVariable "name") + "_spawn";
 	    _enemySectorspawnAreamarkerPos = getmarkerPos(_enemySectorspawnAreaMarkername);
 	    if (_enemySectorspawnAreamarkerPos call markernotExist) exitwith {
-	        systemChat("ERRor: spawn marker not found for sector" + _enemySectorname);
+	        systemChat("Error: spawn marker not found for sector" + _enemySectorname);
 	    };
 	    _allunitsinEnemySector = allunits inAreaArray _enemySectorspawnAreaMarkername;
 	    _allEnemyunitsinSector = [_allunitsinEnemySector, {
@@ -105,7 +107,7 @@ populateEnemySectors = {
 	            ((getmarkerPos _x) inArea _enemySectorspawnAreaMarkername) && ((getmarkertype _x) == "respawn_inf")
 	        };
 	        if (count(_allStaticspawnPointsinEnemySector) == 0) exitwith {
-	            systemChat("ERRor: No spawn points set for sector " + _enemySectorname);
+	            systemChat("Error: No spawn points set for sector " + _enemySectorname);
 	        };
 	        _minEnemySectorunits = _enemySector getVariable["min", 0];
 			_maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
@@ -113,18 +115,39 @@ populateEnemySectors = {
 	        _numberOfIterations = if (_difference > 0) then [{_difference}, { 0}];
 			_i = 0;
 			_currentWarLevel = call calculateWarLevel;
+			_routeGroupName = _enemySectorName + "_route_group";
+			_routeGroup = allGroups select { groupId _x == _routeGroupName };
+			_routeGroupNumber = count(_routeGroup);
+			if (_routeGroupNumber > 1) then {
+				systemChat("ERROR: More than one route groups found for sector " + _enemySectorName);
+			};
+			if (_routeGroupNumber == 0) then {
+				_routeGroup = createGroup[west, false];
+				_routeGroup setGroupId[_routeGroupName];
+				_routeGroup setBehaviour "SAFE";
+				_routeWaypointNumber = _enemySector getVariable["waypointNumber", 0];
+				for [_i = 0, _i < _routeWaypointNumber, _i = _i + 1] do {
+					_routeWPMarkerName = _enemySectorName + "route" + str(_i);
+					_routeWPPos = getMarkerPos(_routeWPMarkerName);
+					_routeWPName = "wp_" + _routeWPMarkerName;
+					_wp = _routeGroup addWaypoint[_routeWPName, 0];
+					_wp setWaypointType "MOVE";
+				};
+			} else {
+				_routeGroup = routeGroup select 0;
+			};
 	        while {_i  < _difference} do {
 				_allUnoccupiedStaticspawnPointsinEnemySector = [_allStaticspawnPointsinEnemySector, {
 					count(_allEnemyunitsinSector inAreaArray _x) == 0
 				}] call BIS_fnc_conditionalselect;
 				_unoccupiedStaticUnitNumber = count(_allUnoccupiedStaticspawnPointsinEnemySector);
-				_occupiedStaticUnitNumber = _numberOfEnemyunitsinSector - _unoccupiedStaticUnitNumber;	
+				_occupiedStaticUnitNumber = _numberOfEnemyunitsinSector - _unoccupiedStaticUnitNumber;
 				if (_maxEnemySectorStaticUnits > _occupiedStaticUnitNumber && _unoccupiedStaticUnitNumber != 0) then {
 					_chosenspawnPoint = selectRandom _allUnoccupiedStaticspawnPointsinEnemySector;
 					_chosenspawnPointPos = getmarkerPos(_chosenspawnPoint);
 					_chosenspawnPointPos set [2, parseNumber(markertext _chosenspawnPoint)];
 					_unittype = "vn_b_men_sog_09";
-					systemChat("Creating unit " +_unittype + " on spawn point " + _chosenspawnPoint + " at sector" + _enemySectorname);
+					systemChat("Creating unit " +_unittype + " on spawn point " + _chosenspawnPoint + " at sector " + _enemySectorname);
 					_group = createGroup west;
 					_group setBehaviour "SAFE";
 					_unit = _group createUnit [_Unittype, _chosenspawnPointPos, [], 0, "NONE"];
@@ -136,7 +159,12 @@ populateEnemySectors = {
 					_i = _i + 1;
 	        	};
 				if (_i > _difference && _currentWarLevel >= defConFive) then {
-					
+					_sectorRouteSpawnPointName = _enemySectorname + "_route0";
+					_sectorRouteSpawnPointPos = getmarkerPos(_sectorRouteSpawnPointName);
+					_sectorRouteSpawnPointPos set [2, parseNumber(markertext _sectorRouteSpawnPointName)];
+					_routeUnitType = "vn_b_men_sog_09";
+					systemChat("Creating route unit " +_routeUnitType + " at sector " + _enemySectorname);
+					_routeUnit = _routeGroup createUnit [_routeUnitType, _sectorRouteSpawnPointPos, [], 0, "NONE"];
 					_i = _i + 1;
 				};
 	    };
@@ -261,7 +289,6 @@ showReport = {
 globalScriptsRun = {
 	call updateManpower;
 	call showReport;
-	call updateGui;
 
 	defcon = _defcon - 1;
 	if (defcon == 0) then {
@@ -269,6 +296,7 @@ globalScriptsRun = {
 	};
 
 	call populateEnemySectors;
+	call updateGui;
 };
 
 initGUI = {
