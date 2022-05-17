@@ -15,11 +15,12 @@ defConTwo = 2;
 0 spawn {
     call makeAllSpawnPointMarkersInvisible;
     call initWinConditionForSectorsEventHandlers;
-    call populateEnemySectors;
     sleep 1;
     call initGUI;
     sleep 1;
     call displayInitialTask;
+    sleep 2;
+    call populateEnemySectors;
     sleep 5;
     call updateDefCon;
 };
@@ -32,7 +33,6 @@ initWinConditionForSectorsEventHandlers = {
         if ( _owner isEqualTo EAST ) then {
             call checkIfAllSectorsOwnedByEast;
             call calculateTotalPOVL;
-            call updateGui;
         };
     }] call BIS_fnc_addScriptedEventHandler; 
 }forEach ( true call BIS_fnc_moduleSector );
@@ -81,18 +81,15 @@ displayInitialTask = {
 
 populateEnemySectors = {
     _enemySectors = "west" call getSectorsOwnedByside;
-    if (count _enemySectors == 0) exitwith {};
+    if (count(_enemySectors) == 0) exitwith {};
     {
         _enemySector = _x;
-        _enemySectorname = _enemySector getVariable ["name", "undefined"];
-        if (_enemySectorname == "undefined") exitwith {
-            systemChat("Error: name not defined for sector" + _enemySectorname);
-        };
+        _enemySectorname = _enemySector call BIS_fnc_objectVar;
         _maxEnemySectorunits = _enemySector getVariable["max", 0];
         if (_maxEnemySectorunits == 0) then {
             systemChat("WARN: max units not set for sector " + _enemySectorname);
         };
-        _enemySectorspawnAreaMarkername = (_enemySector getVariable "name") + "_spawn";
+        _enemySectorspawnAreaMarkername = _enemySectorname + "_spawn";
         _enemySectorspawnAreamarkerPos = getmarkerPos(_enemySectorspawnAreaMarkername);
         if (_enemySectorspawnAreamarkerPos call markernotExist) exitwith {
             systemChat("Error: spawn marker not found for sector" + _enemySectorname);
@@ -126,7 +123,7 @@ populateEnemySectors = {
                 _routeGroup setGroupId[_routeGroupName];
                 _routeGroup setBehaviour "SAFE";
                 _routeWaypointNumber = _enemySector getVariable["waypointNumber", 0];
-                for [_i = 0, _i < _routeWaypointNumber, _i = _i + 1] do {
+                for [{_i = 0},{ _i < _routeWaypointNumber},{ _i = _i + 1}] do {
                     _routeWPMarkerName = _enemySectorName + "route" + str(_i);
                     _routeWPPos = getMarkerPos(_routeWPMarkerName);
                     _routeWPName = "wp_" + _routeWPMarkerName;
@@ -181,7 +178,7 @@ getSectorsOwnedBySide = {
     _sideName = _this;
     _allSectors = true call BIS_fnc_moduleSector;
     _sideSectors = [_allSectors, { str(_x getVariable "owner") == _sideName }] call BIS_fnc_conditionalSelect;
-    _sideSectorsCount = count _sideSectors;
+    _sideSectorsCount = count(_sideSectors);
     if (_sideSectorsCount == 0) exitwith {
         systemChat ("No sector owned by " + _sideName + " found. Exiting.");
         []
@@ -192,8 +189,13 @@ getSectorsOwnedBySide = {
 
 calculateTotalPOVL = {
     newPOVL = 0;
-    {if (str(_x getVariable "owner") == "EAST") then {newPOVL = newPOVL + parseNumber(_x getVariable "scoreReward")}} count allSectors;
+    {
+        if (str(_x getVariable "owner") == "east") then {
+            newPOVL = newPOVL + parseNumber(_x getVariable "scoreReward")
+        }
+    } forEach (true call BIS_fnc_moduleSector);
     totalPOVL = newPOVL;
+    call updateGUI;
 };
 
 recruitUnit = {
@@ -213,6 +215,7 @@ decreaseManpower = {
     if (manpower > 0) then {
         manpower = manpower - 1;
     };
+    call updateGUI;
 };
 
 addRemoveAllActionsFromCorpseHandler = {
@@ -252,7 +255,7 @@ if (count _ownedSectors == 0) exitwith {systemChat "No owned sector found. Exiti
 systemChat str(count(_ownedSectors));
 _randomOwnedSector = selectRandom _ownedSectors;
 systemChat "random sector selected";
-_randomOwnedSectorName = _randomOwnedSector getVariable "name";
+_randomOwnedSectorName = _randomOwnedSector call BIS_fnc_objectVar;
 _randomSpawnPointName = _randomOwnedSectorName + str(floor(random 3));
 systemChat str(_randomSpawnPointName);
 _randomSpawnPointNamePos = getMarkerPos(_randomSpawnPointName);
@@ -279,6 +282,7 @@ updateManpower = {
  } else {
       manpower = manpower + totalPOVL;
  };
+ call updateGUI;
 };
 
 showReport = {
@@ -296,7 +300,6 @@ globalScriptsRun = {
     };
 
     call populateEnemySectors;
-    call updateGui;
 };
 
 initGUI = {
