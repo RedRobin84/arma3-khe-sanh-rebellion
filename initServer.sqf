@@ -110,7 +110,6 @@ populateEnemySectors = {
             _maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
             _difference = _minEnemySectorunits - _numberOfEnemyunitsinSector;
             _numberOfIterations = if (_difference > 0) then [{_difference}, { 0}];
-            _i = 0;
             _currentWarLevel = call calculateWarLevel;
             _routeGroupName = _enemySectorName + "_route_group";
             _routeGroup = allGroups select { groupId _x == _routeGroupName };
@@ -122,17 +121,19 @@ populateEnemySectors = {
                 _routeGroup = createGroup[west, false];
                 _routeGroup setGroupId[_routeGroupName];
                 _routeGroup setBehaviour "SAFE";
-                _routeWaypointNumber = _enemySector getVariable["waypointNumber", 0];
+                _routeWaypointNumber = _enemySector getVariable["waypoints", 0];
                 for [{_i = 0},{ _i < _routeWaypointNumber},{ _i = _i + 1}] do {
-                    _routeWPMarkerName = _enemySectorName + "route" + str(_i);
+                    _routeWPMarkerName = _enemySectorName + "_route" + str(_i);
                     _routeWPPos = getMarkerPos(_routeWPMarkerName);
-                    _routeWPName = "wp_" + _routeWPMarkerName;
-                    _wp = _routeGroup addWaypoint[_routeWPName, 0];
-                    _wp setWaypointType "MOVE";
+                    _wp = _routeGroup addWaypoint[_routeWPPos, 0];
+                    _wp setWaypointType (markerText _routeWPMarkerName);
+                    _wp setWaypointBehaviour "SAFE";
+                    _wp setWaypointSpeed "LIMITED";
                 };
             } else {
                 _routeGroup = routeGroup select 0;
             };
+            _i = 0;
             while {_i  < _difference} do {
                 _allUnoccupiedStaticspawnPointsinEnemySector = [_allStaticspawnPointsinEnemySector, {
                     count(_allEnemyunitsinSector inAreaArray _x) == 0
@@ -142,6 +143,7 @@ populateEnemySectors = {
                 if (_maxEnemySectorStaticUnits > _occupiedStaticUnitNumber && _unoccupiedStaticUnitNumber != 0) then {
                     _chosenspawnPoint = selectRandom _allUnoccupiedStaticspawnPointsinEnemySector;
                     _chosenspawnPointPos = getmarkerPos(_chosenspawnPoint);
+
                     _chosenspawnPointPos set [2, parseNumber(markertext _chosenspawnPoint)];
                     _unittype = "vn_b_men_sog_09";
                     systemChat("Creating unit " +_unittype + " on spawn point " + _chosenspawnPoint + " at sector " + _enemySectorname);
@@ -152,10 +154,11 @@ populateEnemySectors = {
                     _chosenspawnPointdirection = markerDir _chosenspawnPoint;
                     _unit setDir _chosenspawnPointdirection;
                     _unit setFormDir _chosenspawnPointdirection;
+                    _unit SetCombatBehaviour "SAFE";
                     _allEnemyunitsinSector pushBack _unit;
                     _i = _i + 1;
                 };
-                if (_i > _difference && _currentWarLevel >= defConFive) then {
+                if (_i < _difference && _currentWarLevel >= defConFive) then {
                     _sectorRouteSpawnPointName = _enemySectorname + "_route0";
                     _sectorRouteSpawnPointPos = getmarkerPos(_sectorRouteSpawnPointName);
                     _sectorRouteSpawnPointPos set [2, parseNumber(markertext _sectorRouteSpawnPointName)];

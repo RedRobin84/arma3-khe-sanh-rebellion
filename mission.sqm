@@ -8,22 +8,22 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=233;
+		nextID=284;
 	};
 	class MarkerIDProvider
 	{
-		nextID=12;
+		nextID=13;
 	};
 	class LayerIndexProvider
 	{
-		nextID=123;
+		nextID=254;
 	};
 	class Camera
 	{
-		pos[]={15215.234,80.992378,2161.8523};
-		dir[]={-1.2363449e-007,-0.70710683,0.70710683};
-		up[]={-1.2363449e-007,0.70710671,0.70710683};
-		aside[]={1,0,1.7484557e-007};
+		pos[]={15035.448,90.934097,2816.5042};
+		dir[]={-0.13778089,-0.6678521,0.73143011};
+		up[]={-0.12363026,0.74429399,0.65630943};
+		aside[]={0.98271668,-7.4505806e-009,0.1851162};
 	};
 };
 binarizationWanted=0;
@@ -152,7 +152,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=49;
+		items=70;
 		class Item0
 		{
 			dataType="Object";
@@ -178,7 +178,7 @@ class Mission
 				angles[]={0,0,0.0079936078};
 			};
 			name="sectorOldDebris";
-			init="this setVariable [""max"", 2, true];" \n "this setVariable [""min"", 1, true];" \n "this setVariable [""maxStatic"", 3, true];";
+			init="this setVariable [""max"", 3, true];" \n "this setVariable [""min"", 1, true];" \n "this setVariable [""maxStatic"", 2, true];" \n "this setVariable [""waypoints"", 4, true];" \n "";
 			areaSize[]={30,0,30};
 			flags=1;
 			id=16;
@@ -646,7 +646,7 @@ class Mission
 				angles[]={0.053284902,0,0.0053232545};
 			};
 			name="sectorNaxok";
-			init="this setVariable [""max"", 5, true];" \n "this setVariable [""min"", 3, true];" \n "this setVariable [""maxStatic"", 3, true];";
+			init="this setVariable [""max"", 5, true];" \n "this setVariable [""min"", 2, true];" \n "this setVariable [""maxStatic"", 3, true];" \n "this setVariable [""waypoints"", 8, true];";
 			areaSize[]={50,0,50};
 			flags=1;
 			id=80;
@@ -1104,10 +1104,10 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={15022.813,50.701214,2926.238};
-				angles[]={0.11943288,0,6.1558809};
+				position[]={15017.455,42.819508,3032.948};
+				angles[]={0.08248426,0,0.15084881};
 			};
-			areaSize[]={100,0,150};
+			areaSize[]={100,0,250};
 			areaIsRectangle=1;
 			flags=1;
 			id=118;
@@ -2204,6 +2204,609 @@ class Mission
 			};
 			id=232;
 			type="SideOPFOR_F";
+		};
+		class Item49
+		{
+			dataType="Marker";
+			position[]={14565.616,47.661999,2291.6179};
+			name="sectorOldDebris_route0";
+			text="MOVE";
+			type="mil_destroy";
+			id=233;
+			atlOffset=25.178045;
+		};
+		class Item50
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			id=235;
+			atlOffset=-36.689999;
+		};
+		class Item51
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={14552.945,22.386999,2304.5061};
+					name="sectorOldDebris_route1";
+					text="MOVE";
+					type="mil_destroy";
+					id=236;
+					atlOffset=-0.00085639954;
+				};
+			};
+			id=237;
+			atlOffset=-0.00085639954;
+		};
+		class Item52
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={14531.162,22.268,2373.521};
+					name="sectorOldDebris_route2";
+					text="MOVE";
+					type="mil_destroy";
+					id=238;
+					atlOffset=-0.00037765503;
+				};
+			};
+			id=239;
+			atlOffset=-0.00037765503;
+		};
+		class Item53
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={14583.233,22.975,2249.458};
+					name="sectorOldDebris_route3";
+					text="CYCLE";
+					type="mil_destroy";
+					id=240;
+					atlOffset=-0.00070953369;
+				};
+			};
+			id=241;
+			atlOffset=-0.00070953369;
+		};
+		class Item54
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			id=243;
+			atlOffset=-36.689999;
+		};
+		class Item55
+		{
+			dataType="Layer";
+			name="Attack Infantry respawn point";
+			id=245;
+			atlOffset=-36.689999;
+		};
+		class Item56
+		{
+			dataType="Layer";
+			name="Conquer sector";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Conquer sector_1";
+					id=246;
+					atlOffset=-36.689999;
+				};
+			};
+			id=248;
+			atlOffset=-36.689999;
+		};
+		class Item57
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_1";
+					id=249;
+					atlOffset=-36.689999;
+				};
+			};
+			id=251;
+			atlOffset=-36.689999;
+		};
+		class Item58
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_2";
+					class Entities
+					{
+						items=1;
+						class Item0
+						{
+							dataType="Marker";
+							position[]={15019.255,57.390026,2840.7036};
+							name="sectorNaxok_route0";
+							text="MOVE";
+							type="mil_destroy";
+							id=253;
+						};
+					};
+					id=252;
+				};
+			};
+			id=254;
+		};
+		class Item59
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_3";
+					class Entities
+					{
+						items=1;
+						class Item0
+						{
+							dataType="Marker";
+							position[]={15045.069,38.750999,3128.106};
+							name="sectorNaxok_route1";
+							text="MOVE";
+							type="mil_destroy";
+							id=256;
+							atlOffset=-0.00047302246;
+						};
+					};
+					id=255;
+					atlOffset=-0.00047302246;
+				};
+			};
+			id=257;
+			atlOffset=-0.00047302246;
+		};
+		class Item60
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_4";
+					class Entities
+					{
+						items=1;
+						class Item0
+						{
+							dataType="Marker";
+							position[]={15101.473,33.412998,3218.9299};
+							name="sectorNaxok_route2";
+							text="MOVE";
+							type="mil_destroy";
+							id=259;
+							atlOffset=-0.00037384033;
+						};
+					};
+					id=258;
+					atlOffset=-0.00037384033;
+				};
+			};
+			id=260;
+			atlOffset=-0.00037384033;
+		};
+		class Item61
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_5";
+					class Entities
+					{
+						items=1;
+						class Item0
+						{
+							dataType="Marker";
+							position[]={14965.888,32.441002,3232.343};
+							name="sectorNaxok_route3";
+							text="MOVE";
+							type="mil_destroy";
+							id=262;
+							atlOffset=-0.00066757202;
+						};
+					};
+					id=261;
+					atlOffset=-0.00066757202;
+				};
+			};
+			id=263;
+			atlOffset=-0.00066757202;
+		};
+		class Item62
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_6";
+					class Entities
+					{
+						items=1;
+						class Item0
+						{
+							dataType="Marker";
+							position[]={14956.576,34.960999,3146.1331};
+							name="sectorNaxok_route4";
+							text="MOVE";
+							type="mil_destroy";
+							id=265;
+							atlOffset=-0.00040054321;
+						};
+					};
+					id=264;
+					atlOffset=-0.00040054321;
+				};
+			};
+			id=266;
+			atlOffset=-0.00040054321;
+		};
+		class Item63
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_7";
+					class Entities
+					{
+						items=1;
+						class Item0
+						{
+							dataType="Marker";
+							position[]={14956.765,39.483002,3059.967};
+							name="sectorNaxok_route5";
+							text="MOVE";
+							type="mil_destroy";
+							id=268;
+							atlOffset=-0.00030899048;
+						};
+					};
+					id=267;
+					atlOffset=-0.00030899048;
+				};
+			};
+			id=269;
+			atlOffset=-0.00030899048;
+		};
+		class Item64
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_8";
+					id=270;
+					atlOffset=-36.689999;
+				};
+			};
+			id=272;
+			atlOffset=-36.689999;
+		};
+		class Item65
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_9";
+					id=273;
+					atlOffset=-36.689999;
+				};
+			};
+			id=275;
+			atlOffset=-36.689999;
+		};
+		class Item66
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_10";
+					class Entities
+					{
+						items=1;
+						class Item0
+						{
+							dataType="Marker";
+							position[]={14931.419,38.883999,3057.0801};
+							name="sectorNaxok_route6";
+							text="MOVE";
+							type="mil_destroy";
+							id=277;
+							atlOffset=-0.00030136108;
+						};
+					};
+					id=276;
+					atlOffset=-0.00030136108;
+				};
+			};
+			id=278;
+			atlOffset=-0.00030136108;
+		};
+		class Item67
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_11";
+					class Entities
+					{
+						items=1;
+						class Item0
+						{
+							dataType="Marker";
+							position[]={14930.233,46.473999,2944.2209};
+							name="sectorNaxok_route7";
+							text="CYCLE";
+							type="mil_destroy";
+							id=280;
+							atlOffset=-0.00019073486;
+						};
+					};
+					id=279;
+					atlOffset=-0.00019073486;
+				};
+			};
+			id=281;
+			atlOffset=-0.00019073486;
+		};
+		class Item68
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={15011.285,32.419243,3234.4341};
+			};
+			areaSize[]={0.1,-1,0.1};
+			flags=1;
+			id=282;
+			type="ModuleCivilianPresenceSafeSpot_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="#useBuilding";
+					expression="_this setVariable [""#useBuilding"",_value]";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=1;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="#type";
+					expression="_this setVariable [""#type"",_value]";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=2;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property="#terminal";
+					expression="_this setVariable [""#terminal"",_value]";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				class Attribute3
+				{
+					property="#capacity";
+					expression="_this setVariable [""#capacity"",_value]";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=3;
+						};
+					};
+				};
+				nAttributes=4;
+			};
+		};
+		class Item69
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={14974.61,34.33585,3153.0259};
+			};
+			areaSize[]={0.1,-1,0.1};
+			flags=1;
+			id=283;
+			type="ModuleCivilianPresenceSafeSpot_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="#useBuilding";
+					expression="_this setVariable [""#useBuilding"",_value]";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=1;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="#type";
+					expression="_this setVariable [""#type"",_value]";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=2;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property="#terminal";
+					expression="_this setVariable [""#terminal"",_value]";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				class Attribute3
+				{
+					property="#capacity";
+					expression="_this setVariable [""#capacity"",_value]";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=3;
+						};
+					};
+				};
+				nAttributes=4;
+			};
 		};
 	};
 	class Connections
