@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=284;
+		nextID=325;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=254;
+		nextID=306;
 	};
 	class Camera
 	{
-		pos[]={15035.448,90.934097,2816.5042};
-		dir[]={-0.13778089,-0.6678521,0.73143011};
-		up[]={-0.12363026,0.74429399,0.65630943};
-		aside[]={0.98271668,-7.4505806e-009,0.1851162};
+		pos[]={14591.668,54.355007,1003.7906};
+		dir[]={-0.03409363,-0.4563596,-0.889166};
+		up[]={-0.017486362,0.88978255,-0.45604405};
+		aside[]={-0.99928939,-1.9138133e-007,0.038314473};
 	};
 };
 binarizationWanted=0;
@@ -37,13 +37,16 @@ addons[]=
 	"sounds_f_vietnam_c",
 	"A3_Ui_F",
 	"modules_f_vietnam",
-	"A3_Modules_F_Tacops"
+	"A3_Modules_F_Tacops",
+	"wheeled_f_vietnam_c",
+	"wheeled_f_vietnam_02_c",
+	"boat_f_vietnam_c"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=7;
+		items=10;
 		class Item0
 		{
 			className="weapons_f_vietnam_c";
@@ -91,6 +94,27 @@ class AddonsMetaData
 			className="A3_Modules_F_Tacops";
 			name="Arma 3 Tac-Ops - Scripted Modules";
 			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item7
+		{
+			className="wheeled_f_vietnam_c";
+			name="wheeled_f_vietnam_c";
+			author="Savage Game Design";
+			url="https://www.arma3.com";
+		};
+		class Item8
+		{
+			className="wheeled_f_vietnam_02_c";
+			name="wheeled_f_vietnam_02_c";
+			author="Savage Game Design";
+			url="https://www.arma3.com";
+		};
+		class Item9
+		{
+			className="boat_f_vietnam_c";
+			name="boat_f_vietnam_c";
+			author="Savage Game Design";
 			url="https://www.arma3.com";
 		};
 	};
@@ -152,7 +176,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=70;
+		items=79;
 		class Item0
 		{
 			dataType="Object";
@@ -2807,6 +2831,154 @@ class Mission
 				};
 				nAttributes=4;
 			};
+		};
+		class Item70
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={15044.266,58.617226,2834.5605};
+				angles[]={0.069219761,1.5729605,0.010663962};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				presence=0.50000018;
+			};
+			id=285;
+			type="vn_c_bicycle_01";
+			atlOffset=3.8146973e-006;
+		};
+		class Item71
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={15048.311,57.044445,2864.6626};
+				angles[]={0.058590703,2.4987705,6.2805147};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				presence=0.50283277;
+			};
+			id=288;
+			type="vn_c_bicycle_01";
+		};
+		class Item72
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={14932.127,41.574696,3038.4214};
+				angles[]={0.063913956,1.5914086,0.029321531};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				presence=0.50283277;
+			};
+			id=291;
+			type="vn_c_bicycle_01";
+		};
+		class Item73
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={14959.158,33.848343,3240.282};
+				angles[]={0.0079936078,3.2275326,0.0026529003};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				presence=0.50000018;
+			};
+			id=294;
+			type="vn_c_bicycle_02";
+		};
+		class Item74
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={14575.748,24.020945,2278.9641};
+				angles[]={-0,0.74794388,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				presence=0.50000018;
+			};
+			id=297;
+			type="vn_c_bicycle_01";
+		};
+		class Item75
+		{
+			dataType="Group";
+			side="Civilian";
+			class Attributes
+			{
+			};
+			id=299;
+			atlOffset=-36.940666;
+		};
+		class Item76
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={15059.363,58.521156,2839.6326};
+				angles[]={0.055937801,3.5307834,0.0026529003};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				presence=0.24504793;
+			};
+			id=300;
+			type="vn_c_car_04_01";
+			atlOffset=-3.8146973e-006;
+		};
+		class Item77
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={14566.574,1.1582044,1034.142};
+				angles[]={0,5.9079919,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				presence=0.50283277;
+			};
+			id=317;
+			type="vn_c_boat_08_02";
+			atlOffset=9.9879999;
+		};
+		class Item78
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={14625.782,1.3501221,1057.965};
+				angles[]={0,5.637361,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				presence=0.50000018;
+			};
+			id=323;
+			type="vn_c_boat_01_01";
+			atlOffset=7.6370001;
 		};
 	};
 	class Connections
