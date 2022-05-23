@@ -4,6 +4,7 @@ manpower = 0;
 
 //AKA Influence
 totalPOVL = 0;
+totalTicks = 0;
 
 //War level enum
 defConSix = 6;
@@ -158,7 +159,7 @@ populateEnemySectors = {
                     _allEnemyunitsinSector pushBack _unit;
                     _i = _i + 1;
                 };
-                if (_i < _difference && _currentWarLevel >= defConFive) then {
+                if (_i < _difference && _currentWarLevel <= defConFive) then {
                     _sectorRouteSpawnPointName = _enemySectorname + "_route0";
                     _sectorRouteSpawnPointPos = getmarkerPos(_sectorRouteSpawnPointName);
                     _sectorRouteSpawnPointPos set [2, parseNumber(markertext _sectorRouteSpawnPointName)];
@@ -273,6 +274,7 @@ warningMsg = "Enemy is attacking " + _randomOwnedSectorName;
 [warningMsg, 1] call BIS_fnc_3DENNotification;
 ["Warning", [warningMsg]] call BIS_fnc_showNotification;
 call _updateDefCon;
+totalTicks = 0;
 };
 
 
@@ -293,12 +295,12 @@ showReport = {
     ["ScoreAdded", [strToDisplay]] call BIS_fnc_showNotification;
 };
 
-globalScriptsRun = {
+runPerTickScripts = {
+    totalTicks = totalTicks + 1;
     call updateManpower;
     call showReport;
-
-    defcon = _defcon - 1;
-    if (defcon == 0) then {
+    sleep 5;
+    if ((totalTicks mod defcon) == 0) then {
         call attackRandomSettlement;
     };
 
@@ -322,7 +324,7 @@ while {true} do // loops for entire duration that mission/server is running.
     ticksBegin = round(diag_TickTime); // tick time begin.
     if (realTickTime >= _executeTime) then // check _realTickTime against executeTime.
     {
-        call globalScriptsRun; // call the function.
+        call runPerTickScripts; // call the function.
         realTickTime = 0; // reset the timer back to 0 to allow counting to 300 again.
     };
     uiSleep 1; // sleep for one second.
