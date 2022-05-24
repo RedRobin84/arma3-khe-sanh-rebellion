@@ -282,7 +282,7 @@ totalTicks = 0;
 updateManpower = {
  call calculateTotalPOVL;
  if ((manpower + totalPOVL) > totalPOVL) then {
-     manpower = totalPOVL; //TODO: send info manpower cap reached to player
+     manpower = totalPOVL;
      hint("Manpower limit reached. Capture more POI's to extend manpower capacity");
  } else {
       manpower = manpower + totalPOVL;

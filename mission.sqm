@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=477;
+		nextID=491;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=708;
+		nextID=904;
 	};
 	class Camera
 	{
-		pos[]={14748.161,803.21381,3280.0779};
-		dir[]={0.18484904,-0.78013939,0.59769887};
-		up[]={0.23050107,0.62560225,0.74531245};
-		aside[]={0.95537055,-6.6502253e-009,-0.29546481};
+		pos[]={14896.599,249.97539,3789.0037};
+		dir[]={0.17019744,-0.76785207,0.61764336};
+		up[]={0.20398875,0.64061177,0.740273};
+		aside[]={0.96409136,7.9104211e-008,-0.26566365};
 	};
 };
 binarizationWanted=0;
@@ -176,7 +176,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=123;
+		items=128;
 		class Item0
 		{
 			dataType="Object";
@@ -5031,6 +5031,448 @@ class Mission
 			{
 			};
 			id=475;
+		};
+		class Item123
+		{
+			dataType="Layer";
+			name="Conquer sector";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Logic";
+					class PositionInfo
+					{
+						position[]={14971.086,32.640347,3910.032};
+						angles[]={0.0026529003,3.8704946,6.2805324};
+					};
+					name="sectorTuan";
+					init="this setVariable [""max"", 5, true];" \n "this setVariable [""min"", 2, true];" \n "this setVariable [""maxStatic"", 3, true];" \n "this setVariable [""waypoints"", 4, true];";
+					areaSize[]={40,0,60};
+					flags=1;
+					id=477;
+					type="ModuleSector_F";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="ModuleSector_F_DefaultOwner";
+							expression="_this setVariable ['DefaultOwner',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="1";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="ModuleSector_F_CostInfantry";
+							expression="_this setVariable ['CostInfantry',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="1";
+								};
+							};
+						};
+						class Attribute2
+						{
+							property="ModuleSector_F_OnOwnerChange";
+							expression="_this setVariable ['OnOwnerChange',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property="ModuleSector_F_ScoreReward";
+							expression="_this setVariable ['ScoreReward',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="2";
+								};
+							};
+						};
+						class Attribute4
+						{
+							property="ModuleSector_F_CostWheeled";
+							expression="_this setVariable ['CostWheeled',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="2";
+								};
+							};
+						};
+						class Attribute5
+						{
+							property="ModuleSector_F_OwnerLimit";
+							expression="_this setVariable ['OwnerLimit',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="1";
+								};
+							};
+						};
+						class Attribute6
+						{
+							property="ModuleSector_F_TaskTitle";
+							expression="_this setVariable ['TaskTitle',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="Capture %1";
+								};
+							};
+						};
+						class Attribute7
+						{
+							property="ModuleSector_F_Designation";
+							expression="_this setVariable ['Designation',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="";
+								};
+							};
+						};
+						class Attribute8
+						{
+							property="ModuleSector_F_TaskOwner";
+							expression="_this setVariable ['TaskOwner',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="1";
+								};
+							};
+						};
+						class Attribute9
+						{
+							property="ModuleSector_F_CostAir";
+							expression="_this setVariable ['CostAir',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="2";
+								};
+							};
+						};
+						class Attribute10
+						{
+							property="ModuleSector_F_CostPlayers";
+							expression="_this setVariable ['CostPlayers',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="1";
+								};
+							};
+						};
+						class Attribute11
+						{
+							property="ModuleSector_F_CostTracked";
+							expression="_this setVariable ['CostTracked',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="4";
+								};
+							};
+						};
+						class Attribute12
+						{
+							property="ModuleSector_F_TaskDescription";
+							expression="_this setVariable ['TaskDescription',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="";
+								};
+							};
+						};
+						class Attribute13
+						{
+							property="ModuleSector_F_CostWater";
+							expression="_this setVariable ['CostWater',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="0";
+								};
+							};
+						};
+						class Attribute14
+						{
+							property="ModuleSector_F_Name";
+							expression="_this setVariable ['Name',_value,true];";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="Tuan";
+								};
+							};
+						};
+						nAttributes=15;
+					};
+				};
+			};
+			id=478;
+		};
+		class Item124
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_18";
+					class Entities
+					{
+						items=1;
+						class Item0
+						{
+							dataType="Marker";
+							position[]={14990.786,32.541,3925.3679};
+							name="sectorTuan_route0";
+							text="MOVE";
+							type="mil_destroy";
+							id=480;
+							atlOffset=-0.00048446655;
+						};
+					};
+					id=479;
+					atlOffset=-0.00048446655;
+				};
+			};
+			id=481;
+			atlOffset=-0.00048446655;
+		};
+		class Item125
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_19";
+					class Entities
+					{
+						items=1;
+						class Item0
+						{
+							dataType="Marker";
+							position[]={14960.098,31.416,4088.4871};
+							name="sectorTuan_route1";
+							text="MOVE";
+							type="mil_destroy";
+							id=483;
+							atlOffset=-0.00022888184;
+						};
+					};
+					id=482;
+					atlOffset=-0.00022888184;
+				};
+			};
+			id=484;
+			atlOffset=-0.00022888184;
+		};
+		class Item126
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_20";
+					class Entities
+					{
+						items=1;
+						class Item0
+						{
+							dataType="Marker";
+							position[]={14854.461,35.525002,3886.7271};
+							name="sectorTuan_route2";
+							text="MOVE";
+							type="mil_destroy";
+							id=486;
+							atlOffset=-0.00075149536;
+						};
+					};
+					id=485;
+					atlOffset=-0.00075149536;
+				};
+			};
+			id=487;
+			atlOffset=-0.00075149536;
+		};
+		class Item127
+		{
+			dataType="Layer";
+			name="Patrol route WP";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Patrol route WP_21";
+					class Entities
+					{
+						items=1;
+						class Item0
+						{
+							dataType="Marker";
+							position[]={14957.326,32.713001,3878.634};
+							name="sectorTuan_route3";
+							text="CYCLE";
+							type="mil_destroy";
+							id=489;
+							atlOffset=-0.00079345703;
+						};
+					};
+					id=488;
+					atlOffset=-0.00079345703;
+				};
+			};
+			id=490;
+			atlOffset=-0.00079345703;
 		};
 	};
 	class Connections
