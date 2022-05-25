@@ -5,6 +5,7 @@ manpower = 0;
 //AKA Influence
 totalPOVL = 0;
 totalTicks = 0;
+manpowerTicks = 0;
 
 //War level enum
 defConSix = 6;
@@ -19,9 +20,11 @@ defConTwo = 2;
     sleep 1;
     call initGUI;
     sleep 1;
-    call displayInitialTask;
+    "Capture ruins to the north" call displayTask;
     sleep 2;
     call populateEnemySectors;
+    sleep 2;
+    "The main objective is Nabo Camp military outpost" call displayTask;
     sleep 5;
     call updateDefCon;
 };
@@ -76,8 +79,9 @@ makeAllSpawnPointMarkersInvisible =  {
     } forEach allMapMarkers
 };
 
-displayInitialTask = {
-    ["ScoreAdded", ["Capture the ruins to the north"]] call BIS_fnc_showNotification;
+displayTask = {
+    _message = _this;
+    ["ScoreAdded", [_message]] call BIS_fnc_showNotification;
 };
 
 populateEnemySectors = {
@@ -283,10 +287,12 @@ updateManpower = {
  call calculateTotalPOVL;
  if ((manpower + totalPOVL) > totalPOVL) then {
      manpower = totalPOVL;
-     hint("Manpower limit reached. Capture more POI's to extend manpower capacity");
+     hint("Manpower limit reached. Capture more POI's to extend manpower capacity.");
  } else {
       manpower = manpower + totalPOVL;
+      hint("New volunteers have arrived.")
  };
+ manpowerTicks = 0;
  call updateGUI;
 };
 
@@ -297,7 +303,10 @@ showReport = {
 
 runPerTickScripts = {
     totalTicks = totalTicks + 1;
-    call updateManpower;
+    manpowerTicks = manpowerTicks + 1;
+    if ((manpowerTicks mod 2) == 0) then {
+        call updateManpower;;
+    };
     call showReport;
     sleep 5;
     if ((totalTicks mod defcon) == 0) then {
