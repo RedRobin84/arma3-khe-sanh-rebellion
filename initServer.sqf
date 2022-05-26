@@ -104,7 +104,7 @@ populateEnemySectors = {
             side _x == west
         }] call BIS_fnc_conditionalselect;
         _numberOfEnemyunitsinSector = count(_allEnemyunitsinSector);
-        if ((_numberOfEnemyunitsinSector < _maxEnemySectorunits) && (east countside _allunitsinEnemySector) == 0) then {
+        if ((_numberOfEnemyunitsinSector < _maxEnemySectorunits) && !(player inArea _enemySectorspawnAreaMarkername)) then {
             _allStaticspawnPointsinEnemySector = allMapMarkers select {
                 ((getmarkerPos _x) inArea _enemySectorspawnAreaMarkername) && ((getmarkertype _x) == "respawn_inf")
             };
