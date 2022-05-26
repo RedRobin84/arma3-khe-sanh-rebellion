@@ -4,6 +4,8 @@ manpower = 0;
 
 //AKA Influence
 totalPOVL = 0;
+totalTicks = 0;
+manpowerTicks = 0;
 
 //War level enum
 defConSix = 6;
@@ -18,9 +20,11 @@ defConTwo = 2;
     sleep 1;
     call initGUI;
     sleep 1;
-    call displayInitialTask;
+    "Capture ruins to the north" call displayTask;
     sleep 2;
     call populateEnemySectors;
+    sleep 2;
+    "The main objective is Nabo Camp military outpost" call displayTask;
     sleep 5;
     call updateDefCon;
 };
@@ -75,8 +79,9 @@ makeAllSpawnPointMarkersInvisible =  {
     } forEach allMapMarkers
 };
 
-displayInitialTask = {
-    ["ScoreAdded", ["Capture the ruins to the north"]] call BIS_fnc_showNotification;
+displayTask = {
+    _message = _this;
+    ["ScoreAdded", [_message]] call BIS_fnc_showNotification;
 };
 
 populateEnemySectors = {
@@ -99,7 +104,7 @@ populateEnemySectors = {
             side _x == west
         }] call BIS_fnc_conditionalselect;
         _numberOfEnemyunitsinSector = count(_allEnemyunitsinSector);
-        if ((_numberOfEnemyunitsinSector < _maxEnemySectorunits) && (east countside _allunitsinEnemySector) == 0) then {
+        if ((_numberOfEnemyunitsinSector < _maxEnemySectorunits) && !(player inArea _enemySectorspawnAreaMarkername)) then {
             _allStaticspawnPointsinEnemySector = allMapMarkers select {
                 ((getmarkerPos _x) inArea _enemySectorspawnAreaMarkername) && ((getmarkertype _x) == "respawn_inf")
             };
@@ -158,7 +163,7 @@ populateEnemySectors = {
                     _allEnemyunitsinSector pushBack _unit;
                     _i = _i + 1;
                 };
-                if (_i < _difference && _currentWarLevel >= defConFive) then {
+                if (_i < _difference && _currentWarLevel <= defConFive) then {
                     _sectorRouteSpawnPointName = _enemySectorname + "_route0";
                     _sectorRouteSpawnPointPos = getmarkerPos(_sectorRouteSpawnPointName);
                     _sectorRouteSpawnPointPos set [2, parseNumber(markertext _sectorRouteSpawnPointName)];
@@ -273,6 +278,7 @@ warningMsg = "Enemy is attacking " + _randomOwnedSectorName;
 [warningMsg, 1] call BIS_fnc_3DENNotification;
 ["Warning", [warningMsg]] call BIS_fnc_showNotification;
 call _updateDefCon;
+totalTicks = 0;
 };
 
 
@@ -280,11 +286,13 @@ call _updateDefCon;
 updateManpower = {
  call calculateTotalPOVL;
  if ((manpower + totalPOVL) > totalPOVL) then {
-     manpower = totalPOVL; //TODO: send info manpower cap reached to player
-     hint("Manpower limit reached. Capture more POI's to extend manpower capacity");
+     manpower = totalPOVL;
+     hint("Manpower limit reached. Capture more POI's to extend manpower capacity.");
  } else {
       manpower = manpower + totalPOVL;
+      hint("New volunteers have arrived.")
  };
+ manpowerTicks = 0;
  call updateGUI;
 };
 
@@ -293,12 +301,15 @@ showReport = {
     ["ScoreAdded", [strToDisplay]] call BIS_fnc_showNotification;
 };
 
-globalScriptsRun = {
-    call updateManpower;
+runPerTickScripts = {
+    totalTicks = totalTicks + 1;
+    manpowerTicks = manpowerTicks + 1;
+    if ((manpowerTicks mod 2) == 0) then {
+        call updateManpower;;
+    };
     call showReport;
-
-    defcon = _defcon - 1;
-    if (defcon == 0) then {
+    sleep 5;
+    if ((totalTicks mod defcon) == 0) then {
         call attackRandomSettlement;
     };
 
@@ -322,7 +333,7 @@ while {true} do // loops for entire duration that mission/server is running.
     ticksBegin = round(diag_TickTime); // tick time begin.
     if (realTickTime >= _executeTime) then // check _realTickTime against executeTime.
     {
-        call globalScriptsRun; // call the function.
+        call runPerTickScripts; // call the function.
         realTickTime = 0; // reset the timer back to 0 to allow counting to 300 again.
     };
     uiSleep 1; // sleep for one second.
