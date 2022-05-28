@@ -4,7 +4,7 @@ manpower = 0;
 
 //AKA Influence
 totalPOVL = 0;
-totalTicks = 0;
+totalTicks = 3;
 manpowerTicks = 0;
 
 //War level enum
@@ -277,7 +277,7 @@ new_wp setWaypointType "GUARD";
 warningMsg = "Enemy is attacking " + _randomOwnedSectorName;
 [warningMsg, 1] call BIS_fnc_3DENNotification;
 ["Warning", [warningMsg]] call BIS_fnc_showNotification;
-call _updateDefCon;
+call updateDefCon;
 totalTicks = 0;
 };
 
