@@ -1,6 +1,7 @@
 _executeTime = 600; // 600 seconds, aka 10 minutes.
 defcon = 0;
 manpower = 0;
+_maxSoldiersMultiplier = 4;
 
 //AKA Influence
 totalPOVL = 0;
@@ -90,7 +91,7 @@ populateEnemySectors = {
     {
         _enemySector = _x;
         _enemySectorname = _enemySector call BIS_fnc_objectVar;
-        _maxEnemySectorunits = _enemySector getVariable["max", 0];
+        _maxEnemySectorunits = _enemySector getVariable["max", (_enemySector call _getDefaultMaxSoldiers)];
         if (_maxEnemySectorunits == 0) then {
             systemChat("WARN: max units not set for sector " + _enemySectorname);
         };
@@ -111,7 +112,7 @@ populateEnemySectors = {
             if (count(_allStaticspawnPointsinEnemySector) == 0) exitwith {
                 systemChat("Error: No spawn points set for sector " + _enemySectorname);
             };
-            _minEnemySectorunits = _enemySector getVariable["min", 0];
+            _minEnemySectorunits = _enemySector getVariable["min", (_enemySector call _getSectorValue)];
             _maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
             _difference = _minEnemySectorunits - _numberOfEnemyunitsinSector;
             _numberOfIterations = if (_difference > 0) then [{_difference}, { 0}];
@@ -177,6 +178,19 @@ populateEnemySectors = {
     } forEach _enemySectors;
 };
 
+_getDefaultMaxSoldiers = {
+    _sector = _this;
+    _sectorValue = _sector call _getSectorValue;
+    //RETURN
+    (parseNumber(_sectorValue) * _maxSoldiersMultiplier)
+};
+
+_getSectorValue = {
+    _sector = _this;
+    //RETURN
+    (_sector getVariable["scoreReward", 0])
+};
+
 markerNotExist = {
     _position = _this;
     (_position select 0) == 0 && (_position select 1) == 0 && (_position select 2) == 0
@@ -199,7 +213,7 @@ calculateTotalPOVL = {
     newPOVL = 0;
     {
         if (str(_x getVariable "owner") == "east") then {
-            newPOVL = newPOVL + parseNumber(_x getVariable "scoreReward")
+            newPOVL = newPOVL + parseNumber(_x call getSectorValue)
         }
     } forEach (true call BIS_fnc_moduleSector);
     totalPOVL = newPOVL;
