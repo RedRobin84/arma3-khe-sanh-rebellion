@@ -11,14 +11,30 @@ AT / AA LAUNCHER = 	5 %
 ACCESSORIES      =  5 %
 **/
 _RANDOM_LOOT_ARRAY = [
-	[], //Pistols
-	[], //Shotguns
-	[], //Carabines
-	[], //SubMGuns
-	[], //Assault
-	[], //MachineG
-	[], //AT/AA
-	[]  //Accessories
+	[
+		[""],
+	], .3, //Pistols
+	[
+
+	], .15 //Shotguns
+	[
+
+	], .15 //Carabines
+	[
+
+	], .15 //SubMGuns
+	[
+
+	], .1 //Assault
+	[
+
+	], .05 //MachineG
+	[
+
+	], .05 //AT/AA
+	[
+
+	], .05 //Accessories
 ];
 
 addBasicLootGeneratorEvent = {
@@ -28,7 +44,7 @@ addBasicLootGeneratorEvent = {
 		"ContainerOpened", {
 			params ["_container", "_unit"];
 			if (_container call _moreThanOneHourPassedSinceLastOpened) {
-
+				_container call _generateRandomLoot;
 				_container setVariable[_LAST_TIMESTAMP_VAR_NAME, _currentTimestamp];
 	}
 		}
@@ -44,5 +60,9 @@ _moreThanOneHourPassedSinceLastOpened = {
 };
 
 _generateRandomLoot = {
-
+	_container = _this;
+	_randomType = _RANDOM_LOOT_ARRAY call BIS_fnc_selectRandomWeighted;
+	_randomItem = selectRandom _randomType;
+	_container addItemCargo [(_randomItem select 0), ceil(random(3))];
+	_container addItemCargo [(_randomItem select 1), ceil(random(6))];
 };
