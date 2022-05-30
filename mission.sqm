@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=1745;
+		nextID=1989;
 	};
 	class Camera
 	{
@@ -6327,7 +6327,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={14971.231,32.644268,3908.417};
-					angle=3.8082366;
+					angle=3.8082364;
 					class Attributes
 					{
 						name="sector_recruit_3";
@@ -6373,7 +6373,7 @@ class Mission
 					type="";
 					a=40;
 					b=60;
-					angle=223.84688;
+					angle=223.84686;
 					id=527;
 				};
 			};
@@ -6549,7 +6549,7 @@ class Mission
 					name="inf_respawn_marker_26";
 					text="0";
 					type="respawn_inf";
-					angle=1.6766589;
+					angle=1.6766587;
 					id=538;
 					atlOffset=-0.00099563599;
 				};
@@ -9724,7 +9724,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={15120.335,32,4520.8208};
-					angle=3.5063651;
+					angle=3.5063648;
 					class Attributes
 					{
 						name="sector_recruit_5";
@@ -10604,7 +10604,7 @@ class Mission
 							name="inf_respawn_marker_51";
 							text="0.980";
 							type="respawn_inf";
-							angle=223.50491;
+							angle=223.5049;
 							id=783;
 							atlOffset=1.0019989;
 						};
