@@ -1,7 +1,7 @@
 _executeTime = 600; // 600 seconds, aka 10 minutes.
 defcon = 0;
 manpower = 0;
-_maxSoldiersMultiplier = 4;
+maxSoldiersMultiplier = 4;
 
 //AKA Influence
 totalPOVL = 0;
@@ -91,7 +91,7 @@ populateEnemySectors = {
     {
         _enemySector = _x;
         _enemySectorname = _enemySector call BIS_fnc_objectVar;
-        _maxEnemySectorunits = _enemySector getVariable["max", (_enemySector call _getDefaultMaxSoldiers)];
+        _maxEnemySectorunits = _enemySector getVariable["max", (_enemySector call getDefaultMaxSoldiers)];
         if (_maxEnemySectorunits == 0) then {
             systemChat("WARN: max units not set for sector " + _enemySectorname);
         };
@@ -112,7 +112,7 @@ populateEnemySectors = {
             if (count(_allStaticspawnPointsinEnemySector) == 0) exitwith {
                 systemChat("Error: No spawn points set for sector " + _enemySectorname);
             };
-            _minEnemySectorunits = _enemySector getVariable["min", (_enemySector call _getSectorValue)];
+            _minEnemySectorunits = _enemySector getVariable["min", (_enemySector call getSectorValue)];
             _maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
             _difference = _minEnemySectorunits - _numberOfEnemyunitsinSector;
             _numberOfIterations = if (_difference > 0) then [{_difference}, { 0}];
@@ -178,17 +178,17 @@ populateEnemySectors = {
     } forEach _enemySectors;
 };
 
-_getDefaultMaxSoldiers = {
+getDefaultMaxSoldiers = {
     _sector = _this;
-    _sectorValue = _sector call _getSectorValue;
+    _sectorValue = _sector call getSectorValue;
     //RETURN
-    (parseNumber(_sectorValue) * _maxSoldiersMultiplier)
+    (parseNumber(_sectorValue) * maxSoldiersMultiplier)
 };
 
-_getSectorValue = {
+getSectorValue = {
     _sector = _this;
     //RETURN
-    (_sector getVariable["scoreReward", 0])
+    (_sector getVariable ["scoreReward", 0])
 };
 
 markerNotExist = {

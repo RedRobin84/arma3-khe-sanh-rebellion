@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=909;
+		nextID=911;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=1989;
+		nextID=4185;
 	};
 	class Camera
 	{
 		pos[]={15035.204,248.79256,3294.5522};
-		dir[]={0.33720025,-0.92685878,0.16501139};
-		up[]={0.8325215,0.3754102,0.40740043};
-		aside[]={0.43954962,0,-0.89821827};
+		dir[]={0.34574503,-0.9306336,-0.11992362};
+		up[]={0.87924498,0.36595204,-0.3049711};
+		aside[]={-0.32770267,0,-0.94478106};
 	};
 };
 binarizationWanted=0;
@@ -176,7 +176,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=266;
+		items=267;
 		class Item0
 		{
 			dataType="Object";
@@ -210,7 +210,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="[[[[""vn_m1895_sd""],[1]],[[""vn_m1895_mag""],[2]],[[],[]],[[],[]]],false]";
+							value="[[[[""vn_m1895""],[1]],[[""vn_m1895_mag""],[2]],[[],[]],[[],[]]],false]";
 						};
 					};
 				};
@@ -538,8 +538,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14578.646,23.645355,2287.7795};
-				angles[]={0,5.537087,0};
+				position[]={14578.646,23.645784,2287.7791};
+				angles[]={0,5.5370922,0};
 			};
 			side="Empty";
 			flags=4;
@@ -548,6 +548,7 @@ class Mission
 			};
 			id=26;
 			type="vn_b_ammobox_12";
+			atlOffset=0.00042915344;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -565,7 +566,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="[[[[],[]],[[""vn_m1895_mag"",""vn_m61_grenade_mag""],[2,2]],[[""vn_m19_binocs_grey""],[1]],[[],[]]],false]";
+							value="[[[[],[]],[[""vn_m1895_mag"",""vn_m61_grenade_mag""],[2,2]],[[""vn_m19_binocs_grey"",""vn_s_m1895""],[1,1]],[[],[]]],false]";
 						};
 					};
 				};
@@ -6327,7 +6328,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={14971.231,32.644268,3908.417};
-					angle=3.8082364;
+					angle=3.8082347;
 					class Attributes
 					{
 						name="sector_recruit_3";
@@ -6373,7 +6374,7 @@ class Mission
 					type="";
 					a=40;
 					b=60;
-					angle=223.84686;
+					angle=223.84648;
 					id=527;
 				};
 			};
@@ -6527,7 +6528,7 @@ class Mission
 					name="inf_respawn_marker_25";
 					text="0";
 					type="respawn_inf";
-					angle=108.76894;
+					angle=108.76888;
 					id=536;
 					atlOffset=-0.00099563599;
 				};
@@ -6549,7 +6550,7 @@ class Mission
 					name="inf_respawn_marker_26";
 					text="0";
 					type="respawn_inf";
-					angle=1.6766587;
+					angle=1.6766582;
 					id=538;
 					atlOffset=-0.00099563599;
 				};
@@ -6613,7 +6614,7 @@ class Mission
 					name="inf_respawn_marker_29";
 					text="1.418";
 					type="respawn_inf";
-					angle=108.76894;
+					angle=108.76888;
 					id=546;
 					atlOffset=1.4114647;
 				};
@@ -10604,7 +10605,7 @@ class Mission
 							name="inf_respawn_marker_51";
 							text="0.980";
 							type="respawn_inf";
-							angle=223.5049;
+							angle=223.50482;
 							id=783;
 							atlOffset=1.0019989;
 						};
@@ -11617,6 +11618,23 @@ class Mission
 			};
 			id=908;
 			atlOffset=-3.9912663;
+		};
+		class Item266
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={14437.558,97.460793,2105.3892};
+				angles[]={0.0053232545,0,6.2751913};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="this call KSR_fnc_addBasicLootGeneratorEvent;";
+			};
+			id=910;
+			type="vn_b_ammobox_12";
 		};
 	};
 	class Connections

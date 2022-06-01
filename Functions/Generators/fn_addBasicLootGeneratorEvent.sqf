@@ -1,15 +1,15 @@
-_LAST_TIMESTAMP_VAR_NAME = "lastTimestamp";
+LAST_TIMESTAMP_VAR_NAME = "lastTimestamp";
 
 /** RANDOM LOOT CHANCES
 PISTOLS =           30 %
 SHOTGUN =           15 %
 CARABINES =         15 %
 SUB-MACHINE GUNS =  15 %
-ASSAULT RIFLES =    10 %
+ASSAULT RIFLES =    15 %
 MACHINE GUNS =      5 %
 AT / AA LAUNCHER =  5 %
 **/
-_RANDOM_LOOT_ARRAY = [
+RANDOM_LOOT_ARRAY = [
     [
         ["vn_m1895", "vn_m1895_mag"],
         ["vn_m1911", "vn_m1911_mag"]
@@ -20,7 +20,7 @@ _RANDOM_LOOT_ARRAY = [
         ["vn_izh54_shorty", "vn_izh54_mag"]
     ], .15, //Shotguns
     [
-        ["vn_m1carbine". "vn_carbine_15_mag"],
+        ["vn_m1carbine", "vn_carbine_15_mag"],
         ["vn_sks", "vn_sks_mag"]
     ], .15, //Carabines
     [
@@ -41,33 +41,30 @@ _RANDOM_LOOT_ARRAY = [
         ["vn_rpg7", "vn_rpg7_mag"]
     ], .05 //AT/AA
 ];
-
-addBasicLootGeneratorEvent = {
     _container = _this;
     _container addEventHandler
     [
         "ContainerOpened", {
             params ["_container", "_unit"];
-            if (_container call _moreThanOneHourPassedSinceLastOpened) {
-                _container call _generateRandomLoot;
-                _container call _generateRandomLoot;
-                _container setVariable[_LAST_TIMESTAMP_VAR_NAME, _currentTimestamp];
+                _currentTimestamp = round(diag_TickTime);
+            if ([_container, _currentTimestamp] call moreThanOneHourPassedSinceLastOpened) then {
+                _container call generateRandomLoot;
+                _container setVariable[LAST_TIMESTAMP_VAR_NAME, _currentTimestamp];
     }
         }
     ];
-};
 
-_moreThanOneHourPassedSinceLastOpened = {
-    _container = _this;
-    _lastTimestamp = _container getVariable[_LAST_TIMESTAMP_VAR_NAME, 0];
-    _currentTimestamp = round(diag_TickTime);
+moreThanOneHourPassedSinceLastOpened = {
+    params ["_container", "_currentTimestamp"];
+    _lastTimestamp = _container getVariable[LAST_TIMESTAMP_VAR_NAME, -3600];
     //RETURN
     ((_currentTimestamp - _lastTimestamp) >= 3600)
 };
 
-_generateRandomLoot = {
+generateRandomLoot = {
+    hint("You have found some hidden weapons.");
     _container = _this;
-    _randomType = _RANDOM_LOOT_ARRAY call BIS_fnc_selectRandomWeighted;
+    _randomType = RANDOM_LOOT_ARRAY call BIS_fnc_selectRandomWeighted;
     _randomItem = selectRandom _randomType;
     _container addItemCargo [(_randomItem select 0), ceil(random(3))];
     _container addItemCargo [(_randomItem select 1), ceil(random(6))];
