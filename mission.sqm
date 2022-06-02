@@ -11631,7 +11631,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="this call KSR_fnc_addBasicLootGeneratorEvent;";
+				init="this call REB_fnc_addBasicLootGeneratorEvent;";
 			};
 			id=910;
 			type="vn_b_ammobox_12";

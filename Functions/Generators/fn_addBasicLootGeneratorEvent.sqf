@@ -48,7 +48,7 @@ RANDOM_LOOT_ARRAY = [
             params ["_container", "_unit"];
                 _currentTimestamp = round(diag_TickTime);
             if ([_container, _currentTimestamp] call moreThanOneHourPassedSinceLastOpened) then {
-                _container call generateRandomLoot;
+                _container call REB_fnc_generateRandomLoot;
                 _container setVariable[LAST_TIMESTAMP_VAR_NAME, _currentTimestamp];
     }
         }
@@ -59,13 +59,4 @@ moreThanOneHourPassedSinceLastOpened = {
     _lastTimestamp = _container getVariable[LAST_TIMESTAMP_VAR_NAME, -3600];
     //RETURN
     ((_currentTimestamp - _lastTimestamp) >= 3600)
-};
-
-generateRandomLoot = {
-    hint("You have found some hidden weapons.");
-    _container = _this;
-    _randomType = RANDOM_LOOT_ARRAY call BIS_fnc_selectRandomWeighted;
-    _randomItem = selectRandom _randomType;
-    _container addItemCargo [(_randomItem select 0), ceil(random(3))];
-    _container addItemCargo [(_randomItem select 1), ceil(random(6))];
 };

@@ -80,11 +80,12 @@ class CivilianPresence_Presets
 
 class CfgFunctions
 {
-    class KSR
+    class REB
     {
         class Generators
         {
             class addBasicLootGeneratorEvent {};
+            class generateRandomLoot {};
         };
     };
 };
