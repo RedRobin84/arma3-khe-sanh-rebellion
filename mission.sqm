@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=919;
+		nextID=927;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=4673;
+		nextID=4918;
 	};
 	class Camera
 	{
-		pos[]={14158.541,131.11139,2675.759};
-		dir[]={0,-0.70710659,0.70710695};
-		up[]={0,0.70710695,0.70710653};
-		aside[]={0.99999994,0,-0};
+		pos[]={14964.739,35.757626,3878.9434};
+		dir[]={0.91402471,-0.38824391,0.11758276};
+		up[]={0.38507077,0.92155659,0.049536608};
+		aside[]={0.12759145,0,-0.99182689};
 	};
 };
 binarizationWanted=0;
@@ -176,7 +176,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=266;
+		items=267;
 		class Item0
 		{
 			dataType="Object";
@@ -545,6 +545,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
+				init="this call REB_fnc_addRepeatedLootSpawnEvent;";
 			};
 			id=26;
 			type="vn_b_ammobox_12";
@@ -4936,15 +4937,16 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14600.998,17.110016,850.77338};
+				position[]={14600.998,17.110054,850.77356};
 			};
 			side="Empty";
 			class Attributes
 			{
+				init="this call REB_fnc_addRepeatedLootSpawnEvent;";
 			};
 			id=472;
 			type="vn_b_ammobox_14";
-			atlOffset=2.8239241;
+			atlOffset=2.8240004;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -4980,6 +4982,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
+				init="this call REB_fnc_addRepeatedLootSpawnEvent;";
 			};
 			id=474;
 			type="vn_o_ammobox_10";
@@ -6741,6 +6744,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
+				init="this call REB_fnc_addRepeatedLootSpawnEvent;";
 			};
 			id=568;
 			type="vn_b_ammobox_14";
@@ -8190,6 +8194,7 @@ class Mission
 			flags=4;
 			class Attributes
 			{
+				init="this call REB_fnc_addRepeatedLootSpawnEvent;";
 			};
 			id=630;
 			type="vn_b_ammobox_14";
@@ -8229,6 +8234,7 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
+				init="this call REB_fnc_addRepeatedLootSpawnEvent;";
 			};
 			id=631;
 			type="vn_b_ammobox_14";
@@ -11618,6 +11624,33 @@ class Mission
 			};
 			id=908;
 			atlOffset=-3.9912663;
+		};
+		class Item266
+		{
+			dataType="Layer";
+			name="Repeatable loot spawn chest";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={14967.185,34.12524,3879.0642};
+						angles[]={-0,4.6914339,0};
+					};
+					side="Empty";
+					flags=4;
+					class Attributes
+					{
+						init="this call REB_fnc_addRepeatedLootSpawnEvent;";
+					};
+					id=923;
+					type="vn_b_ammobox_12";
+				};
+			};
+			id=924;
 		};
 	};
 	class Connections
