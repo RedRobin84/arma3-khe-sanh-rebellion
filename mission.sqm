@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=911;
+		nextID=919;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=4185;
+		nextID=4673;
 	};
 	class Camera
 	{
-		pos[]={15035.204,248.79256,3294.5522};
-		dir[]={0.34574503,-0.9306336,-0.11992362};
-		up[]={0.87924498,0.36595204,-0.3049711};
-		aside[]={-0.32770267,0,-0.94478106};
+		pos[]={14158.541,131.11139,2675.759};
+		dir[]={0,-0.70710659,0.70710695};
+		up[]={0,0.70710695,0.70710653};
+		aside[]={0.99999994,0,-0};
 	};
 };
 binarizationWanted=0;
@@ -176,7 +176,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=267;
+		items=266;
 		class Item0
 		{
 			dataType="Object";
@@ -11618,23 +11618,6 @@ class Mission
 			};
 			id=908;
 			atlOffset=-3.9912663;
-		};
-		class Item266
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={14437.558,97.460793,2105.3892};
-				angles[]={0.0053232545,0,6.2751913};
-			};
-			side="Empty";
-			flags=4;
-			class Attributes
-			{
-				init="this call REB_fnc_addBasicLootGeneratorEvent;";
-			};
-			id=910;
-			type="vn_b_ammobox_12";
 		};
 	};
 	class Connections

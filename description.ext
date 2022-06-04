@@ -84,8 +84,16 @@ class CfgFunctions
     {
         class Generators
         {
-            class addBasicLootGeneratorEvent {};
-            class generateRandomLoot {};
+            class addRepeatedLootSpawnEvent {};
+            class generateRandomWeapons {};
+            class generateRandomExplosives {};
+            class generateRandomAccessiories {};
+            class spawnGeneralLoot {};
+        };
+
+        class Utils
+        {
+            class percentageChanceOf {};
         };
     };
 };
