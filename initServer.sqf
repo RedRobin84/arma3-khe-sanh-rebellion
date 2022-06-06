@@ -267,9 +267,7 @@ joinPlayer = {
 };
 
 attackRandomSettlement = {
-_units = [
-    "vn_b_men_sog_09",0.5, "vn_b_men_sog_10",0.4,"vn_b_men_sog_04",0.1 //random like in recruitUnit instead of an array
-];
+
 _allSectors = true call BIS_fnc_moduleSector;
 _ownedSectors = [_allSectors, { str(_x getVariable "owner") == "EAST" }] call BIS_fnc_conditionalSelect;
 if (count _ownedSectors == 0) exitwith {systemChat "No owned sector found. Exiting.";}; //TODO: replace with getSectorsOwnedBySide
@@ -278,18 +276,16 @@ _randomOwnedSector = selectRandom _ownedSectors;
 _randomOwnedSectorName = _randomOwnedSector call BIS_fnc_objectVar;
 _randomSpawnPointName = _randomOwnedSectorName + str(floor(random 3));
 _randomSpawnPointNamePos = getMarkerPos(_randomSpawnPointName);
-if (surfaceIsWater _randomSpawnPointNamePos) then {
-    call doNavalSpawn;
-} else {
-    call doLandSpawn;
-};
-_grp = createGroup [west,true];
-    for "_i" from 0 to 2 do {
-        selectRandomWeighted _units createUnit [_randomSpawnPointNamePos, _grp];
-    };
 _randomOwnedSectorPos = getPos _randomOwnedSector;
-new_wp = _grp addWaypoint [_randomOwnedSectorPos, 0];
-new_wp setWaypointType "GUARD";
+call calculateTotalPOVL;
+if (surfaceIsWater _randomSpawnPointNamePos) then {
+   _grp = _randomSpawnPointNamePos call createEnemyInfantryBoatGroup;
+  [_grp, _randomOwnedSectorName, _randomOwnedSectorPos] call doNavalAttack;
+} else {
+   _grp = _randomSpawnPointNamePos call createEnemyInfantryGroup;
+  [_grp, _randomOwnedSectorPos] call doLandAttack;
+};
+
 warningMsg = "Enemy is attacking " + _randomOwnedSectorName;
 [warningMsg, 1] call BIS_fnc_3DENNotification;
 ["Warning", [warningMsg]] call BIS_fnc_showNotification;
@@ -297,15 +293,46 @@ call updateDefCon;
 totalTicks = 0;
 };
 
-doLandSpawn = {
-
+doLandAttack = { 
+params["_grp", "_randomOwnedSectorPos"];
+captureWP = _grp addWaypoint [_randomOwnedSectorPos, 0];
+captureWP setWaypointType "GUARD";
 };
 
-doNavalSpawn = {
-
+doNavalAttack = { 
+params["_grp", "_randomOwnedSectorName", "_randomOwnedSectorPos"];
+_boat = "boatTag" createVehicle getPos(_grp);
+{
+    _x moveInAny _boat;
+} forEach units _grp;
+_coastWaypointPos = getMarkerPos (_randomOwnedSectorName + "_coast");
+unloadWP = _grp addWaypoint [_coastWaypointPos, 0];
+unloadWP setWaypointType "GETOUT";
+captureWP = _grp addWaypoint [_randomOwnedSectorPos, 0];
+captureWP = _grp setWaypointType ["GUARD"];
 };
 
+INFANTRY_UNITS = [
+    "vn_b_men_sog_09",0.5, "vn_b_men_sog_10",0.4,"vn_b_men_sog_04",0.1 //random like in recruitUnit instead of an array
+];
 
+createEnemyInfantryGroup = {
+    _grp = createGroup [west,true];
+    for "_i" from 0 to totalPOVL do {
+        selectRandomWeighted INFANTRY_UNITS createUnit [_randomSpawnPointNamePos, _grp];
+    };
+    _grp;
+};
+
+MAX_NUMBER_OF_BOAT_CREW = 5;
+
+createEnemyInfantryBoatGroup = {
+    _grp = createGroup [west,true];
+    for "_i" from 1 to MAX_NUMBER_OF_BOAT_CREW do {
+        selectRandomWeighted INFANTRY_UNITS createUnit [_randomSpawnPointNamePos, _grp];
+    };
+    _grp;
+};
 
 updateManpower = {
  call calculateTotalPOVL;
