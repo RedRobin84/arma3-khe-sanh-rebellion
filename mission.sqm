@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=927;
+		nextID=934;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=4918;
+		nextID=5163;
 	};
 	class Camera
 	{
-		pos[]={14964.739,35.757626,3878.9434};
-		dir[]={0.91402471,-0.38824391,0.11758276};
-		up[]={0.38507077,0.92155659,0.049536608};
-		aside[]={0.12759145,0,-0.99182689};
+		pos[]={14175.185,6.5142293,2185.6919};
+		dir[]={0.76229823,-0.56202799,-0.320977};
+		up[]={0.51798266,0.82711816,-0.2181043};
+		aside[]={-0.38806665,0,-0.92163146};
 	};
 };
 binarizationWanted=0;
@@ -586,7 +586,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={14435.107,97.752716,2100.9546};
+						position[]={14437.011,102.72002,2084.9475};
 					};
 					side="East";
 					flags=7;
@@ -619,7 +619,6 @@ class Mission
 					};
 					id=28;
 					type="vn_o_men_vc_local_01";
-					atlOffset=-7.6293945e-006;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -668,7 +667,6 @@ class Mission
 			{
 			};
 			id=27;
-			atlOffset=-7.6293945e-006;
 		};
 		class Item5
 		{
@@ -3579,15 +3577,16 @@ class Mission
 				class Item0
 				{
 					dataType="Marker";
-					position[]={14756.896,59.591,1360.293};
+					position[]={14142.547,58.977005,1444.3505};
 					name="sectorThat1";
+					text="coastAttack";
 					type="mil_start";
 					id=377;
-					atlOffset=-3.9907684;
+					atlOffset=67.413986;
 				};
 			};
 			id=378;
-			atlOffset=-3.9907684;
+			atlOffset=67.413986;
 		};
 		class Item88
 		{
@@ -11638,7 +11637,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={14967.185,34.12524,3879.0642};
-						angles[]={-0,4.6914339,0};
+						angles[]={0,4.6914339,0};
 					};
 					side="Empty";
 					flags=4;

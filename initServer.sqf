@@ -6,7 +6,6 @@ maxSoldiersMultiplier = 4;
 //AKA Influence
 totalPOVL = 0;
 totalTicks = 3;
-manpowerTicks = 0;
 
 //War level enum
 defConSix = 6;
@@ -276,11 +275,14 @@ _ownedSectors = [_allSectors, { str(_x getVariable "owner") == "EAST" }] call BI
 if (count _ownedSectors == 0) exitwith {systemChat "No owned sector found. Exiting.";}; //TODO: replace with getSectorsOwnedBySide
 systemChat str(count(_ownedSectors));
 _randomOwnedSector = selectRandom _ownedSectors;
-systemChat "random sector selected";
 _randomOwnedSectorName = _randomOwnedSector call BIS_fnc_objectVar;
 _randomSpawnPointName = _randomOwnedSectorName + str(floor(random 3));
-systemChat str(_randomSpawnPointName);
 _randomSpawnPointNamePos = getMarkerPos(_randomSpawnPointName);
+if (surfaceIsWater _randomSpawnPointNamePos) then {
+    call doNavalSpawn;
+} else {
+    call doLandSpawn;
+};
 _grp = createGroup [west,true];
     for "_i" from 0 to 2 do {
         selectRandomWeighted _units createUnit [_randomSpawnPointNamePos, _grp];
@@ -295,6 +297,14 @@ call updateDefCon;
 totalTicks = 0;
 };
 
+doLandSpawn = {
+
+};
+
+doNavalSpawn = {
+
+};
+
 
 
 updateManpower = {
@@ -306,7 +316,6 @@ updateManpower = {
       manpower = manpower + totalPOVL;
       hint("New volunteers have arrived.")
  };
- manpowerTicks = 0;
  call updateGUI;
 };
 
@@ -317,10 +326,7 @@ showReport = {
 
 runPerTickScripts = {
     totalTicks = totalTicks + 1;
-    manpowerTicks = manpowerTicks + 1;
-    if ((manpowerTicks mod 2) == 0) then {
-        call updateManpower;;
-    };
+    call updateManpower;;
     call showReport;
     sleep 5;
     if ((totalTicks mod defcon) == 0) then {
