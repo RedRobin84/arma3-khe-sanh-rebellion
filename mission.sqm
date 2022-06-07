@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=940;
+		nextID=941;
 	};
 	class MarkerIDProvider
 	{
@@ -11719,12 +11719,12 @@ class Mission
 		class Item269
 		{
 			dataType="Marker";
-			position[]={14596.338,0,921.78699};
+			position[]={14597.296,0,921.18915};
 			name="sectorThat_coastWP";
 			text="sectorThat_coastWP";
 			type="mil_end";
 			id=939;
-			atlOffset=0.86680174;
+			atlOffset=0.6703003;
 		};
 	};
 	class Connections
