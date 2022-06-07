@@ -279,7 +279,7 @@ if (count _ownedSectors == 0) exitwith {
     }; //TODO: replace with getSectorsOwnedBySide
 _randomOwnedSector = selectRandom _ownedSectors;
 _randomOwnedSectorName = _randomOwnedSector call BIS_fnc_objectVar;
-_randomSpawnPointName = _randomOwnedSectorName + str(1);
+_randomSpawnPointName = _randomOwnedSectorName + str(floor(random 3));
 _randomSpawnPointNamePos = getMarkerPos(_randomSpawnPointName);
 _randomOwnedSectorPos = getPos _randomOwnedSector;
 call calculateTotalPOVL;
@@ -313,7 +313,7 @@ _boat = "vn_o_boat_01_mg_03" createVehicle getPos(leader _grp);
 _coastWaypointName = _randomOwnedSectorName + "_coastWP";
 _coastWaypointPos = getMarkerPos (_coastWaypointName);
 if (_coastWaypointName call markerNotExist) then {
-    diag_log("WARN: Boat spawn arker %1 does not exist.", _coastWaypointName);
+    diag_log(format["WARN: Boat spawn arker %1 does not exist.", _coastWaypointName]);
 };
 unloadWP = _grp addWaypoint [_coastWaypointPos, 0];
 unloadWP setWaypointType "GETOUT";
