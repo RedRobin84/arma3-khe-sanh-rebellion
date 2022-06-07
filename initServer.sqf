@@ -92,12 +92,12 @@ populateEnemySectors = {
         _enemySectorname = _enemySector call BIS_fnc_objectVar;
         _maxEnemySectorunits = _enemySector getVariable["max", (_enemySector call getDefaultMaxSoldiers)];
         if (_maxEnemySectorunits == 0) then {
-            systemChat("WARN: max units not set for sector " + _enemySectorname);
+            diag_log(format ["WARN: max units not set for sector %1", _enemySectorname]);
         };
         _enemySectorspawnAreaMarkername = _enemySectorname + "_spawn";
         _enemySectorspawnAreamarkerPos = getmarkerPos(_enemySectorspawnAreaMarkername);
         if (_enemySectorspawnAreamarkerPos call markernotExist) exitwith {
-            systemChat("Error: spawn marker not found for sector" + _enemySectorname);
+            diag_log(format ["ERROR: spawn marker not found for sector %1", _enemySectorname]);
         };
         _allunitsinEnemySector = allunits inAreaArray _enemySectorspawnAreaMarkername;
         _allEnemyunitsinSector = [_allunitsinEnemySector, {
@@ -109,7 +109,7 @@ populateEnemySectors = {
                 ((getmarkerPos _x) inArea _enemySectorspawnAreaMarkername) && ((getmarkertype _x) == "respawn_inf")
             };
             if (count(_allStaticspawnPointsinEnemySector) == 0) exitwith {
-                systemChat("Error: No spawn points set for sector " + _enemySectorname);
+                diag_log(format ["ERROR: No spawn points set for sector %1", _enemySectorname]);
             };
             _minEnemySectorunits = _enemySector getVariable["min", (_enemySector call getSectorValue)];
             _maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
@@ -120,7 +120,7 @@ populateEnemySectors = {
             _routeGroup = allGroups select { groupId _x == _routeGroupName };
             _routeGroupNumber = count(_routeGroup);
             if (_routeGroupNumber > 1) then {
-                systemChat("ERROR: More than one route groups found for sector " + _enemySectorName);
+                diag_log(format ["ERROR: More than one route groups found for sector %1", _enemySectorName]);
             };
             if (_routeGroupNumber == 0) then {
                 _routeGroup = createGroup[west, false];
@@ -151,7 +151,7 @@ populateEnemySectors = {
 
                     _chosenspawnPointPos set [2, parseNumber(markertext _chosenspawnPoint)];
                     _unittype = "vn_b_men_sog_09";
-                    systemChat("Creating unit " +_unittype + " on spawn point " + _chosenspawnPoint + " at sector " + _enemySectorname);
+                    diag_log(format ["DEBUG: Creating unit %1 on spawn point %2 at sector %3", _unittype, _chosenspawnPoint, _enemySectorname]);
                     _group = createGroup west;
                     _group setBehaviour "SAFE";
                     _unit = _group createUnit [_Unittype, _chosenspawnPointPos, [], 0, "NONE"];
@@ -168,7 +168,7 @@ populateEnemySectors = {
                     _sectorRouteSpawnPointPos = getmarkerPos(_sectorRouteSpawnPointName);
                     _sectorRouteSpawnPointPos set [2, parseNumber(markertext _sectorRouteSpawnPointName)];
                     _routeUnitType = "vn_b_men_sog_09";
-                    systemChat("Creating route unit " +_routeUnitType + " at sector " + _enemySectorname);
+                    diag_log(format["DEBUG: Creating route unit %1 at sector %2", _routeUnitType, _enemySectorname]);
                     _routeUnit = _routeGroup createUnit [_routeUnitType, _sectorRouteSpawnPointPos, [], 0, "NONE"];
                     _i = _i + 1;
                 };
@@ -270,11 +270,12 @@ attackRandomSettlement = {
 
 _allSectors = true call BIS_fnc_moduleSector;
 _ownedSectors = [_allSectors, { str(_x getVariable "owner") == "EAST" }] call BIS_fnc_conditionalSelect;
-if (count _ownedSectors == 0) exitwith {systemChat "No owned sector found. Exiting.";}; //TODO: replace with getSectorsOwnedBySide
-systemChat str(count(_ownedSectors));
+if (count _ownedSectors == 0) exitwith {
+    diag_log("INFO: No sectors owned by EAST. Exiting.");
+    }; //TODO: replace with getSectorsOwnedBySide
 _randomOwnedSector = selectRandom _ownedSectors;
 _randomOwnedSectorName = _randomOwnedSector call BIS_fnc_objectVar;
-_randomSpawnPointName = _randomOwnedSectorName + str(floor(random 3));
+_randomSpawnPointName = _randomOwnedSectorName + str(1);
 _randomSpawnPointNamePos = getMarkerPos(_randomSpawnPointName);
 _randomOwnedSectorPos = getPos _randomOwnedSector;
 call calculateTotalPOVL;
@@ -301,15 +302,15 @@ captureWP setWaypointType "GUARD";
 
 doNavalAttack = { 
 params["_grp", "_randomOwnedSectorName", "_randomOwnedSectorPos"];
-_boat = "boatTag" createVehicle getPos(_grp);
+_boat = "vn_o_boat_01_mg_03" createVehicle getPos(leader _grp);
 {
     _x moveInAny _boat;
 } forEach units _grp;
-_coastWaypointPos = getMarkerPos (_randomOwnedSectorName + "_coast");
+_coastWaypointPos = getMarkerPos (_randomOwnedSectorName + "_coastWP");
 unloadWP = _grp addWaypoint [_coastWaypointPos, 0];
 unloadWP setWaypointType "GETOUT";
 captureWP = _grp addWaypoint [_randomOwnedSectorPos, 0];
-captureWP = _grp setWaypointType ["GUARD"];
+captureWP setWaypointType "GUARD";
 };
 
 INFANTRY_UNITS = [
@@ -328,7 +329,8 @@ MAX_NUMBER_OF_BOAT_CREW = 5;
 
 createEnemyInfantryBoatGroup = {
     _grp = createGroup [west,true];
-    for "_i" from 1 to MAX_NUMBER_OF_BOAT_CREW do {
+    _boatCrewNr = if (totalPOVL > MAX_NUMBER_OF_BOAT_CREW) then [{MAX_NUMBER_OF_BOAT_CREW},{totalPOVL}];
+    for "_i" from 1 to _boatCrewNr do {
         selectRandomWeighted INFANTRY_UNITS createUnit [_randomSpawnPointNamePos, _grp];
     };
     _grp;
