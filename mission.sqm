@@ -8,22 +8,22 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=927;
+		nextID=941;
 	};
 	class MarkerIDProvider
 	{
-		nextID=13;
+		nextID=16;
 	};
 	class LayerIndexProvider
 	{
-		nextID=4918;
+		nextID=6143;
 	};
 	class Camera
 	{
-		pos[]={14964.739,35.757626,3878.9434};
-		dir[]={0.91402471,-0.38824391,0.11758276};
-		up[]={0.38507077,0.92155659,0.049536608};
-		aside[]={0.12759145,0,-0.99182689};
+		pos[]={14597.304,8.9279299,921.36713};
+		dir[]={0.41788897,-0.10305583,-0.90263408};
+		up[]={0.04329643,0.99467564,-0.09351965};
+		aside[]={-0.90746593,0,-0.42012593};
 	};
 };
 binarizationWanted=0;
@@ -176,7 +176,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=267;
+		items=270;
 		class Item0
 		{
 			dataType="Object";
@@ -586,7 +586,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={14435.107,97.752716,2100.9546};
+						position[]={14437.011,102.72002,2084.9475};
 					};
 					side="East";
 					flags=7;
@@ -619,7 +619,6 @@ class Mission
 					};
 					id=28;
 					type="vn_o_men_vc_local_01";
-					atlOffset=-7.6293945e-006;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -668,7 +667,6 @@ class Mission
 			{
 			};
 			id=27;
-			atlOffset=-7.6293945e-006;
 		};
 		class Item5
 		{
@@ -3579,15 +3577,15 @@ class Mission
 				class Item0
 				{
 					dataType="Marker";
-					position[]={14756.896,59.591,1360.293};
+					position[]={14155.293,58.977001,1430.4513};
 					name="sectorThat1";
 					type="mil_start";
 					id=377;
-					atlOffset=-3.9907684;
+					atlOffset=66.549637;
 				};
 			};
 			id=378;
-			atlOffset=-3.9907684;
+			atlOffset=66.549637;
 		};
 		class Item88
 		{
@@ -11638,7 +11636,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={14967.185,34.12524,3879.0642};
-						angles[]={-0,4.6914339,0};
+						angles[]={0,4.6914339,0};
 					};
 					side="Empty";
 					flags=4;
@@ -11651,6 +11649,82 @@ class Mission
 				};
 			};
 			id=924;
+		};
+		class Item267
+		{
+			dataType="Group";
+			side="East";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={15544.231,73.867737,1633.6584};
+						angles[]={5.9953651,0,6.1946421};
+					};
+					side="East";
+					flags=6;
+					class Attributes
+					{
+					};
+					id=936;
+					type="vn_o_men_vc_local_23";
+				};
+			};
+			class Attributes
+			{
+			};
+			class CrewLinks
+			{
+				class LinkIDProvider
+				{
+					nextID=1;
+				};
+				class Links
+				{
+					items=1;
+					class Item0
+					{
+						linkID=0;
+						item0=936;
+						item1=935;
+						class CustomData
+						{
+							role=1;
+						};
+					};
+				};
+			};
+			id=934;
+		};
+		class Item268
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={15544.344,75.129303,1633.2345};
+				angles[]={5.9953651,0,6.1946421};
+			};
+			side="East";
+			flags=6;
+			class Attributes
+			{
+			};
+			id=935;
+			type="vn_o_boat_02_03";
+		};
+		class Item269
+		{
+			dataType="Marker";
+			position[]={14597.296,0,921.18915};
+			name="sectorThat_coastWP";
+			text="sectorThat_coastWP";
+			type="mil_end";
+			id=939;
+			atlOffset=0.6703003;
 		};
 	};
 	class Connections
