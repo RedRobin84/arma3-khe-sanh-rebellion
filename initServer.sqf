@@ -2,6 +2,7 @@ _executeTime = 600; // 600 seconds, aka 10 minutes.
 defcon = 0;
 manpower = 0;
 maxSoldiersMultiplier = 4;
+NUMBER_OF_ATTACK_SPAWN_POINTS = 3;
 
 //AKA Influence
 totalPOVL = 0;
@@ -115,13 +116,8 @@ populateEnemySectors = {
             if (count(_allStaticspawnPointsinEnemySector) == 0) exitwith {
                 diag_log(format ["ERROR: No spawn points set for sector %1", _enemySectorname]);
             };
-            _minEnemySectorunits = _enemySector getVariable["min", (_enemySector call getSectorValue)];
+            _numberOfUnitsToSpawn = _enemySector call getNumberUnitsToSpawn;
             _maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
-            _difference = _minEnemySectorunits - _numberOfEnemyunitsinSector;
-            _nrOfUnitsToSpawn = if (_minEnemySectorunits > totalPOVL) then {
-                [{_minEnemySectorunits}, {totalPOVL}];
-            };
-            _numberOfIterations = if (_difference > 0) then [{_difference}, { 0}];
             _currentWarLevel = call calculateWarLevel;
             _routeGroupName = _enemySectorName + "_route_group";
             _routeGroup = allGroups select { groupId _x == _routeGroupName };
@@ -185,7 +181,14 @@ populateEnemySectors = {
 };
 
 getNumberUnitsToSpawn = {
-    
+_enemySector = _this;
+_minEnemySectorunits = _enemySector getVariable["min", (_enemySector call getSectorValue)];
+_minEnemySectorunits = if (_minEnemySectorunits > totalPOVL) then {
+    _minEnemySectorunits = totalPOVL;
+};
+_difference = _minEnemySectorunits - _numberOfEnemyunitsinSector;
+//RETURN
+if (_difference > 0) then [{_difference}, {0}];
 };
 
 getDefaultMaxSoldiers = {
@@ -278,7 +281,7 @@ joinPlayer = {
 };
 
 attackRandomSettlement = {
-
+call calculateTotalPOVL;
 _allSectors = true call BIS_fnc_moduleSector;
 _ownedSectors = [_allSectors, { str(_x getVariable "owner") == "EAST" }] call BIS_fnc_conditionalSelect;
 if (count _ownedSectors == 0) exitwith {
@@ -286,23 +289,53 @@ if (count _ownedSectors == 0) exitwith {
     }; //TODO: replace with getSectorsOwnedBySide
 _randomOwnedSector = selectRandom _ownedSectors;
 _randomOwnedSectorName = _randomOwnedSector call BIS_fnc_objectVar;
-_randomSpawnPointName = _randomOwnedSectorName + str(floor(random 3));
-_randomSpawnPointNamePos = getMarkerPos(_randomSpawnPointName);
 _randomOwnedSectorPos = getPos _randomOwnedSector;
-call calculateTotalPOVL;
-if (surfaceIsWater _randomSpawnPointNamePos) then {
-   _grp = _randomSpawnPointNamePos call createEnemyInfantryBoatGroup;
-  [_grp, _randomOwnedSectorName, _randomOwnedSectorPos] call doNavalAttack;
-} else {
-   _grp = _randomSpawnPointNamePos call createEnemyInfantryGroup;
-  [_grp, _randomOwnedSectorPos] call doLandAttack;
-};
+[_randomOwnedSectorName, _randomOwnedSectorPos] call distributeAttackInGroups;
 
 warningMsg = "Enemy is attacking " + _randomOwnedSectorName;
 [warningMsg, 1] call BIS_fnc_3DENNotification;
 ["Warning", [warningMsg]] call BIS_fnc_showNotification;
 call updateDefCon;
 totalTicks = 0;
+};
+
+distributeAttackInGroups = {
+params["_randomOwnedSectorName", "_randomOwnedSectorPos"];
+_nrOfAttackGroups = call getNumberOfAttacksGroups;
+_sectorSpawnPointsArray = _randomOwnedSectorName call createSectorSpawnPointsArray;
+for "_i" from 1 to _nrOfAttackGroups do {
+    _randomlySelectedSpawnPoint = selectRandom _sectorSpawnPointsArray;
+    _randomSpawnPointNamePos = getMarkerPos(_randomlySelectedSpawnPoint);
+    _soldiersPerGroup = ceil(totalPOVL / _nrOfAttackGroups);
+    if (surfaceIsWater _randomSpawnPointNamePos) then {
+       _grp = [_randomSpawnPointNamePos, _soldiersPerGroup] call createEnemyInfantryBoatGroup;
+      [_grp, _randomOwnedSectorName, _randomOwnedSectorPos] call doNavalAttack;
+    } else {
+       _grp = [_randomSpawnPointNamePos, _soldiersPerGroup] call createEnemyInfantryGroup;
+      [_grp, _randomOwnedSectorPos] call doLandAttack;
+    };
+    _sectorSpawnPointsArray deleteAt (_sectorSpawnPointsArray find _randomlySelectedSpawnPoint);
+};
+};
+
+createSectorSpawnPointsArray = {
+    _sectorName = _this;
+    _arrayOfSectorSpawnPoints = [];
+    for "_i" from 0 to (NUMBER_OF_ATTACK_SPAWN_POINTS - 1) do {
+        _arrayOfSectorSpawnPoints pushBack (_sectorName + str(_i)); 
+    };
+    //RETURN
+    _arrayOfSectorSpawnPoints;
+};
+
+getNumberOfAttackGroups = {
+    _nrOfSoldiers = totalPOVL;
+    _nrOfSpawnPoints = NUMBER_OF_ATTACK_SPAWN_POINTS;
+    _nrOfAttackGroups = ceil(_nrOfSoldiers / _nrOfSpawnPoints);
+    //RETURN
+    if (_nrOfAttackGroups > _nrOfSpawnPoints) then {
+        [{_nrOfSpawnPoints}, {_nrOfAttackGroups}];
+    };
 };
 
 doLandAttack = { 
@@ -333,8 +366,9 @@ INFANTRY_UNITS = [
 ];
 
 createEnemyInfantryGroup = {
+    params["_randomSpawnPointNamePos", "_soldiersPerGroup"];
     _grp = createGroup [west,true];
-    for "_i" from 0 to totalPOVL do {
+    for "_i" from 0 to _soldiersPerGroup do {
         selectRandomWeighted INFANTRY_UNITS createUnit [_randomSpawnPointNamePos, _grp];
     };
     _grp;
@@ -343,8 +377,9 @@ createEnemyInfantryGroup = {
 MAX_NUMBER_OF_BOAT_CREW = 5;
 
 createEnemyInfantryBoatGroup = {
+    params["_randomSpawnPointNamePos", "_soldiersPerGroup"];
     _grp = createGroup [west,true];
-    _boatCrewNr = if (totalPOVL > MAX_NUMBER_OF_BOAT_CREW) then [{MAX_NUMBER_OF_BOAT_CREW},{totalPOVL}];
+    _boatCrewNr = if (_soldiersPerGroup > MAX_NUMBER_OF_BOAT_CREW) then [{MAX_NUMBER_OF_BOAT_CREW},{_soldiersPerGroup}];
     for "_i" from 1 to _boatCrewNr do {
         selectRandomWeighted INFANTRY_UNITS createUnit [_randomSpawnPointNamePos, _grp];
     };
