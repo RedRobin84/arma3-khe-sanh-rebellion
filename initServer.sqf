@@ -118,6 +118,9 @@ populateEnemySectors = {
             _minEnemySectorunits = _enemySector getVariable["min", (_enemySector call getSectorValue)];
             _maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
             _difference = _minEnemySectorunits - _numberOfEnemyunitsinSector;
+            _nrOfUnitsToSpawn = if (_minEnemySectorunits > totalPOVL) then {
+                [{_minEnemySectorunits}, {totalPOVL}];
+            };
             _numberOfIterations = if (_difference > 0) then [{_difference}, { 0}];
             _currentWarLevel = call calculateWarLevel;
             _routeGroupName = _enemySectorName + "_route_group";
@@ -163,7 +166,7 @@ populateEnemySectors = {
                     _chosenspawnPointdirection = markerDir _chosenspawnPoint;
                     _unit setDir _chosenspawnPointdirection;
                     _unit setFormDir _chosenspawnPointdirection;
-                    _unit SetCombatBehaviour "SAFE";
+                    _unit setCombatBehaviour "SAFE";
                     _allEnemyunitsinSector pushBack _unit;
                     _i = _i + 1;
                 };
@@ -179,6 +182,10 @@ populateEnemySectors = {
         };
     };
     } forEach _enemySectors;
+};
+
+getNumberUnitsToSpawn = {
+    
 };
 
 getDefaultMaxSoldiers = {
