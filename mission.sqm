@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=6143;
+		nextID=6878;
 	};
 	class Camera
 	{
-		pos[]={14597.304,8.9279299,921.36713};
-		dir[]={0.41788897,-0.10305583,-0.90263408};
-		up[]={0.04329643,0.99467564,-0.09351965};
-		aside[]={-0.90746593,0,-0.42012593};
+		pos[]={14617.543,82.156662,944.07123};
+		dir[]={-0.65276313,-0.19435851,-0.73220563};
+		up[]={-0.12933645,0.98093063,-0.14507693};
+		aside[]={-0.74643987,0,0.66545302};
 	};
 };
 binarizationWanted=0;
@@ -176,7 +176,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=270;
+		items=268;
 		class Item0
 		{
 			dataType="Object";
@@ -3189,7 +3189,7 @@ class Mission
 															"STRING"
 														};
 													};
-													value="1";
+													value="0";
 												};
 											};
 										};
@@ -11651,72 +11651,6 @@ class Mission
 			id=924;
 		};
 		class Item267
-		{
-			dataType="Group";
-			side="East";
-			class Entities
-			{
-				items=1;
-				class Item0
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={15544.231,73.867737,1633.6584};
-						angles[]={5.9953651,0,6.1946421};
-					};
-					side="East";
-					flags=6;
-					class Attributes
-					{
-					};
-					id=936;
-					type="vn_o_men_vc_local_23";
-				};
-			};
-			class Attributes
-			{
-			};
-			class CrewLinks
-			{
-				class LinkIDProvider
-				{
-					nextID=1;
-				};
-				class Links
-				{
-					items=1;
-					class Item0
-					{
-						linkID=0;
-						item0=936;
-						item1=935;
-						class CustomData
-						{
-							role=1;
-						};
-					};
-				};
-			};
-			id=934;
-		};
-		class Item268
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={15544.344,75.129303,1633.2345};
-				angles[]={5.9953651,0,6.1946421};
-			};
-			side="East";
-			flags=6;
-			class Attributes
-			{
-			};
-			id=935;
-			type="vn_o_boat_02_03";
-		};
-		class Item269
 		{
 			dataType="Marker";
 			position[]={14597.296,0,921.18915};
