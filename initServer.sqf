@@ -18,13 +18,12 @@ defConTwo = 2;
     call initWinConditionForSectorsEventHandlers;
     sleep 1;
     call REB_fnc_initGUI;
-    sleep 1;
-    "Capture ruins to the north" call displayTask;
-    sleep 2;
+    sleep 5;
+    "Capture all settlements to win. The main objective is Nabo Camp military outpost." call displayTask;
     _totalPOVL = call REB_fnc_calculateTotalPOVL;
     _totalPOVL call populateEnemySectors;
-    sleep 2;
-    "The main objective is Nabo Camp military outpost" call displayTask;
+    sleep 5;
+    "Capture ruins to the north" call displayTask;
     sleep 5;
     _totalPOVL call updateDefCon;
 };
@@ -43,7 +42,7 @@ initWinConditionForSectorsEventHandlers = {
 
 checkIfAllSectorsOwnedByEast = {
     _enemySectorNumber = west call BIS_fnc_moduleSector;
-    systemChat("Number of owned WEST sectors " + str(_enemySectorNumber));
+    diag_log(format["DEBUG::checkIfAllSectorsOwnedByEast: Number of owned WEST sectors: %1", _enemySectorNumber]);
     if (_enemySectorNumber == 0) then {
         ["end1", true, 20, true, false] call BIS_fnc_endMission;
     };
@@ -228,7 +227,7 @@ recruitUnit = {
     if (parseNumber _randomUnitId < 10) then {
         _randomUnitId = "0" + _randomUnitId;
     };
-    systemChat ("Random recruit ID: " + _randomUnitId);
+    diag_log(format["DEBUG::recruitUnit: Random recruit ID: %1", _randomUnitId]);
     _myUnitName = "vn_c_men_" + _randomUnitId;
     _myUnitName createUnit [position player, group player, "removeAllAssignedItems this; this call addActionStayHere; this call addRemoveAllActionsFromCorpseHandler"];
 
