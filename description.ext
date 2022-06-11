@@ -95,5 +95,17 @@ class CfgFunctions
         {
             class percentageChanceOf {};
         };
+
+        class Global
+        {
+            class calculateTotalPOVL {};
+        };
+
+        class GUI
+        {
+            class initGUI {};
+            class updateManpowerGUI {};
+            class updateTotalPOVLGUI {};
+        };
     };
 };

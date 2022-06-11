@@ -2,9 +2,8 @@ _executeTime = 600; // 600 seconds, aka 10 minutes.
 defcon = 0;
 manpower = 0;
 maxSoldiersMultiplier = 4;
+NUMBER_OF_ATTACK_SPAWN_POINTS = 3;
 
-//AKA Influence
-totalPOVL = 0;
 totalTicks = 3;
 
 //War level enum
@@ -18,15 +17,15 @@ defConTwo = 2;
     call makeAllSpawnPointMarkersInvisible;
     call initWinConditionForSectorsEventHandlers;
     sleep 1;
-    call initGUI;
-    sleep 1;
-    "Capture ruins to the north" call displayTask;
-    sleep 2;
-    call populateEnemySectors;
-    sleep 2;
-    "The main objective is Nabo Camp military outpost" call displayTask;
+    call REB_fnc_initGUI;
     sleep 5;
-    call updateDefCon;
+    "Capture all settlements to win. The main objective is Nabo Camp military outpost." call displayTask;
+    _totalPOVL = call REB_fnc_calculateTotalPOVL;
+    _totalPOVL call populateEnemySectors;
+    sleep 5;
+    "Capture ruins to the north" call displayTask;
+    sleep 5;
+    _totalPOVL call updateDefCon;
 };
 
 initWinConditionForSectorsEventHandlers = {
@@ -36,7 +35,6 @@ initWinConditionForSectorsEventHandlers = {
 
         if ( _owner isEqualTo EAST ) then {
             call checkIfAllSectorsOwnedByEast;
-            call calculateTotalPOVL;
         };
     }] call BIS_fnc_addScriptedEventHandler; 
 }forEach ( true call BIS_fnc_moduleSector );
@@ -44,29 +42,31 @@ initWinConditionForSectorsEventHandlers = {
 
 checkIfAllSectorsOwnedByEast = {
     _enemySectorNumber = west call BIS_fnc_moduleSector;
-    systemChat("Number of owned WEST sectors " + str(_enemySectorNumber));
+    diag_log(format["DEBUG::checkIfAllSectorsOwnedByEast: Number of owned WEST sectors: %1", _enemySectorNumber]);
     if (_enemySectorNumber == 0) then {
         ["end1", true, 20, true, false] call BIS_fnc_endMission;
     };
 };
 
 updateDefCon = {
-    defcon = call calculateWarLevel;
+    _totalPOVL = _this;
+    defcon = _totalPOVL call calculateWarLevel;
     _msg = "DEFCON at level " + str(defcon);
     ["Warning", [_msg]] call BIS_fnc_showNotification;
 };
 
 calculateWarLevel = {
-    if (totalPOVL < 2) exitWith {
+     _totalPOVL = _this;
+    if (_totalPOVL < 2) exitWith {
         defConSix
     };
-    if (totalPOVL < 4) exitWith {
+    if (_totalPOVL < 4) exitWith {
         defConFive
     };
-    if (totalPOVL < 6) exitWith {
+    if (_totalPOVL < 6) exitWith {
         defConFour
     };
-    if (totalPOVL < 8) exitWith {
+    if (_totalPOVL < 8) exitWith {
         defConThree
     };
     defConTwo
@@ -79,16 +79,13 @@ makeAllSpawnPointMarkersInvisible =  {
     } forEach allMapMarkers
 };
 
-markerNotExist = {
-    (getMarkerColor _this == "");
-};
-
 displayTask = {
     _message = _this;
     ["ScoreAdded", [_message]] call BIS_fnc_showNotification;
 };
 
 populateEnemySectors = {
+    _totalPOVL = _this;
     _enemySectors = "west" call getSectorsOwnedByside;
     if (count(_enemySectors) == 0) exitwith {};
     {
@@ -96,12 +93,12 @@ populateEnemySectors = {
         _enemySectorname = _enemySector call BIS_fnc_objectVar;
         _maxEnemySectorunits = _enemySector getVariable["max", (_enemySector call getDefaultMaxSoldiers)];
         if (_maxEnemySectorunits == 0) then {
-            diag_log(format ["WARN: max units not set for sector %1", _enemySectorname]);
+            diag_log(format ["WARN::populateEnemySectors: max units not set for sector %1", _enemySectorname]);
         };
         _enemySectorspawnAreaMarkername = _enemySectorname + "_spawn";
         _enemySectorspawnAreamarkerPos = getmarkerPos(_enemySectorspawnAreaMarkername);
-        if (_enemySectorspawnAreamarkerPos call markernotExist) exitwith {
-            diag_log(format ["ERROR: spawn marker not found for sector %1", _enemySectorname]);
+        if (_enemySectorspawnAreamarkerPos call markerNotExist) exitwith {
+            diag_log(format ["ERROR::populateEnemySectors: spawn marker not found for sector %1", _enemySectorname]);
         };
         _allunitsinEnemySector = allunits inAreaArray _enemySectorspawnAreaMarkername;
         _allEnemyunitsinSector = [_allunitsinEnemySector, {
@@ -113,18 +110,16 @@ populateEnemySectors = {
                 ((getmarkerPos _x) inArea _enemySectorspawnAreaMarkername) && ((getmarkertype _x) == "respawn_inf")
             };
             if (count(_allStaticspawnPointsinEnemySector) == 0) exitwith {
-                diag_log(format ["ERROR: No spawn points set for sector %1", _enemySectorname]);
+                diag_log(format ["ERROR::populateEnemySectors: No spawn points set for sector %1", _enemySectorname]);
             };
-            _minEnemySectorunits = _enemySector getVariable["min", (_enemySector call getSectorValue)];
+            _numberOfUnitsToSpawn = [_totalPOVL, _enemySector] call getNumberUnitsToSpawn;
             _maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
-            _difference = _minEnemySectorunits - _numberOfEnemyunitsinSector;
-            _numberOfIterations = if (_difference > 0) then [{_difference}, { 0}];
-            _currentWarLevel = call calculateWarLevel;
+            _currentWarLevel = _totalPOVL call calculateWarLevel;
             _routeGroupName = _enemySectorName + "_route_group";
             _routeGroup = allGroups select { groupId _x == _routeGroupName };
             _routeGroupNumber = count(_routeGroup);
             if (_routeGroupNumber > 1) then {
-                diag_log(format ["ERROR: More than one route groups found for sector %1", _enemySectorName]);
+                diag_log(format ["ERROR::populateEnemySectors: More than one route groups found for sector %1", _enemySectorName]);
             };
             if (_routeGroupNumber == 0) then {
                 _routeGroup = createGroup[west, false];
@@ -143,7 +138,7 @@ populateEnemySectors = {
                 _routeGroup = routeGroup select 0;
             };
             _i = 0;
-            while {_i  < _difference} do {
+            while {_i  < _numberOfUnitsToSpawn} do {
                 _allUnoccupiedStaticspawnPointsinEnemySector = [_allStaticspawnPointsinEnemySector, {
                     count(_allEnemyunitsinSector inAreaArray _x) == 0
                 }] call BIS_fnc_conditionalselect;
@@ -155,7 +150,7 @@ populateEnemySectors = {
 
                     _chosenspawnPointPos set [2, parseNumber(markertext _chosenspawnPoint)];
                     _unittype = "vn_b_men_sog_09";
-                    diag_log(format ["DEBUG: Creating unit %1 on spawn point %2 at sector %3", _unittype, _chosenspawnPoint, _enemySectorname]);
+                    diag_log(format ["DEBUG::populateEnemySectors: Creating unit %1 on spawn point %2 at sector %3", _unittype, _chosenspawnPoint, _enemySectorname]);
                     _group = createGroup west;
                     _group setBehaviour "SAFE";
                     _unit = _group createUnit [_Unittype, _chosenspawnPointPos, [], 0, "NONE"];
@@ -163,22 +158,34 @@ populateEnemySectors = {
                     _chosenspawnPointdirection = markerDir _chosenspawnPoint;
                     _unit setDir _chosenspawnPointdirection;
                     _unit setFormDir _chosenspawnPointdirection;
-                    _unit SetCombatBehaviour "SAFE";
+                    _unit setCombatBehaviour "SAFE";
                     _allEnemyunitsinSector pushBack _unit;
                     _i = _i + 1;
                 };
-                if (_i < _difference && _currentWarLevel <= defConFive) then {
+                if (_i < _numberOfUnitsToSpawn && _currentWarLevel <= defConFive) then {
                     _sectorRouteSpawnPointName = _enemySectorname + "_route0";
                     _sectorRouteSpawnPointPos = getmarkerPos(_sectorRouteSpawnPointName);
                     _sectorRouteSpawnPointPos set [2, parseNumber(markertext _sectorRouteSpawnPointName)];
                     _routeUnitType = "vn_b_men_sog_09";
-                    diag_log(format["DEBUG: Creating route unit %1 at sector %2", _routeUnitType, _enemySectorname]);
+                    diag_log(format["DEBUG::populateEnemySectors: Creating route unit %1 at sector %2", _routeUnitType, _enemySectorname]);
                     _routeUnit = _routeGroup createUnit [_routeUnitType, _sectorRouteSpawnPointPos, [], 0, "NONE"];
                     _i = _i + 1;
                 };
         };
     };
     } forEach _enemySectors;
+};
+
+getNumberUnitsToSpawn = {
+params["_totalPOVL", "_enemySector"];
+_sectorValue = _enemySector call getSectorValue;
+_minEnemySectorunits = _enemySector getVariable["min", _sectorValue];
+if (_minEnemySectorunits > _totalPOVL) then {
+    _minEnemySectorunits = _totalPOVL;
+};
+_difference = _minEnemySectorunits - _numberOfEnemyunitsinSector;
+//RETURN
+if (_difference > 0) then [{_difference}, {0}];
 };
 
 getDefaultMaxSoldiers = {
@@ -205,22 +212,13 @@ getSectorsOwnedBySide = {
     _sideSectors = [_allSectors, { str(_x getVariable "owner") == _sideName }] call BIS_fnc_conditionalSelect;
     _sideSectorsCount = count(_sideSectors);
     if (_sideSectorsCount == 0) exitwith {
-        systemChat ("No sector owned by " + _sideName + " found. Exiting.");
+        diag_log(format["DEBUG::getSectorsOwnedBySide: No sector owned by %1 found. Exiting.", _sideName]);
+        //RETURN
         []
         };
-    systemChat ("Found " + str(_sideSectorsCount) + " sector(s) owned by " + str(_sideName));
+     diag_log(format["DEBUG::getSectorsOwnedBySide: Found %1 sector(s) owned by %2", _sideSectorsCount, _sideName]);
+    //RETURN
     _sideSectors
-};
-
-calculateTotalPOVL = {
-    newPOVL = 0;
-    {
-        if (str(_x getVariable "owner") == "east") then {
-            newPOVL = newPOVL + parseNumber(_x call getSectorValue)
-        }
-    } forEach (true call BIS_fnc_moduleSector);
-    totalPOVL = newPOVL;
-    call updateGUI;
 };
 
 recruitUnit = {
@@ -229,7 +227,7 @@ recruitUnit = {
     if (parseNumber _randomUnitId < 10) then {
         _randomUnitId = "0" + _randomUnitId;
     };
-    systemChat ("Random recruit ID: " + _randomUnitId);
+    diag_log(format["DEBUG::recruitUnit: Random recruit ID: %1", _randomUnitId]);
     _myUnitName = "vn_c_men_" + _randomUnitId;
     _myUnitName createUnit [position player, group player, "removeAllAssignedItems this; this call addActionStayHere; this call addRemoveAllActionsFromCorpseHandler"];
 
@@ -240,7 +238,7 @@ decreaseManpower = {
     if (manpower > 0) then {
         manpower = manpower - 1;
     };
-    call updateGUI;
+    call REB_fnc_updateManpowerGUI;
 };
 
 addRemoveAllActionsFromCorpseHandler = {
@@ -271,49 +269,87 @@ joinPlayer = {
 };
 
 attackRandomSettlement = {
-
+_totalPOVL = _this;
 _allSectors = true call BIS_fnc_moduleSector;
 _ownedSectors = [_allSectors, { str(_x getVariable "owner") == "EAST" }] call BIS_fnc_conditionalSelect;
 if (count _ownedSectors == 0) exitwith {
-    diag_log("INFO: No sectors owned by EAST. Exiting.");
+    diag_log("INFO::attackRandomSettlement: No sectors owned by EAST. Exiting.");
     }; //TODO: replace with getSectorsOwnedBySide
 _randomOwnedSector = selectRandom _ownedSectors;
 _randomOwnedSectorName = _randomOwnedSector call BIS_fnc_objectVar;
-_randomSpawnPointName = _randomOwnedSectorName + str(floor(random 3));
-_randomSpawnPointNamePos = getMarkerPos(_randomSpawnPointName);
 _randomOwnedSectorPos = getPos _randomOwnedSector;
-call calculateTotalPOVL;
-if (surfaceIsWater _randomSpawnPointNamePos) then {
-   _grp = _randomSpawnPointNamePos call createEnemyInfantryBoatGroup;
-  [_grp, _randomOwnedSectorName, _randomOwnedSectorPos] call doNavalAttack;
-} else {
-   _grp = _randomSpawnPointNamePos call createEnemyInfantryGroup;
-  [_grp, _randomOwnedSectorPos] call doLandAttack;
-};
+diag_log(format["INFO::attackRandomSettlement: Creating attack on POI %1 at position %2", _randomOwnedSectorName, _randomOwnedSectorPos]);
+[_totalPOVL, _randomOwnedSectorName, _randomOwnedSectorPos] call distributeAttackInGroups;
 
 warningMsg = "Enemy is attacking " + _randomOwnedSectorName;
 [warningMsg, 1] call BIS_fnc_3DENNotification;
 ["Warning", [warningMsg]] call BIS_fnc_showNotification;
-call updateDefCon;
+_totalPOVL call updateDefCon;
 totalTicks = 0;
+};
+
+distributeAttackInGroups = {
+params["_totalPOVL", "_randomOwnedSectorName", "_randomOwnedSectorPos"];
+_nrOfAttackGroups = _totalPOVL call getNumberOfAttackGroups;
+_sectorSpawnPointsArray = _randomOwnedSectorName call createSectorSpawnPointsArray;
+for "_i" from 1 to _nrOfAttackGroups do {
+    _randomlySelectedSpawnPoint = selectRandom _sectorSpawnPointsArray;
+    _randomSpawnPointNamePos = getMarkerPos(_randomlySelectedSpawnPoint);
+    diag_log(format["DEBUG::distributeAttackInGroups: Random spawn point selected: %1 at position %2", _randomlySelectedSpawnPoint, _randomSpawnPointNamePos]);
+    _soldiersPerGroup = ceil(_totalPOVL / _nrOfAttackGroups);
+    if (surfaceIsWater _randomSpawnPointNamePos) then {
+       _grp = [_randomSpawnPointNamePos, _soldiersPerGroup] call createEnemyInfantryBoatGroup;
+      [_grp, _randomOwnedSectorName, _randomOwnedSectorPos] call doNavalAttack;
+    } else {
+       _grp = [_randomSpawnPointNamePos, _soldiersPerGroup] call createEnemyInfantryGroup;
+      [_grp, _randomOwnedSectorPos] call doLandAttack;
+    };
+    _sectorSpawnPointsArray deleteAt (_sectorSpawnPointsArray find _randomlySelectedSpawnPoint);
+};
+};
+
+createSectorSpawnPointsArray = {
+    _sectorName = _this;
+    _arrayOfSectorSpawnPoints = [];
+    for "_i" from 0 to (NUMBER_OF_ATTACK_SPAWN_POINTS - 1) do {
+        _arrayOfSectorSpawnPoints pushBack (_sectorName + str(_i)); 
+    };
+    //RETURN
+    _arrayOfSectorSpawnPoints;
+};
+
+getNumberOfAttackGroups = {
+    _totalPOVL = _this;
+    _nrOfSoldiers = _totalPOVL;
+    _nrOfSpawnPoints = NUMBER_OF_ATTACK_SPAWN_POINTS;
+    _nrOfAttackGroups = ceil(_nrOfSoldiers / _nrOfSpawnPoints);
+    diag_log(format["DEBUG::getNumberOfAttackGroups: _nrOfSoldiers: %1, _nrOfSpawnPoints: %2, _nrOfAttackGroups: %3 ", _totalPOVL, _nrOfSpawnPoints, _nrOfAttackGroups]);
+    if (_nrOfAttackGroups > _nrOfSpawnPoints) exitWith {
+            //RETURN
+        _nrOfSpawnPoints
+    };
+    //ELSE RETURN
+    _nrOfAttackGroups
 };
 
 doLandAttack = { 
 params["_grp", "_randomOwnedSectorPos"];
+diag_log(format["DEBUG::doLandAttack: With group: %1", _grp]);
 captureWP = _grp addWaypoint [_randomOwnedSectorPos, 0];
 captureWP setWaypointType "GUARD";
 };
 
 doNavalAttack = { 
 params["_grp", "_randomOwnedSectorName", "_randomOwnedSectorPos"];
+diag_log(format["DEBUG::doNavalAttack: With group: %1", _grp]);
 _boat = "vn_o_boat_01_mg_03" createVehicle getPos(leader _grp);
 {
     _x moveInAny _boat;
 } forEach units _grp;
 _coastWaypointName = _randomOwnedSectorName + "_coastWP";
 _coastWaypointPos = getMarkerPos (_coastWaypointName);
-if (_coastWaypointName call markerNotExist) then {
-    diag_log(format["WARN: Boat spawn arker %1 does not exist.", _coastWaypointName]);
+if (_coastWaypointPos call markerNotExist) then {
+    diag_log(format["WARN::doNavalAttack: Boat spawn arker %1 does not exist.", _coastWaypointName]);
 };
 unloadWP = _grp addWaypoint [_coastWaypointPos, 0];
 unloadWP setWaypointType "GETOUT";
@@ -326,8 +362,9 @@ INFANTRY_UNITS = [
 ];
 
 createEnemyInfantryGroup = {
+    params["_randomSpawnPointNamePos", "_soldiersPerGroup"];
     _grp = createGroup [west,true];
-    for "_i" from 0 to totalPOVL do {
+    for "_i" from 1 to _soldiersPerGroup do {
         selectRandomWeighted INFANTRY_UNITS createUnit [_randomSpawnPointNamePos, _grp];
     };
     _grp;
@@ -336,8 +373,9 @@ createEnemyInfantryGroup = {
 MAX_NUMBER_OF_BOAT_CREW = 5;
 
 createEnemyInfantryBoatGroup = {
+    params["_randomSpawnPointNamePos", "_soldiersPerGroup"];
     _grp = createGroup [west,true];
-    _boatCrewNr = if (totalPOVL > MAX_NUMBER_OF_BOAT_CREW) then [{MAX_NUMBER_OF_BOAT_CREW},{totalPOVL}];
+    _boatCrewNr = if (_soldiersPerGroup > MAX_NUMBER_OF_BOAT_CREW) then [{MAX_NUMBER_OF_BOAT_CREW},{_soldiersPerGroup}];
     for "_i" from 1 to _boatCrewNr do {
         selectRandomWeighted INFANTRY_UNITS createUnit [_randomSpawnPointNamePos, _grp];
     };
@@ -345,42 +383,33 @@ createEnemyInfantryBoatGroup = {
 };
 
 updateManpower = {
- call calculateTotalPOVL;
- if ((manpower + totalPOVL) > totalPOVL) then {
-     manpower = totalPOVL;
+_totalPOVL = _this;
+ if ((manpower + _totalPOVL) > _totalPOVL) then {
+     manpower = _totalPOVL;
      hint("Manpower limit reached. Capture more POI's to extend manpower capacity.");
  } else {
-      manpower = manpower + totalPOVL;
+      manpower = manpower + _totalPOVL;
       hint("New volunteers have arrived.")
  };
- call updateGUI;
+ call REB_fnc_updateManpowerGUI;
 };
 
 showReport = {
-    strToDisplay = "Manpower: " + str (manpower) + " Influence: " + str (totalPOVL);
+    _totalPOVL = _this;
+    strToDisplay = "Manpower: " + str (manpower) + " Influence: " + str (_totalPOVL);
     ["ScoreAdded", [strToDisplay]] call BIS_fnc_showNotification;
 };
 
 runPerTickScripts = {
     totalTicks = totalTicks + 1;
-    call updateManpower;;
-    call showReport;
+    _totalPOVL = call REB_fnc_calculateTotalPOVL;
+    _totalPOVL call updateManpower;
+    _totalPOVL call showReport;
     sleep 5;
     if ((totalTicks mod defcon) == 0) then {
-        call attackRandomSettlement;
+        _totalPOVL call attackRandomSettlement;
     };
-
-    call populateEnemySectors;
-};
-
-initGUI = {
-    ("ManpowerTitle_layer" call BIS_fnc_rscLayer) cutRsc ["ManpowerTitle","PLAIN"];
-    ("TotalPOVL_layer" call BIS_fnc_rscLayer) cutRsc ["TotalPOVLTitle","PLAIN"];
-};
-
-updateGUI = {
-    (uiNameSpace getVariable "myUI_manpower") ctrlSetText format["Manpower: %1",manpower];
-    (uiNameSpace getVariable "myUI_totalPOVL") ctrlSetText format["Influence: %1",totalPOVL];
+    _totalPOVL call populateEnemySectors;
 };
 
 realTickTime = 0; // declare the local variable for the loop compare.
