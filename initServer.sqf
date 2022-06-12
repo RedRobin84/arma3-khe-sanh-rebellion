@@ -1,6 +1,5 @@
 _executeTime = 600; // 600 seconds, aka 10 minutes.
 defcon = 0;
-manpower = 0;
 maxSoldiersMultiplier = 4;
 NUMBER_OF_ATTACK_SPAWN_POINTS = 3;
 
@@ -86,7 +85,7 @@ displayTask = {
 
 populateEnemySectors = {
     _totalPOVL = _this;
-    _enemySectors = "west" call getSectorsOwnedByside;
+    _enemySectors = west call getSectorsOwnedByside;
     if (count(_enemySectors) == 0) exitwith {};
     {
         _enemySector = _x;
@@ -178,7 +177,7 @@ populateEnemySectors = {
 
 getNumberUnitsToSpawn = {
 params["_totalPOVL", "_enemySector"];
-_sectorValue = _enemySector call getSectorValue;
+_sectorValue = _enemySector call REB_fnc_getSectorValue;
 _minEnemySectorunits = _enemySector getVariable["min", _sectorValue];
 if (_minEnemySectorunits > _totalPOVL) then {
     _minEnemySectorunits = _totalPOVL;
@@ -190,35 +189,14 @@ if (_difference > 0) then [{_difference}, {0}];
 
 getDefaultMaxSoldiers = {
     _sector = _this;
-    _sectorValue = _sector call getSectorValue;
+    _sectorValue = _sector call REB_fnc_getSectorValue;
     //RETURN
     (parseNumber(_sectorValue) * maxSoldiersMultiplier)
-};
-
-getSectorValue = {
-    _sector = _this;
-    //RETURN
-    (_sector getVariable ["scoreReward", 0])
 };
 
 markerNotExist = {
     _position = _this;
     (_position select 0) == 0 && (_position select 1) == 0 && (_position select 2) == 0
-};
-
-getSectorsOwnedBySide = {
-    _sideName = _this;
-    _allSectors = true call BIS_fnc_moduleSector;
-    _sideSectors = [_allSectors, { str(_x getVariable "owner") == _sideName }] call BIS_fnc_conditionalSelect;
-    _sideSectorsCount = count(_sideSectors);
-    if (_sideSectorsCount == 0) exitwith {
-        diag_log(format["DEBUG::getSectorsOwnedBySide: No sector owned by %1 found. Exiting.", _sideName]);
-        //RETURN
-        []
-        };
-     diag_log(format["DEBUG::getSectorsOwnedBySide: Found %1 sector(s) owned by %2", _sideSectorsCount, _sideName]);
-    //RETURN
-    _sideSectors
 };
 
 recruitUnit = {
@@ -271,10 +249,10 @@ joinPlayer = {
 attackRandomSettlement = {
 _totalPOVL = _this;
 _allSectors = true call BIS_fnc_moduleSector;
-_ownedSectors = [_allSectors, { str(_x getVariable "owner") == "EAST" }] call BIS_fnc_conditionalSelect;
+_ownedSectors = east call REB_fnc_getSectorsOwnedBySide;
 if (count _ownedSectors == 0) exitwith {
     diag_log("INFO::attackRandomSettlement: No sectors owned by EAST. Exiting.");
-    }; //TODO: replace with getSectorsOwnedBySide
+    };
 _randomOwnedSector = selectRandom _ownedSectors;
 _randomOwnedSectorName = _randomOwnedSector call BIS_fnc_objectVar;
 _randomOwnedSectorPos = getPos _randomOwnedSector;
@@ -382,29 +360,10 @@ createEnemyInfantryBoatGroup = {
     _grp;
 };
 
-updateManpower = {
-_totalPOVL = _this;
- if ((manpower + _totalPOVL) > _totalPOVL) then {
-     manpower = _totalPOVL;
-     hint("Manpower limit reached. Capture more POI's to extend manpower capacity.");
- } else {
-      manpower = manpower + _totalPOVL;
-      hint("New volunteers have arrived.")
- };
- call REB_fnc_updateManpowerGUI;
-};
-
-showReport = {
-    _totalPOVL = _this;
-    strToDisplay = "Manpower: " + str (manpower) + " Influence: " + str (_totalPOVL);
-    ["ScoreAdded", [strToDisplay]] call BIS_fnc_showNotification;
-};
-
 runPerTickScripts = {
     totalTicks = totalTicks + 1;
     _totalPOVL = call REB_fnc_calculateTotalPOVL;
-    _totalPOVL call updateManpower;
-    _totalPOVL call showReport;
+    call REB_fnc_updateManpower;
     sleep 5;
     if ((totalTicks mod defcon) == 0) then {
         _totalPOVL call attackRandomSettlement;
