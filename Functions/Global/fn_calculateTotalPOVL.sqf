@@ -1,9 +1,9 @@
 totalPOVL = 0;
     {
         if (str(_x getVariable "owner") == "east") then {
-            totalPOVL = totalPOVL + parseNumber(_x call getSectorValue)
+            totalPOVL = totalPOVL + (_x call REB_fnc_getSectorValue)
         }
-    } forEach (true call BIS_fnc_moduleSector);
+    } forEach (call REB_fnc_getAllSectors);
     diag_log(format["DEBUG::calculateTotalPOVL: New totalPOVL: %1", totalPOVL]);
     totalPOVL call REB_fnc_updateTotalPOVLGUI;
     //RETURN

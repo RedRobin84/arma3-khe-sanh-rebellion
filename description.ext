@@ -99,6 +99,10 @@ class CfgFunctions
         class Global
         {
             class calculateTotalPOVL {};
+            class decreaseSectorManpower {};
+            class decrementSectorManpower {};
+            class resetSectorManpower {};
+            class updateManpower {};
         };
 
         class GUI
@@ -106,6 +110,23 @@ class CfgFunctions
             class initGUI {};
             class updateManpowerGUI {};
             class updateTotalPOVLGUI {};
+        };
+
+        class Init
+        {
+            class villagerInit {};
+        };
+
+        class Sector {
+            class closestSectorIsOwnedByEast {};
+            class getAllSectors {};
+            class getClosestSectorToObject {};
+            class getSectorsOwnedBySide {};
+            class getSectorValue {};
+        };
+
+        class Spawn {
+            class recruitUnit {};
         };
     };
 };
