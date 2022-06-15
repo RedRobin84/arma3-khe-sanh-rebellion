@@ -1,5 +1,5 @@
 _sideName = _this;
-    _allSectors = true call BIS_fnc_moduleSector;
+    _allSectors = call REB_fnc_getAllSectors;
     _sideSectors = [_allSectors, { (_x getVariable "owner") == _sideName }] call BIS_fnc_conditionalSelect;
     _sideSectorsCount = count(_sideSectors);
     if (_sideSectorsCount == 0) exitwith {
@@ -10,3 +10,4 @@ _sideName = _this;
      diag_log(format["DEBUG::getSectorsOwnedBySide: Found %1 sector(s) owned by %2", _sideSectorsCount, _sideName]);
     //RETURN
     _sideSectors
+    
