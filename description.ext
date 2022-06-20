@@ -91,13 +91,9 @@ class CfgFunctions
             class spawnGeneralLoot {};
         };
 
-        class Utils
-        {
-            class percentageChanceOf {};
-        };
-
         class Global
         {
+            class calculateDefCon {};
             class calculateTotalPOVL {};
             class decreaseSectorManpower {};
             class decrementSectorManpower {};
@@ -107,6 +103,7 @@ class CfgFunctions
 
         class GUI
         {
+            class displayCurrentDefCon {};
             class initGUI {};
             class updateManpowerGUI {};
             class updateTotalPOVLGUI {};
@@ -127,6 +124,12 @@ class CfgFunctions
 
         class Spawn {
             class recruitUnit {};
+        };
+
+        class Utils
+        {
+            class displayMessage {};
+            class percentageChanceOf {};
         };
     };
 };

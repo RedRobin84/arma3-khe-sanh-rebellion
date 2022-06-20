@@ -5,15 +5,21 @@ defcon = 0;
 maxSoldiersMultiplier = 4;
 NUMBER_OF_ATTACK_SPAWN_POINTS = 3;
 SECTOR_MANPOWER_DEFAULT_DECREMENT = 1;
+INTRO_INFO_MSG = "Capture all settlements to win. The main objective is Nabo Camp military outpost.";
+INTRO_INFO_MSG2 = "Capture ruins to the north";
 
 totalTicks = 3;
 
+//Message types (displayMessage fnc)
+MSG_TYPE_SCORE_ADDED = "ScoreAdded";
+MSG_TYPE_WARNING = "Warning";
+
 //War level enum
-defConSix = 6;
-defConFive = 5;
-defConFour = 4;
-defConThree = 3;
-defConTwo = 2;
+DEFCON_SIX = 6;
+DEFCON_FIVE = 5;
+DEFCON_FOUR = 4;
+DEFCON_THREE = 3;
+DEFCON_TWO = 2;
 
 0 spawn {
     call makeAllSpawnPointMarkersInvisible;
@@ -21,13 +27,14 @@ defConTwo = 2;
     sleep 1;
     call REB_fnc_initGUI;
     sleep 5;
-    "Capture all settlements to win. The main objective is Nabo Camp military outpost." call displayTask;
+    [INTRO_INFO_MSG, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
     _totalPOVL = call REB_fnc_calculateTotalPOVL;
     _totalPOVL call populateEnemySectors;
     sleep 5;
-    "Capture ruins to the north" call displayTask;
+    [INTRO_INFO_MSG2, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
     sleep 5;
-    _totalPOVL call updateDefCon;
+    _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
+    _currentDefcon call REB_fnc_displayCurrentDefCon;
 };
 
 initWinConditionForSectorsEventHandlers = {
@@ -56,30 +63,6 @@ checkIfAllSectorsOwnedByEast = {
     };
 };
 
-updateDefCon = {
-    _totalPOVL = _this;
-    defcon = _totalPOVL call calculateWarLevel;
-    _msg = "DEFCON at level " + str(defcon);
-    ["Warning", [_msg]] call BIS_fnc_showNotification;
-};
-
-calculateWarLevel = {
-     _totalPOVL = _this;
-    if (_totalPOVL < 2) exitWith {
-        defConSix
-    };
-    if (_totalPOVL < 4) exitWith {
-        defConFive
-    };
-    if (_totalPOVL < 6) exitWith {
-        defConFour
-    };
-    if (_totalPOVL < 8) exitWith {
-        defConThree
-    };
-    defConTwo
-};
-
 makeAllSpawnPointMarkersInvisible =  {
     {
     if (getMarkerType _x  == "mil_start" || getMarkerType _x  == "respawn_inf") 
@@ -87,15 +70,12 @@ makeAllSpawnPointMarkersInvisible =  {
     } forEach allMapMarkers
 };
 
-displayTask = {
-    _message = _this;
-    ["ScoreAdded", [_message]] call BIS_fnc_showNotification;
-};
-
 populateEnemySectors = {
     _totalPOVL = _this;
     _enemySectors = west call REB_fnc_getSectorsOwnedBySide;
-    if (count(_enemySectors) == 0) exitwith {};
+    if (count(_enemySectors) == 0) exitwith {
+        diag_log("ERROR::populateEnemySectors: No enemy sectors found. The game should be finished already.");
+    };
     {
         _enemySector = _x;
         _enemySectorname = _enemySector call BIS_fnc_objectVar;
@@ -122,7 +102,7 @@ populateEnemySectors = {
             };
             _numberOfUnitsToSpawn = [_totalPOVL, _enemySector] call getNumberUnitsToSpawn;
             _maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
-            _currentWarLevel = _totalPOVL call calculateWarLevel;
+            _currentWarLevel = _totalPOVL call REB_fnc_calculateDefCon;
             _routeGroupName = _enemySectorName + "_route_group";
             _routeGroup = allGroups select { groupId _x == _routeGroupName };
             _routeGroupNumber = count(_routeGroup);
@@ -170,7 +150,7 @@ populateEnemySectors = {
                     _allEnemyunitsinSector pushBack _unit;
                     _i = _i + 1;
                 };
-                if (_i < _numberOfUnitsToSpawn && _currentWarLevel <= defConFive) then {
+                if (_i < _numberOfUnitsToSpawn && _currentWarLevel <= DEFCON_FIVE) then {
                     _sectorRouteSpawnPointName = _enemySectorname + "_route0";
                     _sectorRouteSpawnPointPos = getmarkerPos(_sectorRouteSpawnPointName);
                     _sectorRouteSpawnPointPos set [2, parseNumber(markertext _sectorRouteSpawnPointName)];
@@ -250,7 +230,8 @@ diag_log(format["INFO::attackRandomSettlement: Creating attack on POI %1 at posi
 warningMsg = "Enemy is attacking " + _randomOwnedSectorName;
 [warningMsg, 1] call BIS_fnc_3DENNotification;
 ["Warning", [warningMsg]] call BIS_fnc_showNotification;
-_totalPOVL call updateDefCon;
+_currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
+_currentDefcon call REB_fnc_displayCurrentDefCon;
 totalTicks = 0;
 };
 
