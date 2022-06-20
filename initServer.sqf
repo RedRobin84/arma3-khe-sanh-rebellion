@@ -1,7 +1,6 @@
 //CONSTANTS
 _executeTime = 600; // 600 seconds, aka 10 minutes.
 MANPOWER_VAR_NAME = "manpower";
-defcon = 0;
 maxSoldiersMultiplier = 4;
 NUMBER_OF_ATTACK_SPAWN_POINTS = 3;
 SECTOR_MANPOWER_DEFAULT_DECREMENT = 1;
@@ -232,7 +231,6 @@ warningMsg = "Enemy is attacking " + _randomOwnedSectorName;
 ["Warning", [warningMsg]] call BIS_fnc_showNotification;
 _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
 _currentDefcon call REB_fnc_displayCurrentDefCon;
-totalTicks = 0;
 };
 
 distributeAttackInGroups = {
@@ -332,10 +330,12 @@ createEnemyInfantryBoatGroup = {
 runPerTickScripts = {
     totalTicks = totalTicks + 1;
     _totalPOVL = call REB_fnc_calculateTotalPOVL;
+    _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
     call REB_fnc_updateManpower;
     sleep 5;
-    if ((totalTicks mod defcon) == 0) then {
+    if (totalTicks >= _currentDefcon) then {
         _totalPOVL call attackRandomSettlement;
+        totalTicks = 0;
     };
     _totalPOVL call populateEnemySectors;
 };
