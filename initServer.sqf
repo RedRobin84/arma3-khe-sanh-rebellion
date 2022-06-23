@@ -6,8 +6,10 @@ NUMBER_OF_ATTACK_SPAWN_POINTS = 3;
 SECTOR_MANPOWER_DEFAULT_DECREMENT = 1;
 INTRO_INFO_MSG = "Capture all settlements to win. The main objective is Nabo Camp military outpost.";
 INTRO_INFO_MSG2 = "Capture ruins to the north";
+MAX_NUMBER_OF_BOAT_CREW = 5;
 
 totalTicks = 3;
+nextAttackedSectorName = "";
 
 //Message types (displayMessage fnc)
 MSG_TYPE_SCORE_ADDED = "ScoreAdded";
@@ -215,22 +217,25 @@ joinPlayer = {
 };
 
 attackRandomSettlement = {
-_totalPOVL = _this;
+params["_totalPOVL", "_nextAttackedSector"];
+
+_randomOwnedSectorName = _nextAttackedSector call BIS_fnc_objectVar;
+_nextAttackedSectorPos = getPos _nextAttackedSector;
+diag_log(format["INFO::attackRandomSettlement: Creating attack on POI %1 at position %2", _nextAttackedSectorName, _nextAttackedSectorPos]);
+[_totalPOVL, _nextAttackedSectorName, _nextAttackedSectorPos] call distributeAttackInGroups;
+};
+
+getRandomEastSectorName = {
 _ownedSectors = east call REB_fnc_getSectorsOwnedBySide;
 if (count _ownedSectors == 0) exitwith {
-    diag_log("INFO::attackRandomSettlement: No sectors owned by EAST. Exiting.");
+    diag_log("INFO::getRandomEastSectorName: No sectors owned by EAST. Exiting.");
+    //RETURN
+    ""
     };
 _randomOwnedSector = selectRandom _ownedSectors;
 _randomOwnedSectorName = _randomOwnedSector call BIS_fnc_objectVar;
-_randomOwnedSectorPos = getPos _randomOwnedSector;
-diag_log(format["INFO::attackRandomSettlement: Creating attack on POI %1 at position %2", _randomOwnedSectorName, _randomOwnedSectorPos]);
-[_totalPOVL, _randomOwnedSectorName, _randomOwnedSectorPos] call distributeAttackInGroups;
-
-warningMsg = "Enemy is attacking " + _randomOwnedSectorName;
-[warningMsg, 1] call BIS_fnc_3DENNotification;
-["Warning", [warningMsg]] call BIS_fnc_showNotification;
-_currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
-_currentDefcon call REB_fnc_displayCurrentDefCon;
+//RETURN
+_randomOwnedSectorName
 };
 
 distributeAttackInGroups = {
@@ -315,8 +320,6 @@ createEnemyInfantryGroup = {
     _grp;
 };
 
-MAX_NUMBER_OF_BOAT_CREW = 5;
-
 createEnemyInfantryBoatGroup = {
     params["_randomSpawnPointNamePos", "_soldiersPerGroup"];
     _grp = createGroup [west,true];
@@ -327,19 +330,6 @@ createEnemyInfantryBoatGroup = {
     _grp;
 };
 
-runPerTickScripts = {
-    totalTicks = totalTicks + 1;
-    _totalPOVL = call REB_fnc_calculateTotalPOVL;
-    _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
-    call REB_fnc_updateManpower;
-    sleep 5;
-    if (totalTicks >= _currentDefcon) then {
-        _totalPOVL call attackRandomSettlement;
-        totalTicks = 0;
-    };
-    _totalPOVL call populateEnemySectors;
-};
-
 realTickTime = 0; // declare the local variable for the loop compare.
  
 while {true} do // loops for entire duration that mission/server is running.
@@ -347,8 +337,32 @@ while {true} do // loops for entire duration that mission/server is running.
     ticksBegin = round(diag_TickTime); // tick time begin.
     if (realTickTime >= _executeTime) then // check _realTickTime against executeTime.
     {
-        call runPerTickScripts; // call the function.
-        realTickTime = 0; // reset the timer back to 0 to allow counting to 300 again.
+        totalTicks = totalTicks + 1;
+        _totalPOVL = call REB_fnc_calculateTotalPOVL;
+        _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
+        call REB_fnc_updateManpower;
+        sleep 5;
+        if (nextAttackedSectorName != "") then {
+            _nextAttackedSector = missionNamespace getVariable [nextAttackedSectorName, objNull];
+            if ((_nextAttackedSector getVariable "owner") == EAST) then {
+                [_totalPOVL, _nextAttackedSector] call attackRandomSettlement;
+                _warningMsg = "Enemy is attacking " + nextAttackedSectorName;
+                [_warningMsg, MSG_TYPE_WARNING] call REB_fnc_displayMessage;
+            } else {
+                _msg = format["Sector %1 is not in our hands anymore. Enemy cancelled his attack.", nextAttackedSectorName];
+                [_msg, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
+            };
+            nextAttackedSectorName = "";
+        };
+        if (totalTicks >= _currentDefcon) then {
+            nextAttackedSectorName = call getRandomEastSectorName;
+            totalTicks = 0;
+        };
+        _totalPOVL call populateEnemySectors;
+        sleep 3;
+       _currentDefcon call REB_fnc_displayCurrentDefCon;
+
+       realTickTime = 0; // reset the timer back to 0 to allow counting to 300 again.
     };
     uiSleep 1; // sleep for one second.
     ticksEnd = round(diag_TickTime); // tick time end.
