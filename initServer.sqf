@@ -356,7 +356,11 @@ while {true} do // loops for entire duration that mission/server is running.
         };
         if (totalTicks >= _currentDefcon) then {
             nextAttackedSectorName = call getRandomEastSectorName;
-            totalTicks = 0;
+            if (nextAttackedSectorName != "") then {
+                 _msg = format["We have a report of incoming attack on sector %1.", nextAttackedSectorName];
+                [_msg, MSG_TYPE_WARNING] call REB_fnc_displayMessage;
+                totalTicks = 0;
+            };
         };
         _totalPOVL call populateEnemySectors;
         sleep 3;
