@@ -82,6 +82,12 @@ class CfgFunctions
 {
     class REB
     {
+        class Faction {
+            class getBLUEFORfactionBasedOnDefConLevel {};
+            class getBLUEFORfactionSkill {};
+            class getBLUEFORfactionSoldierTypesCount {};
+        };
+
         class Generators
         {
             class addRepeatedLootSpawnEvent {};

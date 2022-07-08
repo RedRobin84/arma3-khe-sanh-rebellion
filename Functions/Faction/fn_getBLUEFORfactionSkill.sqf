@@ -1,0 +1,12 @@
+_faction = _this;
+
+switch (_faction) do
+{
+	case BLUEFOR_SEAL: { _BLUEFOR_SEAL_SOLDIER_TYPES_NR };
+	case BLUEFOR_ARVN: { _BLUEFOR_ARVN_SOLDIER_TYPES_NR };
+	case BLUEFOR_LRRP: { _BLUEFOR_LRRP_SOLDIER_TYPES_NR };
+	case BLUEFOR_CIDG: { _BLUEFOR_CIDG_SOLDIER_TYPES_NR };
+	case BLUEFOR_SFOR: { _BLUEFOR_SFOR_SOLDIER_TYPES_NR };
+	case BLUEFOR_SOG:  { _BLUEFOR_SOG_SOLDIER_TYPES_NR };
+	default { throw "invalid BLUEFOR faction type" };
+};
