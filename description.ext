@@ -83,9 +83,10 @@ class CfgFunctions
     class REB
     {
         class Faction {
-            class getBLUEFORfactionBasedOnDefConLevel {};
-            class getBLUEFORfactionSkill {};
+            class getBLUEFORattackFactionBasedOnDefConLevel {};
+            class getBLUEFORdefenseFactionBasedOnDefConLevel {};
             class getBLUEFORfactionSoldierTypesCount {};
+            class setBLUEFORunitSkillBasedOnFaction {};
         };
 
         class Generators

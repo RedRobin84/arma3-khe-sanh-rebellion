@@ -15,13 +15,6 @@ nextAttackedSectorName = "";
 MSG_TYPE_SCORE_ADDED = "ScoreAdded";
 MSG_TYPE_WARNING = "Warning";
 
-//War level enum
-DEFCON_SIX = 6;
-DEFCON_FIVE = 5;
-DEFCON_FOUR = 4;
-DEFCON_THREE = 3;
-DEFCON_TWO = 2;
-
 0 spawn {
     call makeAllSpawnPointMarkersInvisible;
     call initWinConditionForSectorsEventHandlers;
@@ -103,7 +96,7 @@ populateEnemySectors = {
             };
             _numberOfUnitsToSpawn = [_totalPOVL, _enemySector] call getNumberUnitsToSpawn;
             _maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
-            _currentWarLevel = _totalPOVL call REB_fnc_calculateDefCon;
+            _currentDefConLevel = _totalPOVL call REB_fnc_calculateDefCon;
             _routeGroupName = _enemySectorName + "_route_group";
             _routeGroup = allGroups select { groupId _x == _routeGroupName };
             _routeGroupNumber = count(_routeGroup);
@@ -126,6 +119,7 @@ populateEnemySectors = {
             } else {
                 _routeGroup = routeGroup select 0;
             };
+            _unitFaction = _currentDefConLevel call REB_fnc_getBLUEFORdefenseFactionBasedOnDefConLevel;
             _i = 0;
             while {_i  < _numberOfUnitsToSpawn} do {
                 _allUnoccupiedStaticspawnPointsinEnemySector = [_allStaticspawnPointsinEnemySector, {
@@ -133,31 +127,31 @@ populateEnemySectors = {
                 }] call BIS_fnc_conditionalselect;
                 _unoccupiedStaticUnitNumber = count(_allUnoccupiedStaticspawnPointsinEnemySector);
                 _occupiedStaticUnitNumber = _numberOfEnemyunitsinSector - _unoccupiedStaticUnitNumber;
+                _unitType = _unitFaction + str(ceil(random(_unitFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount)));
                 if (_maxEnemySectorStaticUnits > _occupiedStaticUnitNumber && _unoccupiedStaticUnitNumber != 0) then {
                     _chosenspawnPoint = selectRandom _allUnoccupiedStaticspawnPointsinEnemySector;
                     _chosenspawnPointPos = getmarkerPos(_chosenspawnPoint);
-
                     _chosenspawnPointPos set [2, parseNumber(markertext _chosenspawnPoint)];
-                    _unittype = "vn_b_men_sog_09";
-                    diag_log(format ["DEBUG::populateEnemySectors: Creating unit %1 on spawn point %2 at sector %3", _unittype, _chosenspawnPoint, _enemySectorname]);
+                    diag_log(format ["DEBUG::populateEnemySectors: Creating unit %1 on spawn point %2 at sector %3", _unitType, _chosenspawnPoint, _enemySectorname]);
                     _group = createGroup west;
                     _group setBehaviour "SAFE";
-                    _unit = _group createUnit [_Unittype, _chosenspawnPointPos, [], 0, "NONE"];
+                    _unit = _group createUnit [_unitType, _chosenspawnPointPos, [], 0, "NONE"];
                     _unit setPosATL [_chosenspawnPointPos select 0, _chosenspawnPointPos select 1, _chosenspawnPointPos select 2];
                     _chosenspawnPointdirection = markerDir _chosenspawnPoint;
                     _unit setDir _chosenspawnPointdirection;
                     _unit setFormDir _chosenspawnPointdirection;
                     _unit setCombatBehaviour "SAFE";
+                    [_unit, _unitFaction] call REB_fnc_setBLUEFORunitSkillBasedOnFaction;
                     _allEnemyunitsinSector pushBack _unit;
                     _i = _i + 1;
                 };
-                if (_i < _numberOfUnitsToSpawn && _currentWarLevel <= DEFCON_FIVE) then {
+                if (_i < _numberOfUnitsToSpawn && _currentDefConLevel <= DEFCON_FIVE) then {
                     _sectorRouteSpawnPointName = _enemySectorname + "_route0";
                     _sectorRouteSpawnPointPos = getmarkerPos(_sectorRouteSpawnPointName);
                     _sectorRouteSpawnPointPos set [2, parseNumber(markertext _sectorRouteSpawnPointName)];
-                    _routeUnitType = "vn_b_men_sog_09";
-                    diag_log(format["DEBUG::populateEnemySectors: Creating route unit %1 at sector %2", _routeUnitType, _enemySectorname]);
-                    _routeUnit = _routeGroup createUnit [_routeUnitType, _sectorRouteSpawnPointPos, [], 0, "NONE"];
+                    diag_log(format["DEBUG::populateEnemySectors: Creating route unit %1 at sector %2", _unitType, _enemySectorname]);
+                    _routeUnit = _routeGroup createUnit [_unitType, _sectorRouteSpawnPointPos, [], 0, "NONE"];
+                    [_routeUnit, _unitFaction] call REB_fnc_setBLUEFORunitSkillBasedOnFaction;
                     _i = _i + 1;
                 };
         };
@@ -247,11 +241,13 @@ for "_i" from 1 to _nrOfAttackGroups do {
     _randomSpawnPointNamePos = getMarkerPos(_randomlySelectedSpawnPoint);
     diag_log(format["DEBUG::distributeAttackInGroups: Random spawn point selected: %1 at position %2", _randomlySelectedSpawnPoint, _randomSpawnPointNamePos]);
     _soldiersPerGroup = ceil(_totalPOVL / _nrOfAttackGroups);
+    _currentDefConLevel = _totalPOVL call REB_fnc_calculateDefCon;
+    _groupFaction = _currentDefConLevel call REB_fnc_getBLUEFORattackFactionBasedOnDefConLevel;
     if (surfaceIsWater _randomSpawnPointNamePos) then {
-       _grp = [_randomSpawnPointNamePos, _soldiersPerGroup] call createEnemyInfantryBoatGroup;
+       _grp = [_randomSpawnPointNamePos, _soldiersPerGroup, _groupFaction] call createEnemyInfantryBoatGroup;
       [_grp, _randomOwnedSectorName, _randomOwnedSectorPos] call doNavalAttack;
     } else {
-       _grp = [_randomSpawnPointNamePos, _soldiersPerGroup] call createEnemyInfantryGroup;
+       _grp = [_randomSpawnPointNamePos, _soldiersPerGroup, _groupFaction] call createEnemyInfantryGroup;
       [_grp, _randomOwnedSectorPos] call doLandAttack;
     };
     _sectorSpawnPointsArray deleteAt (_sectorSpawnPointsArray find _randomlySelectedSpawnPoint);
@@ -307,25 +303,25 @@ captureWP = _grp addWaypoint [_randomOwnedSectorPos, 0];
 captureWP setWaypointType "GUARD";
 };
 
-INFANTRY_UNITS = [
-    "vn_b_men_sog_09",0.5, "vn_b_men_sog_10",0.4,"vn_b_men_sog_04",0.1 //random like in recruitUnit instead of an array
-];
-
 createEnemyInfantryGroup = {
-    params["_randomSpawnPointNamePos", "_soldiersPerGroup"];
+    params["_randomSpawnPointNamePos", "_soldiersPerGroup", "_groupFaction"];
     _grp = createGroup [west,true];
     for "_i" from 1 to _soldiersPerGroup do {
-        selectRandomWeighted INFANTRY_UNITS createUnit [_randomSpawnPointNamePos, _grp];
+        _unitType = _groupFaction + str(ceil(random(_unitFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount)));
+        _unitType createUnit [_randomSpawnPointNamePos, _grp, "myUnit = this"];
+        [myUnit, _groupFaction] call REB_fnc_setBLUEFORunitSkillBasedOnFaction;
     };
     _grp;
 };
 
 createEnemyInfantryBoatGroup = {
-    params["_randomSpawnPointNamePos", "_soldiersPerGroup"];
+    params["_randomSpawnPointNamePos", "_soldiersPerGroup", "_groupFaction"];
     _grp = createGroup [west,true];
     _boatCrewNr = if (_soldiersPerGroup > MAX_NUMBER_OF_BOAT_CREW) then [{MAX_NUMBER_OF_BOAT_CREW},{_soldiersPerGroup}];
     for "_i" from 1 to _boatCrewNr do {
-        selectRandomWeighted INFANTRY_UNITS createUnit [_randomSpawnPointNamePos, _grp];
+        _unitType = _groupFaction + str(ceil(random(_unitFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount)));
+        _unitType createUnit [_randomSpawnPointNamePos, _grp, "myUnit = this"];
+        [myUnit, _groupFaction] call REB_fnc_setBLUEFORunitSkillBasedOnFaction;
     };
     _grp;
 };
