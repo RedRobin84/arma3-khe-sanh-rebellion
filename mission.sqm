@@ -5,7 +5,7 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=1;
+	toggles=129;
 	class ItemIDProvider
 	{
 		nextID=991;
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={15122.706,65.085899,4510.3662};
-		dir[]={-0.11445113,-0.61679876,0.77875572};
-		up[]={-0.089685485,0.78712088,0.61024368};
-		aside[]={0.98937243,0,0.14540477};
+		pos[]={15096.475,59.816265,4496.4487};
+		dir[]={-0.16402118,-0.38920638,-0.90643018};
+		up[]={-0.069302551,0.92115057,-0.38298669};
+		aside[]={-0.98401952,7.4505806e-009,0.1780612};
 	};
 };
 binarizationWanted=0;
@@ -257,7 +257,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="1";
+							value="0";
 						};
 					};
 				};
@@ -710,7 +710,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="1";
+							value="0";
 						};
 					};
 				};

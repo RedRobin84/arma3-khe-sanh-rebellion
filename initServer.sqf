@@ -133,7 +133,7 @@ populateEnemySectors = {
                     _wp setWaypointSpeed "LIMITED";
                 };
             } else {
-                _routeGroup = routeGroup select 0;
+                _routeGroup = _routeGroup select 0;
             };
             _unitFaction = _currentDefConLevel call REB_fnc_getBLUEFORdefenseFactionBasedOnDefConLevel;
             _i = 0;
@@ -143,7 +143,7 @@ populateEnemySectors = {
                 }] call BIS_fnc_conditionalselect;
                 _unoccupiedStaticUnitNumber = count(_allUnoccupiedStaticspawnPointsinEnemySector);
                 _occupiedStaticUnitNumber = _numberOfEnemyunitsinSector - _unoccupiedStaticUnitNumber;
-                _unitType = _unitFaction + str(ceil(random(_unitFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount)));
+                _unitType = (_unitFaction + ((_unitFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount) call REB_fnc_getRandomNumberWihtLessThanTenZeroPrefix));
                 if (_maxEnemySectorStaticUnits > _occupiedStaticUnitNumber && _unoccupiedStaticUnitNumber != 0) then {
                     _chosenspawnPoint = selectRandom _allUnoccupiedStaticspawnPointsinEnemySector;
                     _chosenspawnPointPos = getmarkerPos(_chosenspawnPoint);
@@ -228,8 +228,8 @@ params["_totalPOVL", "_nextAttackedSector"];
 
 _randomOwnedSectorName = _nextAttackedSector call BIS_fnc_objectVar;
 _nextAttackedSectorPos = getPos _nextAttackedSector;
-diag_log(format["INFO::attackRandomSettlement: Creating attack on POI %1 at position %2", _nextAttackedSectorName, _nextAttackedSectorPos]);
-[_totalPOVL, _nextAttackedSectorName, _nextAttackedSectorPos] call distributeAttackInGroups;
+diag_log(format["INFO::attackRandomSettlement: Creating attack on POI %1 at position %2", _randomOwnedSectorName, _nextAttackedSectorPos]);
+[_totalPOVL, _randomOwnedSectorName, _nextAttackedSectorPos] call distributeAttackInGroups;
 };
 
 getRandomEastSectorName = {
@@ -320,9 +320,8 @@ createEnemyInfantryGroup = {
     params["_randomSpawnPointNamePos", "_soldiersPerGroup", "_groupFaction"];
     _grp = createGroup [west,true];
     for "_i" from 1 to _soldiersPerGroup do {
-        _unitType = _groupFaction + str(ceil(random(_unitFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount)));
-        _unitType createUnit [_randomSpawnPointNamePos, _grp, "myUnit = this"];
-        [myUnit, _groupFaction] call REB_fnc_setBLUEFORunitSkillBasedOnFaction;
+        _unitType = (_groupFaction + ((_groupFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount) call REB_fnc_getRandomNumberWihtLessThanTenZeroPrefix));
+        _unitType createUnit [_randomSpawnPointNamePos, _grp, "[this, _groupFaction] call REB_fnc_setBLUEFORunitSkillBasedOnFaction"];
     };
     _grp;
 };
@@ -332,9 +331,8 @@ createEnemyInfantryBoatGroup = {
     _grp = createGroup [west,true];
     _boatCrewNr = if (_soldiersPerGroup > MAX_NUMBER_OF_BOAT_CREW) then [{MAX_NUMBER_OF_BOAT_CREW},{_soldiersPerGroup}];
     for "_i" from 1 to _boatCrewNr do {
-        _unitType = _groupFaction + str(ceil(random(_unitFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount)));
-        _unitType createUnit [_randomSpawnPointNamePos, _grp, "myUnit = this"];
-        [myUnit, _groupFaction] call REB_fnc_setBLUEFORunitSkillBasedOnFaction;
+        _unitType = (_groupFaction + ((_groupFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount) call REB_fnc_getRandomNumberWihtLessThanTenZeroPrefix));
+        _unitType createUnit [_randomSpawnPointNamePos, _grp, "[this, _groupFaction] call REB_fnc_setBLUEFORunitSkillBasedOnFaction"];
     };
     _grp;
 };
@@ -372,7 +370,7 @@ while {true} do // loops for entire duration that mission/server is running.
             };
         };
         _totalPOVL call populateEnemySectors;
-        sleep 3;
+        sleep 5;
        _currentDefcon call REB_fnc_displayCurrentDefCon;
 
        realTickTime = 0; // reset the timer back to 0 to allow counting to 300 again.
