@@ -1,11 +1,3 @@
-//War level enum
-DEFCON_SIX = 6;
-DEFCON_FIVE = 5;
-DEFCON_FOUR = 4;
-DEFCON_THREE = 3;
-DEFCON_TWO = 2;
-DEFCON_ONE = 1;
-
 _totalPOVL = _this;
 if (_totalPOVL < 2) exitWith {
     //RETURN

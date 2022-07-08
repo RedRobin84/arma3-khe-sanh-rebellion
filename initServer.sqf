@@ -11,6 +11,22 @@ MAX_NUMBER_OF_BOAT_CREW = 5;
 totalTicks = 3;
 nextAttackedSectorName = "";
 
+//BLUEFOR FACTIONS PREFIXES
+BLUEFOR_SEAL = "vn_b_men_seal_";
+BLUEFOR_ARVN = "vn_b_men_army_";
+BLUEFOR_LRRP = "vn_b_men_lrrp_";
+BLUEFOR_CIDG = "vn_b_men_cidg_";
+BLUEFOR_SFOR = "vn_b_men_sf_";
+BLUEFOR_SOG  = "vn_b_men_sog_";
+
+//War level enum
+DEFCON_SIX = 6;
+DEFCON_FIVE = 5;
+DEFCON_FOUR = 4;
+DEFCON_THREE = 3;
+DEFCON_TWO = 2;
+DEFCON_ONE = 1;
+
 //Message types (displayMessage fnc)
 MSG_TYPE_SCORE_ADDED = "ScoreAdded";
 MSG_TYPE_WARNING = "Warning";
@@ -94,7 +110,7 @@ populateEnemySectors = {
             if (count(_allStaticspawnPointsinEnemySector) == 0) exitwith {
                 diag_log(format ["ERROR::populateEnemySectors: No spawn points set for sector %1", _enemySectorname]);
             };
-            _numberOfUnitsToSpawn = [_totalPOVL, _enemySector] call getNumberUnitsToSpawn;
+            _numberOfUnitsToSpawn = [_enemySector, _numberOfEnemyunitsinSector] call getNumberUnitsToSpawn;
             _maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
             _currentDefConLevel = _totalPOVL call REB_fnc_calculateDefCon;
             _routeGroupName = _enemySectorName + "_route_group";
@@ -160,12 +176,9 @@ populateEnemySectors = {
 };
 
 getNumberUnitsToSpawn = {
-params["_totalPOVL", "_enemySector"];
+params["_enemySector", "_numberOfEnemyunitsinSector"];
 _sectorValue = _enemySector call REB_fnc_getSectorValue;
 _minEnemySectorunits = _enemySector getVariable["min", _sectorValue];
-if (_minEnemySectorunits > _totalPOVL) then {
-    _minEnemySectorunits = _totalPOVL;
-};
 _difference = _minEnemySectorunits - _numberOfEnemyunitsinSector;
 //RETURN
 if (_difference > 0) then [{_difference}, {0}];
