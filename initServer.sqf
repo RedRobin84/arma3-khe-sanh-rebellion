@@ -143,7 +143,7 @@ populateEnemySectors = {
                 }] call BIS_fnc_conditionalselect;
                 _unoccupiedStaticUnitNumber = count(_allUnoccupiedStaticspawnPointsinEnemySector);
                 _occupiedStaticUnitNumber = _numberOfEnemyunitsinSector - _unoccupiedStaticUnitNumber;
-                _unitType = (_unitFaction + ((_unitFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount) call REB_fnc_getRandomNumberWihtLessThanTenZeroPrefix));
+                _unitType = (_unitFaction + ((_unitFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount) call REB_fnc_getRandomNumberWithLessThanTenZeroPrefix));
                 if (_maxEnemySectorStaticUnits > _occupiedStaticUnitNumber && _unoccupiedStaticUnitNumber != 0) then {
                     _chosenspawnPoint = selectRandom _allUnoccupiedStaticspawnPointsinEnemySector;
                     _chosenspawnPointPos = getmarkerPos(_chosenspawnPoint);
@@ -320,8 +320,8 @@ createEnemyInfantryGroup = {
     params["_randomSpawnPointNamePos", "_soldiersPerGroup", "_groupFaction"];
     _grp = createGroup [west,true];
     for "_i" from 1 to _soldiersPerGroup do {
-        _unitType = (_groupFaction + ((_groupFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount) call REB_fnc_getRandomNumberWihtLessThanTenZeroPrefix));
-        _unitType createUnit [_randomSpawnPointNamePos, _grp, "[this, _groupFaction] call REB_fnc_setBLUEFORunitSkillBasedOnFaction"];
+        _unitType = (_groupFaction + ((_groupFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount) call REB_fnc_getRandomNumberWithLessThanTenZeroPrefix));
+        _unitType createUnit [_randomSpawnPointNamePos, _grp, "[this, _groupFaction] call REB_fnc_setBLUEFORunitSkillBasedOnFaction;"];
     };
     _grp;
 };
@@ -331,7 +331,7 @@ createEnemyInfantryBoatGroup = {
     _grp = createGroup [west,true];
     _boatCrewNr = if (_soldiersPerGroup > MAX_NUMBER_OF_BOAT_CREW) then [{MAX_NUMBER_OF_BOAT_CREW},{_soldiersPerGroup}];
     for "_i" from 1 to _boatCrewNr do {
-        _unitType = (_groupFaction + ((_groupFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount) call REB_fnc_getRandomNumberWihtLessThanTenZeroPrefix));
+        _unitType = (_groupFaction + ((_groupFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount) call REB_fnc_getRandomNumberWithLessThanTenZeroPrefix));
         _unitType createUnit [_randomSpawnPointNamePos, _grp, "[this, _groupFaction] call REB_fnc_setBLUEFORunitSkillBasedOnFaction"];
     };
     _grp;

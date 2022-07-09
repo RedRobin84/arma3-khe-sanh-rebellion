@@ -136,7 +136,7 @@ class CfgFunctions
         class Utils
         {
             class displayMessage {};
-            class getRandomNumberWihtLessThanTenZeroPrefix {};
+            class getRandomNumberWithLessThanTenZeroPrefix {};
             class percentageChanceOf {};
         };
     };
