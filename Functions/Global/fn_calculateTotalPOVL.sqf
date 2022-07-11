@@ -7,5 +7,5 @@ _totalPOVL = 0;
     diag_log(format["DEBUG::calculateTotalPOVL: New totalPOVL: %1", _totalPOVL]);
     _totalPOVL call REB_fnc_updateTotalPOVLGUI;
     //RETURN
-    _totalPOVL
+    _totalPOVL;
     

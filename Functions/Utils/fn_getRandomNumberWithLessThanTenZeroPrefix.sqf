@@ -6,4 +6,5 @@ _randomNumber = ceil(random _max);
         "0" + str(_randomNumber)
     };
     //ELSE RETURN
-    str(_randomNumber)
+    str(_randomNumber);
+    

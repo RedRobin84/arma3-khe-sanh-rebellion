@@ -1,4 +1,4 @@
-params["_unit", "_faction"]; // faction enum at fn_getBLUEFORattackFactionBasedOnDefConLevel.sqf
+params["_unit", "_faction"]; //enum located at initServer.sqf
 
 switch (_faction) do
 {

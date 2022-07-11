@@ -6,7 +6,7 @@ _BLUEFOR_CIDG_SOLDIER_TYPES_NR = 22;
 _BLUEFOR_SFOR_SOLDIER_TYPES_NR = 22;
 _BLUEFOR_SOG_SOLDIER_TYPES_NR  = 27;
 
-_faction = _this; //in getBLUEFORfactionBasedOnDefConLevel
+_faction = _this; //enum located at initServer.sqf
 switch (_faction) do
 {
 	case BLUEFOR_SEAL: { _BLUEFOR_SEAL_SOLDIER_TYPES_NR };
