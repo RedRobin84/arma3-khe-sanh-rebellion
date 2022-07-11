@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=7921;
+		nextID=8411;
 	};
 	class Camera
 	{
-		pos[]={15082.194,39.686008,4483.0508};
-		dir[]={0.70135558,-0.69418091,-0.16190493};
-		up[]={0.67639238,0.71980059,-0.15614229};
-		aside[]={-0.22493026,-7.4505806e-009,-0.97437477};
+		pos[]={15219.146,146.42212,4441.1294};
+		dir[]={-0.7392422,-0.52837723,0.41753855};
+		up[]={-0.46006393,0.84900975,0.25985318};
+		aside[]={0.49179482,-1.4901161e-008,0.87071115};
 	};
 };
 binarizationWanted=0;
@@ -6247,7 +6247,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={14971.231,32.644268,3908.417};
-					angle=3.8082352;
+					angle=3.8082347;
 					class Attributes
 					{
 						name="sector_recruit_3";
@@ -7449,7 +7449,7 @@ class Mission
 						class Item0
 						{
 							dataType="Marker";
-							position[]={15072.901,32,4532.4731};
+							position[]={15066.041,32,4528.7466};
 							name="sectorNaboCamp_route0";
 							text="MOVE";
 							type="mil_destroy";
@@ -7478,7 +7478,7 @@ class Mission
 						class Item0
 						{
 							dataType="Marker";
-							position[]={15110.045,32,4451.6099};
+							position[]={15102.738,32.912933,4449.3477};
 							name="sectorNaboCamp_route1";
 							text="MOVE";
 							type="mil_destroy";
@@ -7507,20 +7507,17 @@ class Mission
 						class Item0
 						{
 							dataType="Marker";
-							position[]={15179.694,32.405998,4441.2998};
+							position[]={15205.693,33.10371,4427.833};
 							name="sectorNaboCamp_route2";
 							text="MOVE";
 							type="mil_destroy";
 							id=592;
-							atlOffset=-0.00061416626;
 						};
 					};
 					id=591;
-					atlOffset=-0.00061416626;
 				};
 			};
 			id=593;
-			atlOffset=-0.00061416626;
 		};
 		class Item157
 		{
@@ -10314,7 +10311,7 @@ class Mission
 							name="inf_respawn_marker_45";
 							text="0";
 							type="respawn_inf";
-							angle=157.37723;
+							angle=169.20705;
 							id=753;
 							atlOffset=-0.00099563599;
 						};

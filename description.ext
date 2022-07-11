@@ -82,6 +82,13 @@ class CfgFunctions
 {
     class REB
     {
+        class Faction {
+            class getBLUEFORattackFactionBasedOnDefConLevel {};
+            class getBLUEFORdefenseFactionBasedOnDefConLevel {};
+            class getBLUEFORfactionSoldierTypesCount {};
+            class setBLUEFORunitSkillBasedOnFaction {};
+        };
+
         class Generators
         {
             class addRepeatedLootSpawnEvent {};
@@ -91,13 +98,9 @@ class CfgFunctions
             class spawnGeneralLoot {};
         };
 
-        class Utils
-        {
-            class percentageChanceOf {};
-        };
-
         class Global
         {
+            class calculateDefCon {};
             class calculateTotalPOVL {};
             class decreaseSectorManpower {};
             class decrementSectorManpower {};
@@ -107,6 +110,7 @@ class CfgFunctions
 
         class GUI
         {
+            class displayCurrentDefCon {};
             class initGUI {};
             class updateManpowerGUI {};
             class updateTotalPOVLGUI {};
@@ -127,6 +131,13 @@ class CfgFunctions
 
         class Spawn {
             class recruitUnit {};
+        };
+
+        class Utils
+        {
+            class displayMessage {};
+            class getRandomNumberWithLessThanTenZeroPrefix {};
+            class percentageChanceOf {};
         };
     };
 };
