@@ -7,6 +7,18 @@ class CfgNotifications {
         sound = "defaultNotification";
         soundClose = "defaultNotificationClose";
         title = "Warning";
+        duration = 10;
+    };
+
+    class ScoreAdded
+    {
+        title = "Intel";
+        iconText = "+%2";
+        description = "%1";
+        color[] = {0.5,1,1,1};
+        priority = 0;
+        difficulty[] = {"netStats"};
+        duration = 10;
     };
 
 };
@@ -113,6 +125,7 @@ class CfgFunctions
         {
             class displayCurrentDefCon {};
             class initGUI {};
+            class makeAllSystemMarkersInvisible {};
             class updateManpowerGUI {};
             class updateTotalPOVLGUI {};
         };
@@ -128,6 +141,7 @@ class CfgFunctions
             class getClosestSectorToObject {};
             class getSectorsOwnedBySide {};
             class getSectorValue {};
+            class initWinConditionForSectorsEventHandlers {};
         };
 
         class Spawn {

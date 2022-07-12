@@ -1,78 +1,21 @@
-//CONSTANTS
-_executeTime = 600; // 600 seconds, aka 10 minutes.
-MANPOWER_VAR_NAME = "manpower";
-maxSoldiersMultiplier = 4;
-NUMBER_OF_ATTACK_SPAWN_POINTS = 3;
-SECTOR_MANPOWER_DEFAULT_DECREMENT = 1;
-INTRO_INFO_MSG = "Capture all settlements to win. The main objective is Nabo Camp military outpost.";
-INTRO_INFO_MSG2 = "Capture ruins to the north";
-MAX_NUMBER_OF_BOAT_CREW = 5;
-
-totalTicks = 3;
-nextAttackedSectorName = "";
-realTickTime = 0; // declare the local variable for the loop compare.
-
-//BLUEFOR FACTIONS PREFIXES
-BLUEFOR_SEAL = "vn_b_men_seal_";
-BLUEFOR_ARVN = "vn_b_men_army_";
-BLUEFOR_LRRP = "vn_b_men_lrrp_";
-BLUEFOR_CIDG = "vn_b_men_cidg_";
-BLUEFOR_SFOR = "vn_b_men_sf_";
-BLUEFOR_SOG  = "vn_b_men_sog_";
-
-//War level enum
-DEFCON_SIX = 6;
-DEFCON_FIVE = 5;
-DEFCON_FOUR = 4;
-DEFCON_THREE = 3;
-DEFCON_TWO = 2;
-DEFCON_ONE = 1;
-
-//Message types (displayMessage fnc)
-MSG_TYPE_SCORE_ADDED = "ScoreAdded";
-MSG_TYPE_WARNING = "Warning";
-
 0 spawn {
-    call makeAllSpawnPointMarkersInvisible;
-    call initWinConditionForSectorsEventHandlers;
-    call REB_fnc_gameTickLoop;
-    call addResumeGameLoopOnGameLoadHandler;
     sleep 1;
     call REB_fnc_initGUI;
-    sleep 5;
+    sleep 10;
     [INTRO_INFO_MSG, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
-    _totalPOVL = call REB_fnc_calculateTotalPOVL;
-    _totalPOVL call populateEnemySectors;
-    sleep 5;
+    sleep 15;
     [INTRO_INFO_MSG2, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
-    sleep 5;
+    sleep 15;
     _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
     _currentDefcon call REB_fnc_displayCurrentDefCon;
-};
-
-initWinConditionForSectorsEventHandlers = {
-{
-    [ _x, "ownerChanged", {
-        params[ "_sector", "_owner", "_ownerOld" ];
-         _enemySectorName = _sector call BIS_fnc_objectVar;
-        _manpowerMarker = _enemySectorName + "_manpowerMarker";
-        if ( _owner isEqualTo EAST ) then {
-            call checkIfAllSectorsOwnedByEast;
-            _manpowerMarker setMarkerAlpha 100;
-        };
-        if ( _owner isEqualTo WEST ) then {
-            _manpowerMarker setMarkerAlpha 0;
-            _sector call REB_fnc_resetSectorManpower;
-        };
-    }] call BIS_fnc_addScriptedEventHandler; 
-}forEach (call REB_fnc_getAllSectors);
+    0 spawn {call REB_fnc_gameTickLoop;};
 };
 
 addResumeGameLoopOnGameLoadHandler = {
 addMissionEventHandler ["Loaded", {
     params ["_saveType"];
     
-    call REB_fnc_gameTickLoop;
+    0 spawn {call REB_fnc_gameTickLoop;};
 }];
 };
 
@@ -82,13 +25,6 @@ checkIfAllSectorsOwnedByEast = {
     if (_enemySectorNumber == 0) then {
         ["end1", true, 20, true, false] call BIS_fnc_endMission;
     };
-};
-
-makeAllSpawnPointMarkersInvisible =  {
-    {
-    if (getMarkerType _x  == "mil_start" || getMarkerType _x  == "respawn_inf") 
-    then { _x setMarkerAlpha 0;}    
-    } forEach allMapMarkers
 };
 
 populateEnemySectors = {
@@ -199,7 +135,7 @@ getDefaultMaxSoldiers = {
     _sector = _this;
     _sectorValue = _sector call REB_fnc_getSectorValue;
     //RETURN
-    (_sectorValue * maxSoldiersMultiplier)
+    (_sectorValue * MAX_SOLDIERS_MULTIPLIER)
 };
 
 markerNotExist = {

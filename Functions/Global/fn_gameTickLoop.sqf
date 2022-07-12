@@ -1,8 +1,9 @@
 while {true} do // loops for entire duration that mission/server is running.
 {
     ticksBegin = round(diag_TickTime); // tick time begin.
-    if (realTickTime >= _executeTime) then // check _realTickTime against executeTime.
+    if (realTickTime >= executeTime) then // check _realTickTime against executeTime.
     {
+        diag_log("INFO::gameTickLoop: Executing regular computations");
         totalTicks = totalTicks + 1;
         _totalPOVL = call REB_fnc_calculateTotalPOVL;
         _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
