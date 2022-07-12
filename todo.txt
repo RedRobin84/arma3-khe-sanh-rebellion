@@ -1,1 +1,15 @@
 Add more civilian types to description.ext CfgVehicles >> UnitTypes
+add instructions at the beginning - take weapon from the shack
+messages displayed longer - bigger interval between
+own loadouts for enemy soldiers - too much weapons on them
+new volunteers have arrived message only when manpower generated
+naxos - villagers not moving out of the village?
+player speaks vietnamese not english
+recruited soldiers have no voice
+recruit volunteers without weird equipment
+how to remove bodies? Bury them? Auto removal after certain time?
+Its difficult to arm recruits - its easier in cars, or crate outside?
+is there max manpower per POI pojistka?
+audio warning enemy is attacking
+killing civilian goes to minus manpower values = expected behaviour
+after mission load, game loop stopped working

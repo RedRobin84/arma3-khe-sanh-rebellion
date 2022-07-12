@@ -10,6 +10,7 @@ MAX_NUMBER_OF_BOAT_CREW = 5;
 
 totalTicks = 3;
 nextAttackedSectorName = "";
+realTickTime = 0; // declare the local variable for the loop compare.
 
 //BLUEFOR FACTIONS PREFIXES
 BLUEFOR_SEAL = "vn_b_men_seal_";
@@ -34,6 +35,8 @@ MSG_TYPE_WARNING = "Warning";
 0 spawn {
     call makeAllSpawnPointMarkersInvisible;
     call initWinConditionForSectorsEventHandlers;
+    call REB_fnc_gameTickLoop;
+    call addResumeGameLoopOnGameLoadHandler;
     sleep 1;
     call REB_fnc_initGUI;
     sleep 5;
@@ -63,6 +66,14 @@ initWinConditionForSectorsEventHandlers = {
         };
     }] call BIS_fnc_addScriptedEventHandler; 
 }forEach (call REB_fnc_getAllSectors);
+};
+
+addResumeGameLoopOnGameLoadHandler = {
+addMissionEventHandler ["Loaded", {
+    params ["_saveType"];
+    
+    call REB_fnc_gameTickLoop;
+}];
 };
 
 checkIfAllSectorsOwnedByEast = {
@@ -335,48 +346,4 @@ createEnemyInfantryBoatGroup = {
         _unitType createUnit [_randomSpawnPointNamePos, _grp, "[this, _groupFaction] call REB_fnc_setBLUEFORunitSkillBasedOnFaction"];
     };
     _grp;
-};
-
-realTickTime = 0; // declare the local variable for the loop compare.
- 
-while {true} do // loops for entire duration that mission/server is running.
-{
-    ticksBegin = round(diag_TickTime); // tick time begin.
-    if (realTickTime >= _executeTime) then // check _realTickTime against executeTime.
-    {
-        totalTicks = totalTicks + 1;
-        _totalPOVL = call REB_fnc_calculateTotalPOVL;
-        _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
-        call REB_fnc_updateManpower;
-        sleep 5;
-        if (nextAttackedSectorName != "") then {
-            _nextAttackedSector = missionNamespace getVariable [nextAttackedSectorName, objNull];
-            if ((_nextAttackedSector getVariable "owner") == EAST) then {
-                [_totalPOVL, _nextAttackedSector] call attackRandomSettlement;
-                _warningMsg = "Enemy is attacking " + nextAttackedSectorName;
-                [_warningMsg, MSG_TYPE_WARNING] call REB_fnc_displayMessage;
-            } else {
-                _msg = format["Sector %1 is not in our hands anymore. Enemy cancelled his attack.", nextAttackedSectorName];
-                [_msg, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
-            };
-            nextAttackedSectorName = "";
-        };
-        if (totalTicks >= _currentDefcon) then {
-            nextAttackedSectorName = call getRandomEastSectorName;
-            if (nextAttackedSectorName != "") then {
-                 _msg = format["We have a report of incoming attack on sector %1.", nextAttackedSectorName];
-                [_msg, MSG_TYPE_WARNING] call REB_fnc_displayMessage;
-                totalTicks = 0;
-            };
-        };
-        _totalPOVL call populateEnemySectors;
-        sleep 5;
-       _currentDefcon call REB_fnc_displayCurrentDefCon;
-
-       realTickTime = 0; // reset the timer back to 0 to allow counting to 300 again.
-    };
-    uiSleep 1; // sleep for one second.
-    ticksEnd = round(diag_TickTime); // tick time end.
-    ticksEndLoop = round(ticksEnd - ticksBegin); // get 'real' (rounded) tick time due to loop latency/calls.
-    realTickTime = realTickTime + ticksEndLoop; // increase the tick counter.
 };
