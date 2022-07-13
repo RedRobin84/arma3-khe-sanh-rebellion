@@ -12,13 +12,13 @@ class CfgNotifications {
 
     class ScoreAdded
     {
-        title = "Intel";
-        iconText = "+%2";
-        description = "%1";
         color[] = {0.5,1,1,1};
+        description = "%1";
+        iconText = "intel";
         priority = 0;
-        difficulty[] = {"netStats"};
+        difficulty[] = {"scoreTable"};
         duration = 10;
+        sound = "scoreAdded";
     };
 
 };
@@ -145,6 +145,7 @@ class CfgFunctions
         };
 
         class Spawn {
+            class populateEnemySectors {};
             class recruitUnit {};
         };
 

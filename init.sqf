@@ -12,7 +12,8 @@ MAX_NUMBER_OF_BOAT_CREW = 5;
 
 //STRING CONSTANTS
 INTRO_INFO_MSG = "Capture all settlements to win. The main objective is Nabo Camp military outpost.";
-INTRO_INFO_MSG2 = "Begin with capturing ruins to the north. You may find some equipment in your shack.";
+INTRO_INFO_MSG2 = "Begin with capturing ruins to the north.";
+INTRO_HINT = "You may find some equipment in your shack.";
 
 MANPOWER_VAR_NAME = "manpower";
 
@@ -42,7 +43,4 @@ MSG_TYPE_WARNING = "Warning";
 
 0 spawn {
     call REB_fnc_makeAllSystemMarkersInvisible;
-    call REB_fnc_initWinConditionForSectorsEventHandlers;
-    _totalPOVL = call REB_fnc_calculateTotalPOVL;
-    _totalPOVL call populateEnemySectors;
 };

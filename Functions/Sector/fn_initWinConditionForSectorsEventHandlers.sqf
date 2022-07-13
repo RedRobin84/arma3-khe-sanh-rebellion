@@ -13,3 +13,4 @@
         };
     }] call BIS_fnc_addScriptedEventHandler; 
 } forEach (call REB_fnc_getAllSectors);
+//VOID

@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=9636;
+		nextID=9881;
 	};
 	class Camera
 	{
@@ -126,6 +126,10 @@ class AddonsMetaData
 			url="https://www.arma3.com";
 		};
 	};
+};
+dlcs[]=
+{
+	"VN"
 };
 randomSeed=1291061;
 class ScenarioData
