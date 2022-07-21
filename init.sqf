@@ -16,6 +16,7 @@ INTRO_INFO_MSG2 = "Begin with capturing ruins to the north.";
 INTRO_HINT = "You may find some equipment in your shack.";
 
 MANPOWER_VAR_NAME = "manpower";
+CONTAINER_GENERATOR_FLAG = "generated";
 
 //BLUEFOR FACTIONS PREFIXES
 BLUEFOR_SEAL = "vn_b_men_seal_";

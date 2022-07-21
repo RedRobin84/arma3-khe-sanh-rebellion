@@ -14,3 +14,5 @@ audio warning enemy is attacking
 ~~killing civilian goes to minus manpower values = expected behaviour~~
 after mission load, game loop stopped working - testing
 ~~move proper code to init.sqf instead of init.sqf (may be loaded in advance)~~
+New volunteers still occuring (non manpower generating POIs not excluded)
+add random generated loot crates to outlying places

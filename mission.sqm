@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=991;
+		nextID=1004;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=9881;
+		nextID=10865;
 	};
 	class Camera
 	{
-		pos[]={15219.146,146.42212,4441.1294};
-		dir[]={-0.7392422,-0.52837723,0.41753855};
-		up[]={-0.46006393,0.84900975,0.25985318};
-		aside[]={0.49179482,-1.4901161e-008,0.87071115};
+		pos[]={15164.655,37.065399,4693.8809};
+		dir[]={-0.1339595,-0.56371534,0.8150357};
+		up[]={-0.09142594,0.82596993,0.55625331};
+		aside[]={0.98676312,5.0291419e-008,0.16218455};
 	};
 };
 binarizationWanted=0;
@@ -190,7 +190,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=271;
+		items=281;
 		class Item0
 		{
 			dataType="Object";
@@ -559,7 +559,8 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="this call REB_fnc_addRepeatedLootSpawnEvent;";
+				init="this call REB_fnc_addLootSpawnEvent;";
+				name="sectorOldDebris_inventory";
 			};
 			id=26;
 			type="vn_b_ammobox_12";
@@ -1211,7 +1212,7 @@ class Mission
 									"BOOL"
 								};
 							};
-							value=0;
+							value=1;
 						};
 					};
 				};
@@ -1381,7 +1382,7 @@ class Mission
 									"SCALAR"
 								};
 							};
-							value=3;
+							value=2;
 						};
 					};
 				};
@@ -1579,8 +1580,8 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={15061.284,55.909504,2858.4189};
-				angles[]={0.058590703,0,0.0026703537};
+				position[]={15039.125,56.361225,2851.2817};
+				angles[]={0.034652505,0,6.2805333};
 			};
 			areaSize[]={0.1,-1,0.1};
 			flags=1;
@@ -1685,8 +1686,8 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={15048.817,55.862,2859.4253};
-				angles[]={0.055941612,0,6.2805333};
+				position[]={15056.887,54.646503,2878.0884};
+				angles[]={0.085126832,0,0.0053377044};
 			};
 			areaSize[]={0.1,-1,0.1};
 			flags=1;
@@ -4864,11 +4865,12 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
-				init="this call REB_fnc_addRepeatedLootSpawnEvent;";
+				init="this call REB_fnc_addLootSpawnEvent;";
+				name="sectorThat_inventory";
 			};
 			id=472;
 			type="vn_b_ammobox_14";
-			atlOffset=2.8240004;
+			atlOffset=2.8239985;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -4894,46 +4896,6 @@ class Mission
 			};
 		};
 		class Item109
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={15043.501,58.407269,2838.1919};
-				angles[]={0,2.7895947,0};
-			};
-			side="Empty";
-			class Attributes
-			{
-				init="this call REB_fnc_addRepeatedLootSpawnEvent;";
-			};
-			id=474;
-			type="vn_o_ammobox_10";
-			atlOffset=1.484005;
-			class CustomAttributes
-			{
-				class Attribute0
-				{
-					property="ammoBox";
-					expression="[_this,_value] call bis_fnc_initAmmoBox;";
-					class Value
-					{
-						class data
-						{
-							class type
-							{
-								type[]=
-								{
-									"STRING"
-								};
-							};
-							value="[[[[""arifle_AKM_F"",""vn_m1895""],[2,3]],[[""75Rnd_762x39_Mag_F"",""vn_m1895_mag"",""vn_m67_grenade_mag""],[6,10,4]],[[""vn_o_3x_m9130"",""vn_o_item_firstaidkit""],[1,4]],[[],[]]],false]";
-						};
-					};
-				};
-				nAttributes=1;
-			};
-		};
-		class Item110
 		{
 			dataType="Layer";
 			name="Conquer sector";
@@ -5247,7 +5209,7 @@ class Mission
 			};
 			id=478;
 		};
-		class Item111
+		class Item110
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -5279,7 +5241,7 @@ class Mission
 			id=481;
 			atlOffset=-0.00048446655;
 		};
-		class Item112
+		class Item111
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -5311,7 +5273,7 @@ class Mission
 			id=484;
 			atlOffset=-0.00022888184;
 		};
-		class Item113
+		class Item112
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -5343,7 +5305,7 @@ class Mission
 			id=487;
 			atlOffset=-0.00075149536;
 		};
-		class Item114
+		class Item113
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -5375,7 +5337,7 @@ class Mission
 			id=490;
 			atlOffset=-0.00079345703;
 		};
-		class Item115
+		class Item114
 		{
 			dataType="Object";
 			class PositionInfo
@@ -5393,7 +5355,7 @@ class Mission
 			type="vn_c_bicycle_01";
 			atlOffset=3.8146973e-006;
 		};
-		class Item116
+		class Item115
 		{
 			dataType="Object";
 			class PositionInfo
@@ -5411,7 +5373,7 @@ class Mission
 			type="vn_c_bicycle_01";
 			atlOffset=-1.1444092e-005;
 		};
-		class Item117
+		class Item116
 		{
 			dataType="Object";
 			class PositionInfo
@@ -5429,7 +5391,7 @@ class Mission
 			type="vn_c_bicycle_02";
 			atlOffset=-1.9073486e-006;
 		};
-		class Item118
+		class Item117
 		{
 			dataType="Object";
 			class PositionInfo
@@ -5446,7 +5408,7 @@ class Mission
 			id=504;
 			type="vn_c_bicycle_01";
 		};
-		class Item119
+		class Item118
 		{
 			dataType="Object";
 			class PositionInfo
@@ -5463,7 +5425,7 @@ class Mission
 			id=507;
 			type="vn_c_car_02_01";
 		};
-		class Item120
+		class Item119
 		{
 			dataType="Object";
 			class PositionInfo
@@ -5502,7 +5464,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item121
+		class Item120
 		{
 			dataType="Layer";
 			name="Civilian  presence";
@@ -5634,7 +5596,7 @@ class Mission
 											"SCALAR"
 										};
 									};
-									value=8;
+									value=5;
 								};
 							};
 						};
@@ -5663,7 +5625,7 @@ class Mission
 			};
 			id=515;
 		};
-		class Item122
+		class Item121
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -5675,7 +5637,7 @@ class Mission
 			id=516;
 			type="ModuleCivilianPresenceUnit_F";
 		};
-		class Item123
+		class Item122
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -5687,7 +5649,7 @@ class Mission
 			id=517;
 			type="ModuleCivilianPresenceUnit_F";
 		};
-		class Item124
+		class Item123
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -5779,7 +5741,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item125
+		class Item124
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -5871,7 +5833,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item126
+		class Item125
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -5963,7 +5925,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item127
+		class Item126
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -6056,7 +6018,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item128
+		class Item127
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -6149,7 +6111,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item129
+		class Item128
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -6242,7 +6204,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item130
+		class Item129
 		{
 			dataType="Layer";
 			name="Recruitment trigger";
@@ -6269,7 +6231,7 @@ class Mission
 			};
 			id=525;
 		};
-		class Item131
+		class Item130
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -6280,7 +6242,7 @@ class Mission
 			id=526;
 			type="LocationArea_F";
 		};
-		class Item132
+		class Item131
 		{
 			dataType="Layer";
 			name="AI spawn area";
@@ -6302,7 +6264,7 @@ class Mission
 			};
 			id=528;
 		};
-		class Item133
+		class Item132
 		{
 			dataType="Layer";
 			name="Attack Infantry respawn point";
@@ -6322,7 +6284,7 @@ class Mission
 			id=530;
 			atlOffset=-3.990943;
 		};
-		class Item134
+		class Item133
 		{
 			dataType="Layer";
 			name="Attack Infantry respawn point";
@@ -6342,7 +6304,7 @@ class Mission
 			id=532;
 			atlOffset=-3.9915829;
 		};
-		class Item135
+		class Item134
 		{
 			dataType="Layer";
 			name="Attack Infantry respawn point";
@@ -6362,7 +6324,7 @@ class Mission
 			id=534;
 			atlOffset=-3.99086;
 		};
-		class Item136
+		class Item135
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -6436,7 +6398,7 @@ class Mission
 				nAttributes=3;
 			};
 		};
-		class Item137
+		class Item136
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -6458,7 +6420,7 @@ class Mission
 			id=537;
 			atlOffset=-0.00099563599;
 		};
-		class Item138
+		class Item137
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -6480,7 +6442,7 @@ class Mission
 			id=539;
 			atlOffset=-0.00099563599;
 		};
-		class Item139
+		class Item138
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -6502,7 +6464,7 @@ class Mission
 			id=541;
 			atlOffset=-0.00099563599;
 		};
-		class Item140
+		class Item139
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -6522,7 +6484,7 @@ class Mission
 			};
 			id=543;
 		};
-		class Item141
+		class Item140
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -6544,7 +6506,7 @@ class Mission
 			id=547;
 			atlOffset=1.4114647;
 		};
-		class Item142
+		class Item141
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -6566,7 +6528,7 @@ class Mission
 			id=551;
 			atlOffset=1.8157387;
 		};
-		class Item143
+		class Item142
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -6588,7 +6550,7 @@ class Mission
 			id=555;
 			atlOffset=1.4881935;
 		};
-		class Item144
+		class Item143
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -6610,7 +6572,7 @@ class Mission
 			id=559;
 			atlOffset=1.4384155;
 		};
-		class Item145
+		class Item144
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -6630,7 +6592,7 @@ class Mission
 			};
 			id=563;
 		};
-		class Item146
+		class Item145
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -6652,7 +6614,7 @@ class Mission
 			id=567;
 			atlOffset=1.3722153;
 		};
-		class Item147
+		class Item146
 		{
 			dataType="Object";
 			class PositionInfo
@@ -6663,7 +6625,6 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="this call REB_fnc_addRepeatedLootSpawnEvent;";
 			};
 			id=568;
 			type="vn_b_ammobox_14";
@@ -6691,7 +6652,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item148
+		class Item147
 		{
 			dataType="Layer";
 			name="Conquer sector";
@@ -7005,7 +6966,7 @@ class Mission
 			};
 			id=570;
 		};
-		class Item149
+		class Item148
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -7034,7 +6995,7 @@ class Mission
 			};
 			id=573;
 		};
-		class Item150
+		class Item149
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -7063,7 +7024,7 @@ class Mission
 			};
 			id=576;
 		};
-		class Item151
+		class Item150
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -7095,7 +7056,7 @@ class Mission
 			id=579;
 			atlOffset=-0.0001335144;
 		};
-		class Item152
+		class Item151
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -7124,7 +7085,7 @@ class Mission
 			};
 			id=582;
 		};
-		class Item153
+		class Item152
 		{
 			dataType="Layer";
 			name="Conquer sector";
@@ -7438,7 +7399,7 @@ class Mission
 			};
 			id=584;
 		};
-		class Item154
+		class Item153
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -7467,7 +7428,7 @@ class Mission
 			};
 			id=587;
 		};
-		class Item155
+		class Item154
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -7496,7 +7457,7 @@ class Mission
 			};
 			id=590;
 		};
-		class Item156
+		class Item155
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -7525,7 +7486,7 @@ class Mission
 			};
 			id=593;
 		};
-		class Item157
+		class Item156
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -7557,7 +7518,7 @@ class Mission
 			id=596;
 			atlOffset=-0.00052452087;
 		};
-		class Item158
+		class Item157
 		{
 			dataType="Layer";
 			name="Conquer sector";
@@ -7871,7 +7832,7 @@ class Mission
 			};
 			id=598;
 		};
-		class Item159
+		class Item158
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -7903,7 +7864,7 @@ class Mission
 			id=601;
 			atlOffset=-0.00037193298;
 		};
-		class Item160
+		class Item159
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -7935,7 +7896,7 @@ class Mission
 			id=604;
 			atlOffset=0.00012779236;
 		};
-		class Item161
+		class Item160
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -7964,7 +7925,7 @@ class Mission
 			};
 			id=607;
 		};
-		class Item162
+		class Item161
 		{
 			dataType="Layer";
 			name="Patrol route WP";
@@ -7996,7 +7957,7 @@ class Mission
 			id=610;
 			atlOffset=-0.00066757202;
 		};
-		class Item163
+		class Item162
 		{
 			dataType="Object";
 			class PositionInfo
@@ -8013,7 +7974,7 @@ class Mission
 			type="vn_c_bicycle_01";
 			atlOffset=-1.9073486e-006;
 		};
-		class Item164
+		class Item163
 		{
 			dataType="Object";
 			class PositionInfo
@@ -8030,7 +7991,7 @@ class Mission
 			type="vn_c_bicycle_01";
 			atlOffset=-1.9073486e-006;
 		};
-		class Item165
+		class Item164
 		{
 			dataType="Object";
 			class PositionInfo
@@ -8047,7 +8008,7 @@ class Mission
 			type="vn_c_bicycle_01";
 			atlOffset=-1.9073486e-006;
 		};
-		class Item166
+		class Item165
 		{
 			dataType="Object";
 			class PositionInfo
@@ -8064,7 +8025,7 @@ class Mission
 			id=619;
 			type="vn_c_bicycle_02";
 		};
-		class Item167
+		class Item166
 		{
 			dataType="Object";
 			class PositionInfo
@@ -8081,7 +8042,7 @@ class Mission
 			id=621;
 			type="vn_c_wheeled_m151_02";
 		};
-		class Item168
+		class Item167
 		{
 			dataType="Object";
 			class PositionInfo
@@ -8098,23 +8059,23 @@ class Mission
 			id=626;
 			type="vn_c_wheeled_m151_01";
 		};
-		class Item169
+		class Item168
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15122.066,32.28437,4507.5811};
-				angles[]={0.014748032,5.176053,0.0018675023};
+				position[]={15120.816,31.999371,4509.1152};
+				angles[]={-0,5.9892416,0};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				init="this call REB_fnc_addRepeatedLootSpawnEvent;";
+				init="this call REB_fnc_addLootSpawnEvent;";
+				name="sectorNaboCamp_inventory";
 			};
 			id=630;
 			type="vn_b_ammobox_14";
-			atlOffset=1.1444092e-005;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -8139,47 +8100,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item170
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={15135.086,32.241371,4749.4063};
-				angles[]={0,5.176053,0};
-			};
-			side="Empty";
-			class Attributes
-			{
-				init="this call REB_fnc_addRepeatedLootSpawnEvent;";
-			};
-			id=631;
-			type="vn_b_ammobox_14";
-			atlOffset=0.33200073;
-			class CustomAttributes
-			{
-				class Attribute0
-				{
-					property="ammoBox";
-					expression="[_this,_value] call bis_fnc_initAmmoBox;";
-					class Value
-					{
-						class data
-						{
-							class type
-							{
-								type[]=
-								{
-									"STRING"
-								};
-							};
-							value="[[[[""vn_m1carbine""],[4]],[[""vn_carbine_30_mag""],[20]],[[],[]],[[],[]]],false]";
-						};
-					};
-				};
-				nAttributes=1;
-			};
-		};
-		class Item171
+		class Item169
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -8253,7 +8174,7 @@ class Mission
 				nAttributes=3;
 			};
 		};
-		class Item172
+		class Item170
 		{
 			dataType="Layer";
 			name="Civilian  presence";
@@ -8414,7 +8335,7 @@ class Mission
 			};
 			id=634;
 		};
-		class Item173
+		class Item171
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -8426,7 +8347,7 @@ class Mission
 			id=635;
 			type="ModuleCivilianPresenceUnit_F";
 		};
-		class Item174
+		class Item172
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -8438,7 +8359,7 @@ class Mission
 			id=636;
 			type="ModuleCivilianPresenceUnit_F";
 		};
-		class Item175
+		class Item173
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -8530,7 +8451,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item176
+		class Item174
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -8622,7 +8543,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item177
+		class Item175
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -8715,7 +8636,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item178
+		class Item176
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -8807,7 +8728,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item179
+		class Item177
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -8900,7 +8821,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item180
+		class Item178
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -8993,7 +8914,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item181
+		class Item179
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -9085,7 +9006,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item182
+		class Item180
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -9177,7 +9098,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item183
+		class Item181
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -9270,7 +9191,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item184
+		class Item182
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -9362,7 +9283,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item185
+		class Item183
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -9454,7 +9375,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item186
+		class Item184
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -9547,7 +9468,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item187
+		class Item185
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -9557,7 +9478,7 @@ class Mission
 			id=650;
 			type="LocationArea_F";
 		};
-		class Item188
+		class Item186
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -9567,7 +9488,7 @@ class Mission
 			id=651;
 			type="LocationArea_F";
 		};
-		class Item189
+		class Item187
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -9577,7 +9498,7 @@ class Mission
 			id=652;
 			type="LocationArea_F";
 		};
-		class Item190
+		class Item188
 		{
 			dataType="Layer";
 			name="Recruitment trigger";
@@ -9604,7 +9525,7 @@ class Mission
 			};
 			id=654;
 		};
-		class Item191
+		class Item189
 		{
 			dataType="Layer";
 			name="AI spawn area";
@@ -9628,7 +9549,7 @@ class Mission
 			id=656;
 			atlOffset=3.8146973e-005;
 		};
-		class Item192
+		class Item190
 		{
 			dataType="Layer";
 			name="Recruitment trigger";
@@ -9655,7 +9576,7 @@ class Mission
 			};
 			id=660;
 		};
-		class Item193
+		class Item191
 		{
 			dataType="Layer";
 			name="AI spawn area";
@@ -9677,7 +9598,7 @@ class Mission
 			};
 			id=662;
 		};
-		class Item194
+		class Item192
 		{
 			dataType="Layer";
 			name="AI spawn area";
@@ -9698,7 +9619,7 @@ class Mission
 			};
 			id=664;
 		};
-		class Item195
+		class Item193
 		{
 			dataType="Layer";
 			name="Recruitment trigger";
@@ -9726,7 +9647,7 @@ class Mission
 			id=666;
 			atlOffset=0.016998291;
 		};
-		class Item196
+		class Item194
 		{
 			dataType="Group";
 			side="West";
@@ -9821,7 +9742,7 @@ class Mission
 			};
 			id=676;
 		};
-		class Item197
+		class Item195
 		{
 			dataType="Object";
 			class PositionInfo
@@ -9839,7 +9760,7 @@ class Mission
 			id=677;
 			type="vn_b_sf_static_m60_high";
 		};
-		class Item198
+		class Item196
 		{
 			dataType="Object";
 			class PositionInfo
@@ -9858,7 +9779,7 @@ class Mission
 			type="vn_b_sf_static_m60_low";
 			atlOffset=-0.0042381287;
 		};
-		class Item199
+		class Item197
 		{
 			dataType="Group";
 			side="West";
@@ -9952,7 +9873,7 @@ class Mission
 			};
 			id=703;
 		};
-		class Item200
+		class Item198
 		{
 			dataType="Object";
 			class PositionInfo
@@ -9969,7 +9890,7 @@ class Mission
 			id=710;
 			type="vn_b_army_static_m60_low";
 		};
-		class Item201
+		class Item199
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10002,7 +9923,7 @@ class Mission
 			id=722;
 			atlOffset=3.5559998;
 		};
-		class Item202
+		class Item200
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10035,7 +9956,7 @@ class Mission
 			id=725;
 			atlOffset=-0.00099563599;
 		};
-		class Item203
+		class Item201
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10068,7 +9989,7 @@ class Mission
 			id=728;
 			atlOffset=-0.00099563599;
 		};
-		class Item204
+		class Item202
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10101,7 +10022,7 @@ class Mission
 			id=731;
 			atlOffset=-0.00099563599;
 		};
-		class Item205
+		class Item203
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10134,7 +10055,7 @@ class Mission
 			id=734;
 			atlOffset=-0.00099563599;
 		};
-		class Item206
+		class Item204
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10164,7 +10085,7 @@ class Mission
 			};
 			id=737;
 		};
-		class Item207
+		class Item205
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10197,7 +10118,7 @@ class Mission
 			id=740;
 			atlOffset=-0.00099563599;
 		};
-		class Item208
+		class Item206
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10230,7 +10151,7 @@ class Mission
 			id=743;
 			atlOffset=-0.00099563599;
 		};
-		class Item209
+		class Item207
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10263,7 +10184,7 @@ class Mission
 			id=746;
 			atlOffset=-0.00099563599;
 		};
-		class Item210
+		class Item208
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10296,7 +10217,7 @@ class Mission
 			id=751;
 			atlOffset=3.5550003;
 		};
-		class Item211
+		class Item209
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10329,7 +10250,7 @@ class Mission
 			id=754;
 			atlOffset=-0.00099563599;
 		};
-		class Item212
+		class Item210
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10362,7 +10283,7 @@ class Mission
 			id=759;
 			atlOffset=3.5550003;
 		};
-		class Item213
+		class Item211
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10395,7 +10316,7 @@ class Mission
 			id=764;
 			atlOffset=1.0019989;
 		};
-		class Item214
+		class Item212
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10428,7 +10349,7 @@ class Mission
 			id=769;
 			atlOffset=1.0519981;
 		};
-		class Item215
+		class Item213
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10461,7 +10382,7 @@ class Mission
 			id=774;
 			atlOffset=1.0130005;
 		};
-		class Item216
+		class Item214
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10494,7 +10415,7 @@ class Mission
 			id=779;
 			atlOffset=0.99300003;
 		};
-		class Item217
+		class Item215
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10527,7 +10448,7 @@ class Mission
 			id=784;
 			atlOffset=1.0019989;
 		};
-		class Item218
+		class Item216
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10560,7 +10481,7 @@ class Mission
 			id=789;
 			atlOffset=0.98400116;
 		};
-		class Item219
+		class Item217
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10578,7 +10499,7 @@ class Mission
 			id=794;
 			atlOffset=-36.689999;
 		};
-		class Item220
+		class Item218
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10611,7 +10532,7 @@ class Mission
 			id=797;
 			atlOffset=0.99200058;
 		};
-		class Item221
+		class Item219
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10644,7 +10565,7 @@ class Mission
 			id=802;
 			atlOffset=1;
 		};
-		class Item222
+		class Item220
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10677,7 +10598,7 @@ class Mission
 			id=807;
 			atlOffset=0.97900009;
 		};
-		class Item223
+		class Item221
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10710,7 +10631,7 @@ class Mission
 			id=812;
 			atlOffset=0.98400116;
 		};
-		class Item224
+		class Item222
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10743,7 +10664,7 @@ class Mission
 			id=815;
 			atlOffset=-0.00099563599;
 		};
-		class Item225
+		class Item223
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10761,7 +10682,7 @@ class Mission
 			id=818;
 			atlOffset=-36.689999;
 		};
-		class Item226
+		class Item224
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10794,7 +10715,7 @@ class Mission
 			id=823;
 			atlOffset=1.4970016;
 		};
-		class Item227
+		class Item225
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10827,7 +10748,7 @@ class Mission
 			id=828;
 			atlOffset=1.3913612;
 		};
-		class Item228
+		class Item226
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10860,7 +10781,7 @@ class Mission
 			id=831;
 			atlOffset=-0.00099563599;
 		};
-		class Item229
+		class Item227
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10893,7 +10814,7 @@ class Mission
 			id=836;
 			atlOffset=-0.00099563599;
 		};
-		class Item230
+		class Item228
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10926,7 +10847,7 @@ class Mission
 			id=839;
 			atlOffset=-0.00099563599;
 		};
-		class Item231
+		class Item229
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10956,7 +10877,7 @@ class Mission
 			};
 			id=842;
 		};
-		class Item232
+		class Item230
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -10989,7 +10910,7 @@ class Mission
 			id=845;
 			atlOffset=-0.00099563599;
 		};
-		class Item233
+		class Item231
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -11022,7 +10943,7 @@ class Mission
 			id=848;
 			atlOffset=-0.00099563599;
 		};
-		class Item234
+		class Item232
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -11052,7 +10973,7 @@ class Mission
 			};
 			id=851;
 		};
-		class Item235
+		class Item233
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -11085,7 +11006,7 @@ class Mission
 			id=854;
 			atlOffset=-0.00099563599;
 		};
-		class Item236
+		class Item234
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -11118,7 +11039,7 @@ class Mission
 			id=857;
 			atlOffset=-0.00099563599;
 		};
-		class Item237
+		class Item235
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -11151,7 +11072,7 @@ class Mission
 			id=860;
 			atlOffset=-0.00099563599;
 		};
-		class Item238
+		class Item236
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -11184,7 +11105,7 @@ class Mission
 			id=865;
 			atlOffset=0.37023926;
 		};
-		class Item239
+		class Item237
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -11217,7 +11138,7 @@ class Mission
 			id=868;
 			atlOffset=-0.00099563599;
 		};
-		class Item240
+		class Item238
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -11250,7 +11171,7 @@ class Mission
 			id=873;
 			atlOffset=0.3185463;
 		};
-		class Item241
+		class Item239
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -11283,7 +11204,7 @@ class Mission
 			id=878;
 			atlOffset=1.2770004;
 		};
-		class Item242
+		class Item240
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -11316,7 +11237,7 @@ class Mission
 			id=883;
 			atlOffset=0.14199829;
 		};
-		class Item243
+		class Item241
 		{
 			dataType="Layer";
 			name="Infantry respawn marker";
@@ -11349,7 +11270,7 @@ class Mission
 			id=890;
 			atlOffset=1.2770004;
 		};
-		class Item244
+		class Item242
 		{
 			dataType="Layer";
 			name="Attack Infantry respawn point";
@@ -11369,7 +11290,7 @@ class Mission
 			id=892;
 			atlOffset=-3.9912663;
 		};
-		class Item245
+		class Item243
 		{
 			dataType="Layer";
 			name="Attack Infantry respawn point";
@@ -11389,7 +11310,7 @@ class Mission
 			id=894;
 			atlOffset=-3.990942;
 		};
-		class Item246
+		class Item244
 		{
 			dataType="Layer";
 			name="Attack Infantry respawn point";
@@ -11409,7 +11330,7 @@ class Mission
 			id=896;
 			atlOffset=-3.991251;
 		};
-		class Item247
+		class Item245
 		{
 			dataType="Layer";
 			name="Attack Infantry respawn point";
@@ -11429,7 +11350,7 @@ class Mission
 			id=898;
 			atlOffset=-3.9909992;
 		};
-		class Item248
+		class Item246
 		{
 			dataType="Layer";
 			name="Attack Infantry respawn point";
@@ -11449,7 +11370,7 @@ class Mission
 			id=900;
 			atlOffset=-3.9908924;
 		};
-		class Item249
+		class Item247
 		{
 			dataType="Layer";
 			name="Attack Infantry respawn point";
@@ -11469,7 +11390,7 @@ class Mission
 			id=902;
 			atlOffset=-3.9909267;
 		};
-		class Item250
+		class Item248
 		{
 			dataType="Layer";
 			name="Attack Infantry respawn point";
@@ -11489,7 +11410,7 @@ class Mission
 			id=904;
 			atlOffset=-3.9910545;
 		};
-		class Item251
+		class Item249
 		{
 			dataType="Layer";
 			name="Attack Infantry respawn point";
@@ -11509,7 +11430,7 @@ class Mission
 			id=906;
 			atlOffset=-3.9909611;
 		};
-		class Item252
+		class Item250
 		{
 			dataType="Layer";
 			name="Attack Infantry respawn point";
@@ -11529,34 +11450,14 @@ class Mission
 			id=908;
 			atlOffset=-3.9912663;
 		};
-		class Item253
+		class Item251
 		{
 			dataType="Layer";
 			name="Repeatable loot spawn chest";
-			class Entities
-			{
-				items=1;
-				class Item0
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={14967.185,34.12524,3879.0642};
-						angles[]={0,4.6914339,0};
-					};
-					side="Empty";
-					flags=4;
-					class Attributes
-					{
-						init="this call REB_fnc_addRepeatedLootSpawnEvent;";
-					};
-					id=923;
-					type="vn_b_ammobox_12";
-				};
-			};
 			id=924;
+			atlOffset=1.4435654;
 		};
-		class Item254
+		class Item252
 		{
 			dataType="Marker";
 			position[]={14597.296,0,921.18915};
@@ -11566,7 +11467,7 @@ class Mission
 			id=939;
 			atlOffset=0.6703003;
 		};
-		class Item255
+		class Item253
 		{
 			dataType="Marker";
 			position[]={14585.911,22.559999,2273.7485};
@@ -11575,7 +11476,7 @@ class Mission
 			type="Empty";
 			id=948;
 		};
-		class Item256
+		class Item254
 		{
 			dataType="Layer";
 			name="Manpower marker";
@@ -11595,7 +11496,7 @@ class Mission
 			id=951;
 			atlOffset=-0.00043487549;
 		};
-		class Item257
+		class Item255
 		{
 			dataType="Layer";
 			name="Manpower marker";
@@ -11615,7 +11516,7 @@ class Mission
 			id=953;
 			atlOffset=-0.00062942505;
 		};
-		class Item258
+		class Item256
 		{
 			dataType="Marker";
 			position[]={14996.104,32,4533.731};
@@ -11624,7 +11525,7 @@ class Mission
 			type="Empty";
 			id=954;
 		};
-		class Item259
+		class Item257
 		{
 			dataType="Marker";
 			position[]={15211.826,33.287914,4716.2847};
@@ -11633,7 +11534,7 @@ class Mission
 			type="Empty";
 			id=955;
 		};
-		class Item260
+		class Item258
 		{
 			dataType="Layer";
 			name="Manpower marker";
@@ -11653,7 +11554,7 @@ class Mission
 			id=958;
 			atlOffset=-0.00031280518;
 		};
-		class Item261
+		class Item259
 		{
 			dataType="Layer";
 			name="Manpower marker";
@@ -11671,7 +11572,7 @@ class Mission
 			};
 			id=962;
 		};
-		class Item262
+		class Item260
 		{
 			dataType="Layer";
 			name="Manpower marker";
@@ -11691,7 +11592,7 @@ class Mission
 			id=964;
 			atlOffset=-0.00012207031;
 		};
-		class Item263
+		class Item261
 		{
 			dataType="Layer";
 			name="Manpower marker";
@@ -11711,7 +11612,7 @@ class Mission
 			id=968;
 			atlOffset=-0.00062179565;
 		};
-		class Item264
+		class Item262
 		{
 			dataType="Layer";
 			name="Recruit unit trigger";
@@ -11739,7 +11640,7 @@ class Mission
 			};
 			id=976;
 		};
-		class Item265
+		class Item263
 		{
 			dataType="Layer";
 			name="Recruitment trigger";
@@ -11769,7 +11670,7 @@ class Mission
 			id=980;
 			atlOffset=0.016998291;
 		};
-		class Item266
+		class Item264
 		{
 			dataType="Layer";
 			name="Recruit unit trigger";
@@ -11799,7 +11700,7 @@ class Mission
 			id=982;
 			atlOffset=0.017000198;
 		};
-		class Item267
+		class Item265
 		{
 			dataType="Layer";
 			name="Recruit unit trigger";
@@ -11828,7 +11729,7 @@ class Mission
 			};
 			id=984;
 		};
-		class Item268
+		class Item266
 		{
 			dataType="Layer";
 			name="Recruit unit trigger";
@@ -11856,7 +11757,7 @@ class Mission
 			};
 			id=986;
 		};
-		class Item269
+		class Item267
 		{
 			dataType="Layer";
 			name="Recruit unit trigger";
@@ -11887,7 +11788,7 @@ class Mission
 			id=988;
 			atlOffset=0.016998291;
 		};
-		class Item270
+		class Item268
 		{
 			dataType="Layer";
 			name="Recruit unit trigger";
@@ -11918,16 +11819,219 @@ class Mission
 			id=990;
 			atlOffset=0.016998291;
 		};
+		class Item269
+		{
+			dataType="Layer";
+			name="Repeatable trigger";
+			id=992;
+			atlOffset=-36.689999;
+		};
+		class Item270
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={14931.651,43.11248,2993.0327};
+			};
+			areaSize[]={0.1,-1,0.1};
+			flags=1;
+			id=993;
+			type="ModuleCivilianPresenceUnit_F";
+		};
+		class Item271
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={14969.63,33.206673,3193.2019};
+			};
+			areaSize[]={0.1,-1,0.1};
+			flags=1;
+			id=994;
+			type="ModuleCivilianPresenceUnit_F";
+		};
+		class Item272
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={15080.508,58.134598,2823.3655};
+			};
+			areaSize[]={0.1,-1,0.1};
+			flags=1;
+			id=995;
+			type="ModuleCivilianPresenceUnit_F";
+		};
+		class Item273
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={14965.113,32.160553,4103.6172};
+			};
+			areaSize[]={0.1,-1,0.1};
+			flags=1;
+			id=996;
+			type="ModuleCivilianPresenceUnit_F";
+		};
+		class Item274
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={14992.103,31.952562,4194.6504};
+			};
+			areaSize[]={0.1,-1,0.1};
+			flags=1;
+			id=997;
+			type="ModuleCivilianPresenceUnit_F";
+		};
+		class Item275
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={14887.511,32.479191,4501.627};
+			};
+			areaSize[]={0.1,-1,0.1};
+			flags=1;
+			id=998;
+			type="ModuleCivilianPresenceUnit_F";
+		};
+		class Item276
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={14611.433,15.474708,846.29608};
+			};
+			areaSize[]={0.1,-1,0.1};
+			flags=1;
+			id=999;
+			type="ModuleCivilianPresenceUnit_F";
+		};
+		class Item277
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={14534.339,21.191633,817.65656};
+			};
+			areaSize[]={0.1,-1,0.1};
+			flags=1;
+			id=1000;
+			type="ModuleCivilianPresenceUnit_F";
+		};
+		class Item278
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={15061.731,55.709576,2861.5144};
+				angles[]={0.045308746,0,6.2725215};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="this call REB_fnc_addLootSpawnEvent;";
+				name="sectorNaxok_inventory";
+			};
+			id=1001;
+			type="vn_o_ammobox_wpn_10";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ammoBox";
+					expression="[_this,_value] call bis_fnc_initAmmoBox;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="[[[[""vn_fkb1""],[5]],[[],[]],[[],[]],[[""vn_o_pack_static_ammo_01""],[1]]],false]";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item279
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={14999.253,32.48597,3920.355};
+				angles[]={0,3.7031696,6.2751913};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="this call REB_fnc_addLootSpawnEvent;";
+				name="sectorTuan_inventory";
+			};
+			id=1002;
+			type="vn_o_ammobox_10";
+		};
+		class Item280
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={15162.72,32.336361,4700.3745};
+				angles[]={0,5.176053,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				init="this call REB_fnc_addLootSpawnEvent;";
+				name="sectorNaboFair_inventory";
+			};
+			id=1003;
+			type="vn_b_ammobox_01";
+			atlOffset=0.33200073;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ammoBox";
+					expression="[_this,_value] call bis_fnc_initAmmoBox;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="[[[[""vn_m1carbine""],[4]],[[""vn_carbine_30_mag""],[20]],[[],[]],[[],[]]],false]";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
 	};
 	class Connections
 	{
 		class LinkIDProvider
 		{
-			nextID=28;
+			nextID=37;
 		};
 		class Links
 		{
-			items=28;
+			items=37;
 			class Item0
 			{
 				linkID=0;
@@ -12203,6 +12307,96 @@ class Mission
 				linkID=27;
 				item0=16;
 				item1=231;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item28
+			{
+				linkID=28;
+				item0=119;
+				item1=118;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item29
+			{
+				linkID=29;
+				item0=120;
+				item1=118;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item30
+			{
+				linkID=30;
+				item0=121;
+				item1=118;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item31
+			{
+				linkID=31;
+				item0=283;
+				item1=118;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item32
+			{
+				linkID=32;
+				item0=282;
+				item1=118;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item33
+			{
+				linkID=33;
+				item0=125;
+				item1=118;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item34
+			{
+				linkID=34;
+				item0=124;
+				item1=118;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item35
+			{
+				linkID=35;
+				item0=123;
+				item1=118;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item36
+			{
+				linkID=36;
+				item0=122;
+				item1=118;
 				class CustomData
 				{
 					type="Sync";

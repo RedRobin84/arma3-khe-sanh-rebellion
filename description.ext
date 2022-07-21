@@ -103,6 +103,7 @@ class CfgFunctions
 
         class Generators
         {
+            class addLootSpawnEvent {};
             class addRepeatedLootSpawnEvent {};
             class generateRandomWeapons {};
             class generateRandomExplosives {};
