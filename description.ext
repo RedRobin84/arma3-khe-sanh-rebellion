@@ -119,7 +119,7 @@ class CfgFunctions
             class decrementSectorManpower {};
             class gameTickLoop {};
             class resetSectorManpower {};
-            class updateManpower {};
+            class generateManpower {};
         };
 
         class GUI
@@ -142,6 +142,7 @@ class CfgFunctions
             class getClosestSectorToObject {};
             class getSectorsOwnedBySide {};
             class getSectorValue {};
+            class getTownSectorsOwnedByEast {};
             class initWinConditionForSectorsEventHandlers {};
         };
 

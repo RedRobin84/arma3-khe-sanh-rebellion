@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=1004;
+		nextID=1013;
 	};
 	class MarkerIDProvider
 	{
@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=10865;
+		nextID=11114;
 	};
 	class Camera
 	{
@@ -190,7 +190,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=281;
+		items=283;
 		class Item0
 		{
 			dataType="Object";
@@ -1060,7 +1060,7 @@ class Mission
 			position[]={14569.672,22.514923,2289.8589};
 			class Attributes
 			{
-				name="sector_recruit";
+				name="sectorOldDebris_captureArea";
 				condition="";
 				sizeA=28.968;
 				sizeB=30.622;
@@ -1926,6 +1926,7 @@ class Mission
 					position[]={15052.075,56.720127,2844.1289};
 					class Attributes
 					{
+						name="sectorNaxok_captureArea";
 						condition="";
 						activationBy="ANYPLAYER";
 						triggerInterval=0;
@@ -3434,10 +3435,10 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={14561.521,12.555852,858.659};
-					angle=4.1788054;
+					angle=4.1788068;
 					class Attributes
 					{
-						name="sector_recruit_2";
+						name="sectorThat_captureArea";
 						condition="";
 						sizeA=60;
 						sizeB=80;
@@ -4870,7 +4871,7 @@ class Mission
 			};
 			id=472;
 			type="vn_b_ammobox_14";
-			atlOffset=2.8239985;
+			atlOffset=2.8240004;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -6215,10 +6216,10 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={14971.231,32.644268,3908.417};
-					angle=3.8082347;
+					angle=3.8082385;
 					class Attributes
 					{
-						name="sector_recruit_3";
+						name="sectorTuan_captureArea";
 						condition="";
 						sizeA=40;
 						sizeB=60;
@@ -8065,7 +8066,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={15120.816,31.999371,4509.1152};
-				angles[]={-0,5.9892416,0};
+				angles[]={0,5.9892416,0};
 			};
 			side="Empty";
 			flags=4;
@@ -9512,7 +9513,7 @@ class Mission
 					angle=2.6652925;
 					class Attributes
 					{
-						name="sector_recruit_4";
+						name="sectorNaboFair_captureArea";
 						condition="";
 						sizeA=25;
 						sizeB=75;
@@ -9560,10 +9561,10 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={15120.335,32,4520.8208};
-					angle=3.5063648;
+					angle=3.5063663;
 					class Attributes
 					{
-						name="sector_recruit_5";
+						name="sectorNaboCamp_captureArea";
 						condition="";
 						sizeA=24;
 						sizeB=44;
@@ -9632,7 +9633,7 @@ class Mission
 					position[]={15008.981,32.016998,4507.79};
 					class Attributes
 					{
-						name="sector_recruit_6";
+						name="sectorNaboFarms_captureArea";
 						condition="";
 						sizeA=20;
 						sizeB=20;
@@ -11455,7 +11456,7 @@ class Mission
 			dataType="Layer";
 			name="Repeatable loot spawn chest";
 			id=924;
-			atlOffset=1.4435654;
+			atlOffset=-36.689999;
 		};
 		class Item252
 		{
@@ -11625,7 +11626,7 @@ class Mission
 					position[]={15055.85,56.789951,2842.8359};
 					class Attributes
 					{
-						name="sector_recruit_7";
+						name="sectorNaxok_recruitArea";
 						onActivation="if (thisTrigger call REB_fnc_closestSectorIsOwnedByEast) then" \n "{" \n "    player addaction [""Recruit volunteer"", REB_fnc_recruitUnit];" \n "};";
 						onDeactivation="removeAllActions player;";
 						sizeA=30;
@@ -11644,29 +11645,6 @@ class Mission
 		{
 			dataType="Layer";
 			name="Recruitment trigger";
-			class Entities
-			{
-				items=1;
-				class Item0
-				{
-					dataType="Trigger";
-					position[]={14568.302,22.523417,2288.7781};
-					class Attributes
-					{
-						name="sector_recruit_1";
-						onActivation="if (thisTrigger call REB_fnc_closestSectorIsOwnedByEast) then" \n "{" \n "    player addaction [""Recruit volunteer"", REB_fnc_recruitUnit];" \n "};";
-						onDeactivation="removeAllActions player;";
-						sizeA=20;
-						sizeB=20;
-						repeatable=1;
-						activationBy="ANYPLAYER";
-						triggerInterval=10;
-					};
-					id=979;
-					type="EmptyDetector";
-					atlOffset=0.016998291;
-				};
-			};
 			id=980;
 			atlOffset=0.016998291;
 		};
@@ -11683,7 +11661,7 @@ class Mission
 					position[]={14566.334,12.779526,856.10999};
 					class Attributes
 					{
-						name="sector_recruit_8";
+						name="sectorThat_recruitArea";
 						onActivation="if (thisTrigger call REB_fnc_closestSectorIsOwnedByEast) then" \n "{" \n "    player addaction [""Recruit volunteer"", REB_fnc_recruitUnit];" \n "};";
 						onDeactivation="removeAllActions player;";
 						sizeA=30;
@@ -11711,10 +11689,10 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={14970.604,32.65062,3906.6641};
-					angle=3.7983592;
+					angle=3.7983601;
 					class Attributes
 					{
-						name="sector_recruit_9";
+						name="sectorTuan_recruitArea";
 						onActivation="if (thisTrigger call REB_fnc_closestSectorIsOwnedByEast) then" \n "{" \n "    player addaction [""Recruit volunteer"", REB_fnc_recruitUnit];" \n "};";
 						onDeactivation="removeAllActions player;";
 						sizeA=40;
@@ -11768,10 +11746,10 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={15119.887,32.016998,4519.8208};
-					angle=3.5633852;
+					angle=3.5633864;
 					class Attributes
 					{
-						name="sector_recruit_11";
+						name="sectorNaboCamp_recruitArea";
 						onActivation="if (thisTrigger call REB_fnc_closestSectorIsOwnedByEast) then" \n "{" \n "    player addaction [""Recruit volunteer"", REB_fnc_recruitUnit];" \n "};";
 						onDeactivation="removeAllActions player;";
 						sizeA=24;
@@ -11802,7 +11780,7 @@ class Mission
 					angle=2.7032881;
 					class Attributes
 					{
-						name="sector_recruit_12";
+						name="sectorNaboFair_recruitArea";
 						onActivation="if (thisTrigger call REB_fnc_closestSectorIsOwnedByEast) then" \n "{" \n "    player addaction [""Recruit volunteer"", REB_fnc_recruitUnit];" \n "};";
 						onDeactivation="removeAllActions player;";
 						sizeA=25;
@@ -11939,6 +11917,7 @@ class Mission
 			};
 			id=1001;
 			type="vn_o_ammobox_wpn_10";
+			atlOffset=1.5258789e-005;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -12021,6 +12000,31 @@ class Mission
 				};
 				nAttributes=1;
 			};
+		};
+		class Item281
+		{
+			dataType="Layer";
+			name="Recruit unit trigger";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Recruitment trigger_1";
+					id=1004;
+					atlOffset=0.016998291;
+				};
+			};
+			id=1006;
+			atlOffset=0.016998291;
+		};
+		class Item282
+		{
+			dataType="Layer";
+			name="Recruit unit trigger";
+			id=1008;
+			atlOffset=0.017000198;
 		};
 	};
 	class Connections

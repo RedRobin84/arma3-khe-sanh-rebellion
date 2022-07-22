@@ -7,7 +7,7 @@ while {true} do // loops for entire duration that mission/server is running.
         totalTicks = totalTicks + 1;
         _totalPOVL = call REB_fnc_calculateTotalPOVL;
         _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
-        call REB_fnc_updateManpower;
+        call REB_fnc_generateManpower;
         sleep 5;
         if (nextAttackedSectorName != "") then {
             _nextAttackedSector = missionNamespace getVariable [nextAttackedSectorName, objNull];
