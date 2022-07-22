@@ -1,7 +1,7 @@
 _totalPOVL = _this;
 if (_totalPOVL < 2) exitWith {
     //RETURN
-    DEFCON_SIX
+    DEFCON_SIX //enum located in init.sqf
 };
 if (_totalPOVL < 4) exitWith {
     //RETURN

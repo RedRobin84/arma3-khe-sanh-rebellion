@@ -1,14 +1,7 @@
 params["_villager", "_sectorVar"];
 _villager setVariable["homeSector", _sectorVar];
-_villager setUnitLoadout (
-    selectRandom [ 
-        (getUnitLoadout "vn_c_men_01"), 
-        (getUnitLoadout "vn_c_men_03"), 
-        (getUnitLoadout "vn_c_men_02"), 
-        (getUnitLoadout "vn_c_men_04"), 
-        (getUnitLoadout "vn_c_men_05") 
-    ]
-);
+_unitType = (CIVILIAN_TYPE + (CIVILIAN_TYPES_COUNT call REB_fnc_getRandomNumberWithLessThanTenZeroPrefix));
+_villager setUnitLoadout (getUnitLoadout(_unitType));
 _villager addEventHandler ["Killed", { 
     _killed = _this select 0; 
     _killer = _this select 1;

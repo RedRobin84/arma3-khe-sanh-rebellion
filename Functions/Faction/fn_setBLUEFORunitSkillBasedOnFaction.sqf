@@ -1,4 +1,4 @@
-params["_unit", "_faction"]; //enum located at initServer.sqf
+params["_unit", "_faction"]; //enum located at init.sqf
 
 switch (_faction) do
 {

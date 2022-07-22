@@ -7,6 +7,18 @@ class CfgNotifications {
         sound = "defaultNotification";
         soundClose = "defaultNotificationClose";
         title = "Warning";
+        duration = 10;
+    };
+
+    class ScoreAdded
+    {
+        color[] = {0.5,1,1,1};
+        description = "%1";
+        iconText = "intel";
+        priority = 0;
+        difficulty[] = {"scoreTable"};
+        duration = 10;
+        sound = "scoreAdded";
     };
 
 };
@@ -91,6 +103,7 @@ class CfgFunctions
 
         class Generators
         {
+            class addLootSpawnEvent {};
             class addRepeatedLootSpawnEvent {};
             class generateRandomWeapons {};
             class generateRandomExplosives {};
@@ -104,14 +117,16 @@ class CfgFunctions
             class calculateTotalPOVL {};
             class decreaseSectorManpower {};
             class decrementSectorManpower {};
+            class gameTickLoop {};
             class resetSectorManpower {};
-            class updateManpower {};
+            class generateManpower {};
         };
 
         class GUI
         {
             class displayCurrentDefCon {};
             class initGUI {};
+            class makeAllSystemMarkersInvisible {};
             class updateManpowerGUI {};
             class updateTotalPOVLGUI {};
         };
@@ -127,9 +142,12 @@ class CfgFunctions
             class getClosestSectorToObject {};
             class getSectorsOwnedBySide {};
             class getSectorValue {};
+            class getTownSectorsOwnedByEast {};
+            class initWinConditionForSectorsEventHandlers {};
         };
 
         class Spawn {
+            class populateEnemySectors {};
             class recruitUnit {};
         };
 
