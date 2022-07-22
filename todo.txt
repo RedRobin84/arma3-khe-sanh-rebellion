@@ -8,11 +8,13 @@ player speaks vietnamese not english
 recruited soldiers have no voice
 recruit volunteers without weird equipment
 how to remove bodies? Bury them? Auto removal after certain time?
-Its difficult to arm recruits - its easier in cars, or crate outside?
+~~Its difficult to arm recruits - its easier in cars, or crate outside? - solved by creating town armories~~
 ~~is there max manpower per POI pojistka?~~
 audio warning enemy is attacking
 ~~killing civilian goes to minus manpower values = expected behaviour~~
 after mission load, game loop stopped working - testing
 ~~move proper code to init.sqf instead of init.sqf (may be loaded in advance)~~
-New volunteers still occuring (non manpower generating POIs not excluded)
-add random generated loot crates to outlying places
+~~New volunteers message still occuring (non manpower generating POIs not excluded)~~
+Defcon in UI + warning if defcon changes only
+revealing 80 % of enemy units without making noise = show all static units
+implement own sector control

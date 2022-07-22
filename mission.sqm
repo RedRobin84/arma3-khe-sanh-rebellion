@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=11114;
+		nextID=11861;
 	};
 	class Camera
 	{
@@ -1212,7 +1212,7 @@ class Mission
 									"BOOL"
 								};
 							};
-							value=1;
+							value=0;
 						};
 					};
 				};
@@ -3435,7 +3435,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={14561.521,12.555852,858.659};
-					angle=4.1788068;
+					angle=4.1788054;
 					class Attributes
 					{
 						name="sectorThat_captureArea";
@@ -6216,7 +6216,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={14971.231,32.644268,3908.417};
-					angle=3.8082385;
+					angle=3.8082378;
 					class Attributes
 					{
 						name="sectorTuan_captureArea";
@@ -9561,7 +9561,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={15120.335,32,4520.8208};
-					angle=3.5063663;
+					angle=3.5063655;
 					class Attributes
 					{
 						name="sectorNaboCamp_captureArea";
@@ -11341,15 +11341,15 @@ class Mission
 				class Item0
 				{
 					dataType="Marker";
-					position[]={15327.427,28.009001,4249.1528};
+					position[]={15293.968,29.066162,4259.8369};
 					name="sectorNaboCamp1";
 					type="mil_start";
 					id=897;
-					atlOffset=-3.9909992;
+					atlOffset=-3.7168083;
 				};
 			};
 			id=898;
-			atlOffset=-3.9909992;
+			atlOffset=-3.7168083;
 		};
 		class Item246
 		{
@@ -11646,7 +11646,7 @@ class Mission
 			dataType="Layer";
 			name="Recruitment trigger";
 			id=980;
-			atlOffset=0.016998291;
+			atlOffset=-36.689999;
 		};
 		class Item264
 		{
@@ -11689,7 +11689,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={14970.604,32.65062,3906.6641};
-					angle=3.7983601;
+					angle=3.7983594;
 					class Attributes
 					{
 						name="sectorTuan_recruitArea";
@@ -11746,7 +11746,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={15119.887,32.016998,4519.8208};
-					angle=3.5633864;
+					angle=3.5633857;
 					class Attributes
 					{
 						name="sectorNaboCamp_recruitArea";
@@ -12013,18 +12013,18 @@ class Mission
 					dataType="Layer";
 					name="Recruitment trigger_1";
 					id=1004;
-					atlOffset=0.016998291;
+					atlOffset=-36.689999;
 				};
 			};
 			id=1006;
-			atlOffset=0.016998291;
+			atlOffset=-36.689999;
 		};
 		class Item282
 		{
 			dataType="Layer";
 			name="Recruit unit trigger";
 			id=1008;
-			atlOffset=0.017000198;
+			atlOffset=-36.689999;
 		};
 	};
 	class Connections
