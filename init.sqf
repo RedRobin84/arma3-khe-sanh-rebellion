@@ -21,6 +21,7 @@ CAPTURED_BY_EAST_MASSAGE = "We've captured sector %1.";
 
 MANPOWER_VAR_NAME = "manpower";
 CONTAINER_GENERATOR_FLAG = "generated";
+SECTOR_INVENTORY_VAR_SUFFIX = "_inventory";
 
 //BLUEFOR FACTIONS PREFIXES
 BLUEFOR_SEAL = "vn_b_men_seal_";

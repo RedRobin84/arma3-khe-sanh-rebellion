@@ -1,10 +1,7 @@
-missionNamespace setVariable ["sector_1_controller", west];
-missionNamespace setVariable ["friend_present_1", true];
-
 0 spawn {
     0 spawn {call REB_fnc_gameTickLoop;};
     sleep 5;
-    call REB_fnc_initWinConditionForSectorsEventHandlers;
+    //call REB_fnc_initWinConditionForSectorsEventHandlers;
     _totalPOVL = call REB_fnc_calculateTotalPOVL;
     _totalPOVL call REB_fnc_populateEnemySectors;
     sleep 1;
@@ -20,20 +17,13 @@ missionNamespace setVariable ["friend_present_1", true];
     _currentDefcon call REB_fnc_displayCurrentDefCon;
 };
 
+//DEPRECATED
 addResumeGameLoopOnGameLoadHandler = {
 addMissionEventHandler ["Loaded", {
     params ["_saveType"];
     
     0 spawn {call REB_fnc_gameTickLoop;};
 }];
-};
-
-checkIfAllSectorsOwnedByEast = {
-    _enemySectorNumber = west call BIS_fnc_moduleSector;
-    diag_log(format["DEBUG::checkIfAllSectorsOwnedByEast: Number of owned WEST sectors: %1", _enemySectorNumber]);
-    if (_enemySectorNumber == 0) then {
-        ["end1", true, 20, true, false] call BIS_fnc_endMission;
-    };
 };
 
 getNumberUnitsToSpawn = {

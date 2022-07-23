@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=12359;
+		nextID=12857;
 	};
 	class Camera
 	{
@@ -6231,7 +6231,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={14971.231,32.644268,3908.417};
-					angle=3.8082359;
+					angle=3.8082347;
 					class Attributes
 					{
 						name="sectorTuan_captureArea";
@@ -12044,18 +12044,20 @@ class Mission
 		class Item283
 		{
 			dataType="Trigger";
-			position[]={9618.1357,231.59253,6651.5532};
+			position[]={9618.1357,234.59253,6651.5532};
 			class Attributes
 			{
-				name="sector_1_controller";
-				condition="[1, ThisTrigger] call llama_fnc_triggerSectorEvaluator;";
-				onActivation="[1, ThisTrigger] call llama_fnc_triggerSectorActivation;";
-				onDeactivation="[1, ThisTrigger] call llama_fnc_triggerSectorDeactivation;";
+				name="testSector";
+				text="sector";
+				condition="thisTrigger call llama_fnc_triggerSectorEvaluator;";
+				onActivation="thisTrigger call llama_fnc_triggerSectorActivation;";
+				onDeactivation="thisTrigger call llama_fnc_triggerSectorDeactivation;";
 				repeatable=1;
 				triggerInterval=3;
 			};
 			id=1013;
 			type="EmptyDetectorAreaR50";
+			atlOffset=3;
 		};
 		class Item284
 		{
@@ -12107,7 +12109,7 @@ class Mission
 		{
 			dataType="Marker";
 			position[]={9617.3154,231.591,6652.2139};
-			name="AdvSector_1";
+			name="AdvSector_testSector";
 			markerType="ELLIPSE";
 			type="";
 			colorName="ColorBlue";

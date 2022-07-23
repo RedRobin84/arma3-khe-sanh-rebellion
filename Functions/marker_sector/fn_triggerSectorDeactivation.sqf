@@ -75,22 +75,31 @@ for [{_count3 = 0}, { _count3 < (count _enemyArray)}, { _count3 = _count3 + 1}] 
 // evaluates new controller
 if(_enemyCount > 0) then
 {
+    _manpowerMarker = _triggerName + "_manpowerMarker";
     if((_blufor >= _indfor) && (_blufor >= _opfor)) then 
     {
+        _manpowerMarker setMarkerAlpha 0;
+        _trigger call REB_fnc_resetSectorManpower;
+         _sectorInventory = missionNamespace getVariable [_triggerName + SECTOR_INVENTORY_VAR_SUFFIX, objNull];
+            if (!(isNull _sectorInventory)) then {
+                _sectorInventory setVariable[CONTAINER_GENERATOR_FLAG, false];
+            };          
         [("AdvSector_" + (_triggerName)), "ColorWEST"] spawn BIS_fnc_changeColorMarker;
         _trigger setVariable [("sector_" + (_triggerName) + "_controller"), west];
         [format[CAPTURED_BY_WEST_MESSAGE, _triggerName], MSG_TYPE_WARNING] call REB_fnc_displayMessage;
     };
     if((_opfor >= _indfor) && (_opfor > _blufor)) then 
     {
+         call checkIfAllSectorsOwnedByEast;
+        _manpowerMarker setMarkerAlpha 100;
         [("AdvSector_" + (_triggerName)), "ColorEAST"] spawn BIS_fnc_changeColorMarker;
         _trigger setVariable [("sector_" + (_triggerName) + "_controller"), east];
+        [format[CAPTURED_BY_EAST_MESSAGE, _triggerName], MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
     };
     if((_indfor > _opfor) && (_indfor > _blufor)) then 
     {
         [("AdvSector_" + (_triggerName)), "ColorGUER"] spawn BIS_fnc_changeColorMarker;
         _trigger setVariable [("sector_" + (_triggerName) + "_controller"), independent];
-        [format[CAPTURED_BY_EASTT_MESSAGE, _triggerName], MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
     };
 };
 //resets the friend present

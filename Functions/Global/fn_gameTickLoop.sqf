@@ -11,7 +11,7 @@ while {true} do // loops for entire duration that mission/server is running.
         sleep 5;
         if (nextAttackedSectorName != "") then {
             _nextAttackedSector = missionNamespace getVariable [nextAttackedSectorName, objNull];
-            if ((_nextAttackedSector getVariable "owner") == EAST) then {
+            if ((_nextAttackedSector getVariable ("sector_" + str(_nextAttackedSector) + "_controller")) == EAST) then {
                 [_totalPOVL, _nextAttackedSector] call attackRandomSettlement;
                 _warningMsg = "Enemy is attacking " + nextAttackedSectorName;
                 [_warningMsg, MSG_TYPE_WARNING] call REB_fnc_displayMessage;

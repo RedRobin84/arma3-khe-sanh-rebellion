@@ -1,6 +1,6 @@
 _totalPOVL = 0;
     {
-        if (str(_x getVariable "owner") == "east") then {
+        if (("sector_" + str(_x) + "_controller") == east) then {
             _totalPOVL = _totalPOVL + (_x call REB_fnc_getSectorValue)
         }
     } forEach (call REB_fnc_getAllSectors);

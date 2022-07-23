@@ -9,5 +9,5 @@ diag_log(format["DEBUG::recruitUnit: Random recruit ID: %1", _randomUnitId]);
 _myUnitName = "vn_c_men_" + _randomUnitId;
 _myUnitName createUnit [position player, group player, "removeAllAssignedItems this; this call addActionStayHere; this call addRemoveAllActionsFromCorpseHandler"];
 
-   _sector call REB_fnc_decrementSectorManpower;
+_sector call REB_fnc_decrementSectorManpower;
 //VOID
