@@ -1,3 +1,6 @@
+missionNamespace setVariable ["sector_1_controller", west];
+missionNamespace setVariable ["friend_present_1", true];
+
 0 spawn {
     0 spawn {call REB_fnc_gameTickLoop;};
     sleep 5;

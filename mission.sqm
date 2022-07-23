@@ -8,22 +8,22 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=1013;
+		nextID=1019;
 	};
 	class MarkerIDProvider
 	{
-		nextID=23;
+		nextID=24;
 	};
 	class LayerIndexProvider
 	{
-		nextID=11861;
+		nextID=12359;
 	};
 	class Camera
 	{
 		pos[]={15164.655,37.065399,4693.8809};
-		dir[]={-0.1339595,-0.56371534,0.8150357};
-		up[]={-0.09142594,0.82596993,0.55625331};
-		aside[]={0.98676312,5.0291419e-008,0.16218455};
+		dir[]={-0.13395943,-0.56371427,0.81503439};
+		up[]={-0.091425657,0.82596987,0.55625093};
+		aside[]={0.9867605,-7.4505806e-009,0.16218439};
 	};
 };
 binarizationWanted=0;
@@ -41,13 +41,15 @@ addons[]=
 	"wheeled_f_vietnam_02_c",
 	"boat_f_vietnam_c",
 	"static_f_vietnam_c",
-	"objects_f_vietnam_c"
+	"objects_f_vietnam_c",
+	"A3_Weapons_F",
+	"A3_Weapons_F_Exp"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=11;
+		items=13;
 		class Item0
 		{
 			className="weapons_f_vietnam_c";
@@ -125,6 +127,20 @@ class AddonsMetaData
 			author="Savage Game Design";
 			url="https://www.arma3.com";
 		};
+		class Item11
+		{
+			className="A3_Weapons_F";
+			name="Arma 3 Alpha - Weapons and Accessories";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item12
+		{
+			className="A3_Weapons_F_Exp";
+			name="Arma 3 Apex - Weapons and Accessories";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
 	};
 };
 dlcs[]=
@@ -190,7 +206,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=283;
+		items=288;
 		class Item0
 		{
 			dataType="Object";
@@ -601,7 +617,8 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={14434.197,104.65482,2077.3523};
+						position[]={9691.5596,231.6557,6637.5293};
+						angles[]={0,4.8258314,0};
 					};
 					side="East";
 					flags=7;
@@ -634,7 +651,6 @@ class Mission
 					};
 					id=28;
 					type="vn_o_men_vc_local_01";
-					atlOffset=7.6293945e-006;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -683,7 +699,6 @@ class Mission
 			{
 			};
 			id=27;
-			atlOffset=7.6293945e-006;
 		};
 		class Item5
 		{
@@ -6216,7 +6231,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={14971.231,32.644268,3908.417};
-					angle=3.8082378;
+					angle=3.8082359;
 					class Attributes
 					{
 						name="sectorTuan_captureArea";
@@ -9561,7 +9576,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={15120.335,32,4520.8208};
-					angle=3.5063655;
+					angle=3.5063648;
 					class Attributes
 					{
 						name="sectorNaboCamp_captureArea";
@@ -11689,7 +11704,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={14970.604,32.65062,3906.6641};
-					angle=3.7983594;
+					angle=3.7983592;
 					class Attributes
 					{
 						name="sectorTuan_recruitArea";
@@ -11746,7 +11761,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={15119.887,32.016998,4519.8208};
-					angle=3.5633857;
+					angle=3.5633852;
 					class Attributes
 					{
 						name="sectorNaboCamp_recruitArea";
@@ -12025,6 +12040,97 @@ class Mission
 			name="Recruit unit trigger";
 			id=1008;
 			atlOffset=-36.689999;
+		};
+		class Item283
+		{
+			dataType="Trigger";
+			position[]={9618.1357,231.59253,6651.5532};
+			class Attributes
+			{
+				name="sector_1_controller";
+				condition="[1, ThisTrigger] call llama_fnc_triggerSectorEvaluator;";
+				onActivation="[1, ThisTrigger] call llama_fnc_triggerSectorActivation;";
+				onDeactivation="[1, ThisTrigger] call llama_fnc_triggerSectorDeactivation;";
+				repeatable=1;
+				triggerInterval=3;
+			};
+			id=1013;
+			type="EmptyDetectorAreaR50";
+		};
+		class Item284
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={9603.6045,231.58105,6644.9873};
+						angles[]={0,4.735671,0};
+					};
+					side="West";
+					flags=7;
+					class Attributes
+					{
+					};
+					id=1015;
+					type="vn_b_men_sog_08";
+				};
+			};
+			class Attributes
+			{
+			};
+			id=1014;
+		};
+		class Item285
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={9689.916,232.30943,6637.7979};
+				angles[]={0.0053265258,0,0.0026744273};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=1016;
+			type="Item_ItemMap";
+			atlOffset=1.5258789e-005;
+		};
+		class Item286
+		{
+			dataType="Marker";
+			position[]={9617.3154,231.591,6652.2139};
+			name="AdvSector_1";
+			markerType="ELLIPSE";
+			type="";
+			colorName="ColorBlue";
+			a=50;
+			b=50;
+			id=1017;
+			atlOffset=0.00024414063;
+		};
+		class Item287
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={9687.417,231.64586,6638.0171};
+				angles[]={0.0079935296,0,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=1018;
+			type="Weapon_arifle_AK12_F";
 		};
 	};
 	class Connections

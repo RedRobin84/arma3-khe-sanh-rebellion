@@ -92,6 +92,7 @@ class CivilianPresence_Presets
 
 class CfgFunctions
 {
+
     class REB
     {
         class Faction {
@@ -136,7 +137,7 @@ class CfgFunctions
             class villagerInit {};
         };
 
-        class Sector {
+        class Sector_old {
             class closestSectorIsOwnedByEast {};
             class getAllSectors {};
             class getClosestSectorToObject {};
@@ -158,4 +159,29 @@ class CfgFunctions
             class percentageChanceOf {};
         };
     };
+
+    class SCS
+    {
+        class Sector {
+
+        };
+    };
+
+    class llama
+{
+    /*
+    Below outlines the functions that will be utilized by the trigger.
+    Only one of the two options can be uncommented at any given time,
+    so make sure to utilize the comment block as seen below to 
+    inactivate one of the blocks based on your preference.
+    */
+    tag = "llama";
+    class marker_sector                             // Functions that color a marker on the map
+    {
+        class triggerSectorActivation {};
+        class triggerSectorDeactivation {};
+        class triggerSectorEvaluator {};
+    };
+
+};
 };
