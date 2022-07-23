@@ -1,5 +1,6 @@
 0 spawn {
     0 spawn {call REB_fnc_gameTickLoop;};
+    call REB_fnc_initSectorVars;
     sleep 5;
     //call REB_fnc_initWinConditionForSectorsEventHandlers;
     _totalPOVL = call REB_fnc_calculateTotalPOVL;

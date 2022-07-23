@@ -134,9 +134,20 @@ class CfgFunctions
 
         class Init
         {
+            class initSectorVars {};
             class villagerInit {};
         };
 
+        class Sector {
+            class checkIfAllSectorsOwnedByEast {};
+            class closestSectorIsOwnedByEast {};
+            class getAllSectors {};
+            class getClosestSectorToObject {};
+            class getSectorsOwnedBySide {};
+            class getSectorValue {};
+            class getTownSectorsOwnedByEast {};
+        };
+        /*
         class Sector_old {
             class checkIfAllSectorsOwnedByEast {};
             class closestSectorIsOwnedByEast {};
@@ -147,7 +158,7 @@ class CfgFunctions
             class getTownSectorsOwnedByEast {};
             class initWinConditionForSectorsEventHandlers {};
         };
-
+        */
         class Spawn {
             class populateEnemySectors {};
             class recruitUnit {};
@@ -172,7 +183,6 @@ class CfgFunctions
     {
         class marker_sector
         {
-            class allTicketsExpired {};
             class triggerSectorActivation {};
             class triggerSectorDeactivation {};
             class triggerSectorEvaluator {};

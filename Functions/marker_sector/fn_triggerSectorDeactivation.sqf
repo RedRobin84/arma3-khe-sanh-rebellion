@@ -86,7 +86,8 @@ if(_enemyCount > 0) then
             };          
         [("AdvSector_" + (_triggerName)), "ColorWEST"] spawn BIS_fnc_changeColorMarker;
         _trigger setVariable [("sector_" + (_triggerName) + "_controller"), west];
-        [format[CAPTURED_BY_WEST_MESSAGE, _triggerName], MSG_TYPE_WARNING] call REB_fnc_displayMessage;
+        _msg = format["Sector %1 was captured by enemy.", _triggerName];
+        [_msg, MSG_TYPE_WARNING] call REB_fnc_displayMessage;
     };
     if((_opfor >= _indfor) && (_opfor > _blufor)) then 
     {
@@ -94,7 +95,8 @@ if(_enemyCount > 0) then
         _manpowerMarker setMarkerAlpha 100;
         [("AdvSector_" + (_triggerName)), "ColorEAST"] spawn BIS_fnc_changeColorMarker;
         _trigger setVariable [("sector_" + (_triggerName) + "_controller"), east];
-        [format[CAPTURED_BY_EAST_MESSAGE, _triggerName], MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
+        _msg = format["We've captured sector %1.", _triggerName];
+        [_msg, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
     };
     if((_indfor > _opfor) && (_indfor > _blufor)) then 
     {
