@@ -12,3 +12,6 @@ _container = _this;
 
 _randomAccessoryItem = selectRandom ACCESSIORIES_LOOT_ARRAY;
 _container addItemCargo [_randomAccessoryItem, 1];
+diag_log(format["DEBUG::fn_generateRandomAccessiories: Adding random item %1 to container %1", _randomAccessoryItem, _container]);
+//VOID
+

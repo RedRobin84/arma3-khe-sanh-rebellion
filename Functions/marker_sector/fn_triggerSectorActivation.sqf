@@ -1,4 +1,3 @@
 _trigger = _this;
-_triggerName = _trigger call BIS_fnc_objectVar;
-_sectorMarker = "AdvSector_" + _triggerName;
+diag_log(format["DEBUG::fn_triggerSectorActivation: Sector %1 activated", _trigger]);
 [_trigger, "ColorBlack"] call REB_fnc_setSectorMarkerColor;

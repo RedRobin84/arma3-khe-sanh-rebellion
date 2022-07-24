@@ -1,3 +1,4 @@
+diag_log("DEBUG::fn_initSectorVars: Initializing sector variables");
 _sector = missionNamespace getVariable ["sectorOldDebris", objNull];
 _sector setVariable ["sectorName", "Old debris", true];
 _sector setVariable ["max", 3, true];

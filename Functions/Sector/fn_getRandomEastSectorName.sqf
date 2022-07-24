@@ -6,5 +6,6 @@ if (count _ownedSectors == 0) exitwith {
     };
 _randomOwnedSector = selectRandom _ownedSectors;
 _randomOwnedSectorName = _randomOwnedSector call BIS_fnc_objectVar;
+diag_log(format["DEBUG::fn_getRandomEastSectorName: _randomOwnedSectorName"]);
 //RETURN
 _randomOwnedSectorName

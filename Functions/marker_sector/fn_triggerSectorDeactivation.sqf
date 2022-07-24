@@ -107,7 +107,7 @@ if(_enemyCount > 0) then
 };
 //resets the friend present
 _trigger setVariable ["friend_present_" + _triggerVarName, true];
-
+diag_log(format["DEBUG::fn_triggerSectorDeactivation: Sector %1 deactivated", _trigger]);
 /*
 The Below area can contain any and all code you want to be triggered whenever a sector becomes deactivated.
 Because you will likely be utilizing multiple sectors, make sure to adapt your code to utilize the _triggerVarName

@@ -32,3 +32,6 @@ _container = _this;
 _randomExplosiveType = EXPLOSIVES_LOOT_ARRAY call BIS_fnc_selectRandomWeighted;
 _randomExplosiveItem = selectRandom _randomExplosiveType;
 _container addItemCargo [_randomExplosiveItem, ceil(random(3))];
+diag_log(format["DEBUG::fn_generateRandomExplosives: Adding random item %1 to container %1", _randomExplosiveItem, _container]);
+//VOID
+
