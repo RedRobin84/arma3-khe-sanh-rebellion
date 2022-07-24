@@ -1,7 +1,7 @@
 _CIVILIAN_TYPES_COUNT = 32;
 
 _sector = player call REB_fnc_getClosestSectorToObject;
-_sectorManpower = _sector getVariable[MANPOWER_VAR_NAME, 0];
+_sectorManpower = _sector call REB_fnc_getSectorManpower;
 if (_sectorManpower < 1) exitWith { hint "Not enough manpower."; };
 
 _randomUnitId = _CIVILIAN_TYPES_COUNT call REB_fnc_getRandomNumberWithLessThanTenZeroPrefix;

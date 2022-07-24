@@ -145,6 +145,7 @@ class CfgFunctions
             class getClosestSectorToObject {};
             class getRandomEastSectorName {};
             class getSectorController {};
+            class getSectorManpower {};
             class getSectorName {};
             class getSectorsOwnedBySide {};
             class getSectorValue {};

@@ -1,4 +1,15 @@
 diag_log("DEBUG::fn_initSectorVars: Initializing sector variables");
+_sector = missionNamespace getVariable ["sectorTest", objNull];
+_sector setVariable ["sectorName", "Test", true];
+_sector setVariable ["max", 3, true];
+_sector setVariable ["min", 1, true];
+_sector setVariable ["maxStatic", 2, true];
+_sector setVariable ["waypoints", 4, true];
+_sector setVariable ["value", 1, true];
+_sector setVariable ["sector_sectorTest_controller", west];
+_manpowerMarker = "sectorTest_manpowerMarker";
+_manpowerMarker setMarkerAlpha 0;
+
 _sector = missionNamespace getVariable ["sectorOldDebris", objNull];
 _sector setVariable ["sectorName", "Old debris", true];
 _sector setVariable ["max", 3, true];

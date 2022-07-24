@@ -1,5 +1,5 @@
 params["_sector", "_amountToDecrease"];
-_sectorManpower = _sector getVariable[MANPOWER_VAR_NAME, 0];
+_sectorManpower = _sector call REB_fnc_getSectorManpower;
 _enemySectorName = _sector call BIS_fnc_objectVar;
 _sectorValue = _sector call REB_fnc_getSectorValue;
 _sectorManpower = _sectorManpower - _amountToDecrease;

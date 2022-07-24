@@ -7,6 +7,7 @@ diag_log(format["DEBUG::fn_villagerInit: Created villager %1 with homeSector %2 
 _villager addEventHandler ["Killed", { 
     _killed = _this select 0; 
     _killer = _this select 1;
+    diag_log(format["DEBUG::fn_villagerInit: Villager %1 killed by %2 at sector %3", _killed, _killer, _sectorVar]);
     if (side _killer == east) then {
         _eventSectorVar = _killed getVariable["homeSector", "no_sector"];
         if (_eventSectorVar == "no_sector") exitWith {
@@ -17,6 +18,5 @@ _villager addEventHandler ["Killed", {
         systemChat "Civilian was killed by your soldiers and the number of volunteers has decreased.";
         } 
     }
-    diag_log(format["DEBUG::fn_villagerInit: Villager %1 killed by %2 at sector %3", _killed, _killer, _sectorVar]);
 ];
 //VOID

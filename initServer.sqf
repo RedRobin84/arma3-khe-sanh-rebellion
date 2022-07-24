@@ -1,4 +1,5 @@
 0 spawn {
+    diag_log("DEBUG::Starting init script...");
     0 spawn {call REB_fnc_gameTickLoop;};
     call REB_fnc_initSectorVars;
     sleep 5;
@@ -17,7 +18,7 @@
     _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
     _currentDefcon call REB_fnc_updateDefConGUI;
     _currentDefcon call REB_fnc_displayCurrentDefCon;
-    diag_log(format["Init script done."]);
+    diag_log(format["DEBUG::Init script done."]);
 };
 
 //DEPRECATED

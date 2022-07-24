@@ -98,12 +98,14 @@ if(_enemyCount > 0) then
         [_trigger, east] call REB_fnc_setSectorController;
         _msg = format["We've captured sector %1.", _sectorName];
         [_msg, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
+        player addaction ["Recruit volunteer", REB_fnc_recruitUnit];
     };
     if((_indfor > _opfor) && (_indfor > _blufor)) then 
     {
         [_trigger, "ColorGrey"] call REB_fnc_setSectorMarkerColor;
         [_trigger, independent] call REB_fnc_setSectorController;
     };
+    [_triggerVarName, _trigger call REB_fnc_getSectorManpower, _trigger call REB_fnc_getSectorValue] call REB_fnc_updateManpowerGUI;
 };
 //resets the friend present
 _trigger setVariable ["friend_present_" + _triggerVarName, true];
