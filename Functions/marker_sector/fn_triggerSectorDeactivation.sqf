@@ -76,11 +76,10 @@ for [{_count3 = 0}, { _count3 < (count _enemyArray)}, { _count3 = _count3 + 1}] 
 // evaluates new controller
 if(_enemyCount > 0) then
 {
-    _manpowerMarker = _triggerVarName
- + "_manpowerMarker";
+    _manpowerMarker = _triggerVarName + "_manpowerMarker";
     if((_blufor >= _indfor) && (_blufor >= _opfor)) then 
     {
-        _manpowerMarker setMarkerAlpha 0; systemChat("test");
+        _manpowerMarker setMarkerAlpha 0;
         _trigger call REB_fnc_resetSectorManpower;
          _sectorInventory = missionNamespace getVariable [_triggerVarName
          + SECTOR_INVENTORY_VAR_SUFFIX, objNull];
