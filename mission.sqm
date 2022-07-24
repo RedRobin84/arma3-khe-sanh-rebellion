@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=1061;
+		nextID=1064;
 	};
 	class MarkerIDProvider
 	{
@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=14709;
+		nextID=15517;
 	};
 	class Camera
 	{
@@ -197,7 +197,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=296;
+		items=297;
 		class Item0
 		{
 			dataType="Object";
@@ -292,7 +292,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={9683.2939,231.68301,6633.8506};
+						position[]={14433.548,107.39378,2052.3884};
 						angles[]={0,6.1938801,0};
 					};
 					side="East";
@@ -326,7 +326,7 @@ class Mission
 					};
 					id=28;
 					type="vn_o_men_vc_local_01";
-					atlOffset=1.5258789e-005;
+					atlOffset=-2.2888184e-005;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -375,7 +375,7 @@ class Mission
 			{
 			};
 			id=27;
-			atlOffset=1.5258789e-005;
+			atlOffset=-2.2888184e-005;
 		};
 		class Item3
 		{
@@ -2163,13 +2163,12 @@ class Mission
 			class PositionInfo
 			{
 				position[]={14575.748,24.020945,2278.9641};
-				angles[]={0,0.74794388,0};
+				angles[]={0,0.7479434,0};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
-				presence=0.50000018;
 			};
 			id=297;
 			type="vn_c_bicycle_01";
@@ -9681,11 +9680,10 @@ class Mission
 			class Attributes
 			{
 				name="sectorTest";
-				text="sector";
+				text="sec";
 				condition="thisTrigger call llama_fnc_triggerSectorEvaluator;";
 				onActivation="thisTrigger call llama_fnc_triggerSectorActivation;";
 				onDeactivation="thisTrigger call llama_fnc_triggerSectorDeactivation;";
-				repeatable=1;
 				triggerInterval=3;
 			};
 			id=1013;
@@ -10494,6 +10492,47 @@ class Mission
 			};
 			id=1060;
 			atlOffset=0.016983032;
+		};
+		class Item296
+		{
+			dataType="Layer";
+			name="Recruit unit trigger";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Recruit unit trigger_2";
+					class Entities
+					{
+						items=1;
+						class Item0
+						{
+							dataType="Trigger";
+							position[]={14565.477,22.500816,2287.939};
+							class Attributes
+							{
+								name="sectorOldDebris_recruitArea";
+								onActivation="if (thisTrigger call REB_fnc_closestSectorIsOwnedByEast) then" \n "{" \n "    player addaction [""Recruit volunteer"", REB_fnc_recruitUnit];" \n "};";
+								onDeactivation="removeAllActions player;";
+								sizeA=20;
+								sizeB=20;
+								repeatable=1;
+								activationBy="ANYPLAYER";
+								triggerInterval=5;
+							};
+							id=1062;
+							type="EmptyDetector";
+							atlOffset=0.017000198;
+						};
+					};
+					id=1061;
+					atlOffset=0.017000198;
+				};
+			};
+			id=1063;
+			atlOffset=0.017000198;
 		};
 	};
 	class Connections

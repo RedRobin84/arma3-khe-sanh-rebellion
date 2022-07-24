@@ -23,6 +23,17 @@ class CfgNotifications {
 
 };
 
+class cfgMusic 
+{
+    tracks[] = {};
+
+    class KheSanhIntro
+    {
+        name = "Khe Sanh Intro";
+        sound[] = {"music\khe_sanh_intro.ogg", 1, 1};
+    };
+};
+
 class RscTitles 
 { 
        class ManpowerTitle 

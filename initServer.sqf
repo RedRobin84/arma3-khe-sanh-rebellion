@@ -2,7 +2,8 @@
     diag_log("DEBUG::Starting init script...");
     0 spawn {call REB_fnc_gameTickLoop;};
     call REB_fnc_initSectorVars;
-    sleep 5;
+    sleep 3;
+    playMusic "KheSanhIntro";
     //call REB_fnc_initWinConditionForSectorsEventHandlers;
     _totalPOVL = call REB_fnc_calculateTotalPOVL;
     _totalPOVL call REB_fnc_populateEnemySectors;
