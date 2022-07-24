@@ -30,7 +30,7 @@ class cfgMusic
     class KheSanhIntro
     {
         name = "Khe Sanh Intro";
-        sound[] = {"music\khe_sanh_intro.ogg", 1, 1};
+        sound[] = {"music\khe_sanh_intro.ogg", db+5, 1};
     };
 };
 

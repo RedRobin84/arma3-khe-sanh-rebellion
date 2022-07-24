@@ -89,6 +89,7 @@ if(_enemyCount > 0) then
         [_trigger, west] call REB_fnc_setSectorController;
         _msg = format["Sector %1 was captured by enemy.", _sectorName];
         [_msg, MSG_TYPE_WARNING] call REB_fnc_displayMessage;
+        removeAllActions _trigger;
     };
     if((_opfor >= _indfor) && (_opfor > _blufor)) then 
     {

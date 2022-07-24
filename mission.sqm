@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=1064;
+		nextID=1065;
 	};
 	class MarkerIDProvider
 	{
@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=15517;
+		nextID=16057;
 	};
 	class Camera
 	{
@@ -292,7 +292,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={14433.548,107.39378,2052.3884};
+						position[]={14438.718,105.42052,2065.3533};
 						angles[]={0,6.1938801,0};
 					};
 					side="East";
@@ -326,7 +326,6 @@ class Mission
 					};
 					id=28;
 					type="vn_o_men_vc_local_01";
-					atlOffset=-2.2888184e-005;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -375,7 +374,6 @@ class Mission
 			{
 			};
 			id=27;
-			atlOffset=-2.2888184e-005;
 		};
 		class Item3
 		{
@@ -10514,7 +10512,7 @@ class Mission
 							class Attributes
 							{
 								name="sectorOldDebris_recruitArea";
-								onActivation="if (thisTrigger call REB_fnc_closestSectorIsOwnedByEast) then" \n "{" \n "    player addaction [""Recruit volunteer"", REB_fnc_recruitUnit];" \n "};";
+								onActivation="if (thisTrigger call REB_fnc_closestSectorIsOwnedByEast) then" \n "{" \n "    removeAllActions player;" \n "    player addaction [""Recruit volunteer"", REB_fnc_recruitUnit];" \n "};";
 								onDeactivation="removeAllActions player;";
 								sizeA=20;
 								sizeB=20;

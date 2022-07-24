@@ -7,7 +7,6 @@ if (count _capturedTownSectors != 0) then {
         _currentManpower = _x call REB_fnc_getSectorManpower;
         _sectorValue = _x call REB_fnc_getSectorValue;
         if (_currentManpower < _sectorValue) then {
-            _totalGeneratedManpower = _totalGeneratedManpower + _MANPOWER_SECTOR_DEFAULT_INCREMENT;
             _currentManpower = _currentManpower + _MANPOWER_SECTOR_DEFAULT_INCREMENT;
             _x setVariable[MANPOWER_VAR_NAME, _currentManpower];
             _capturedSectorName = _x call BIS_fnc_objectVar;
