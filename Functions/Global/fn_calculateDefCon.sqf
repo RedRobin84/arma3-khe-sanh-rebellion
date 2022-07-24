@@ -1,3 +1,4 @@
+diag_log("DEBUG::calculateDefCon: executing...");
 _totalPOVL = _this;
 if (_totalPOVL < 2) exitWith {
     //RETURN

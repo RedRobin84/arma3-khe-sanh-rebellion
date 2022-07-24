@@ -30,6 +30,7 @@ _totalPOVL = _this;
             _numberOfUnitsToSpawn = [_enemySector, _numberOfEnemyunitsinSector] call getNumberUnitsToSpawn;
             _maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
             _currentDefConLevel = _totalPOVL call REB_fnc_calculateDefCon;
+            _currentDefConLevel call REB_fnc_updateDefConGUI;
             _routeGroupName = _enemySectorName + "_route_group";
             _routeGroup = allGroups select { groupId _x == _routeGroupName };
             _routeGroupNumber = count(_routeGroup);

@@ -17,4 +17,7 @@ after mission load, game loop stopped working - testing
 ~~New volunteers message still occuring (non manpower generating POIs not excluded)~~
 Defcon in UI + warning if defcon changes only
 revealing 80 % of enemy units without making noise = show all static units
-implement own sector control
+~~implement lamas sector control~~
+~~add getSectorName helper~~
+~~add name var to sector inits~~
+set initial task to take weapons from shed

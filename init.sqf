@@ -1,3 +1,5 @@
+
+
 //CONSTANTS
 executeTime = 600; // 600 seconds, aka 10 minutes. Used in fn_gameTickLoop
 MAX_SOLDIERS_MULTIPLIER = 4; //Default multiplier for max soldiers per sector value
@@ -12,11 +14,12 @@ MAX_NUMBER_OF_BOAT_CREW = 5;
 
 //STRING CONSTANTS
 INTRO_INFO_MSG = "Capture all settlements to win. The main objective is Nabo Camp military outpost.";
-INTRO_INFO_MSG2 = "Begin with capturing ruins to the north.";
+INTRO_INFO_MSG2 = "Begin with capturing ruins to the north-east.";
 INTRO_HINT = "You may find some equipment in your shack.";
 
 MANPOWER_VAR_NAME = "manpower";
 CONTAINER_GENERATOR_FLAG = "generated";
+SECTOR_INVENTORY_VAR_SUFFIX = "_inventory";
 
 //BLUEFOR FACTIONS PREFIXES
 BLUEFOR_SEAL = "vn_b_men_seal_";

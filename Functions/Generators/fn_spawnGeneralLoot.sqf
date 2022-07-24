@@ -1,3 +1,4 @@
+diag_log("DEBUG::spawnGeneralLoot: executing...");
 _container = _this;
 
 _container call REB_fnc_generateRandomWeapons;

@@ -1,3 +1,3 @@
 _sector = _this;
 //RETURN
-parseNumber((_sector getVariable ["scoreReward", 0]))
+_sector getVariable["value", 0];

@@ -55,3 +55,5 @@ if (25 call REB_fnc_percentageChanceOf) then {
     _container addItemCargo [(_randomWeaponItem select 2), 1];
 };
 hint("You have found some hidden weapons.");
+diag_log(format["DEBUG::fn_generateRandomWeapons: Adding random item %1 to container %1", _randomWeaponItem, _container]);
+//VOID
