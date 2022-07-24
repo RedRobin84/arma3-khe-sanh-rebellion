@@ -99,6 +99,7 @@ if(_enemyCount > 0) then
         [_trigger, east] call REB_fnc_setSectorController;
         _msg = format["We've captured sector %1.", _sectorName];
         [_msg, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
+        playMusic "KheSanhSectorCaptured";
         player addaction ["Recruit volunteer", REB_fnc_recruitUnit];
     };
     if((_indfor > _opfor) && (_indfor > _blufor)) then 

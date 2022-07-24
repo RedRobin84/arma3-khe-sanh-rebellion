@@ -32,6 +32,12 @@ class cfgMusic
         name = "Khe Sanh Intro";
         sound[] = {"music\khe_sanh_intro.ogg", db+5, 1};
     };
+
+    class KheSanhSectorCaptured
+    {
+        name = "Khe Sanh Sector Captured";
+        sound[] = {"music\khe_sanh_sector_captured.ogg", db+5, 1};
+    };
 };
 
 class RscTitles 
