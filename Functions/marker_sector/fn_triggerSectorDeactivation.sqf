@@ -81,31 +81,27 @@ if(_enemyCount > 0) then
     {
         _manpowerMarker setMarkerAlpha 0;
         _trigger call REB_fnc_resetSectorManpower;
-         _sectorInventory = missionNamespace getVariable [_triggerVarName
-         + SECTOR_INVENTORY_VAR_SUFFIX, objNull];
+         _sectorInventory = missionNamespace getVariable [_triggerVarName+ SECTOR_INVENTORY_VAR_SUFFIX, objNull];
             if (!(isNull _sectorInventory)) then {
                 _sectorInventory setVariable[CONTAINER_GENERATOR_FLAG, false];
             };          
-        [("AdvSector_" + (_triggerVarName
-    )), "ColorWEST"] spawn BIS_fnc_changeColorMarker;
+        [_trigger, "ColorBlue"] call REB_fnc_setSectorMarkerColor;
         [_trigger, west] call REB_fnc_setSectorController;
         _msg = format["Sector %1 was captured by enemy.", _sectorName];
         [_msg, MSG_TYPE_WARNING] call REB_fnc_displayMessage;
     };
     if((_opfor >= _indfor) && (_opfor > _blufor)) then 
     {
-         call checkIfAllSectorsOwnedByEast;
+        call checkIfAllSectorsOwnedByEast;
         _manpowerMarker setMarkerAlpha 100;
-        [("AdvSector_" + (_triggerVarName
-    )), "ColorEAST"] spawn BIS_fnc_changeColorMarker;
+        [_trigger, "ColorRed"] call REB_fnc_setSectorMarkerColor;
         [_trigger, east] call REB_fnc_setSectorController;
         _msg = format["We've captured sector %1.", _sectorName];
         [_msg, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
     };
     if((_indfor > _opfor) && (_indfor > _blufor)) then 
     {
-        [("AdvSector_" + (_triggerVarName
-    )), "ColorGUER"] spawn BIS_fnc_changeColorMarker;
+        [_trigger, "ColorGrey"] call REB_fnc_setSectorMarkerColor;
         [_trigger, independent] call REB_fnc_setSectorController;
     };
 };

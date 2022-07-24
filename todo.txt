@@ -20,3 +20,4 @@ revealing 80 % of enemy units without making noise = show all static units
 ~~implement lamas sector control~~
 ~~add getSectorName helper~~
 ~~add name var to sector inits~~
+set initial task to take weapons from shed

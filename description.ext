@@ -49,14 +49,14 @@ class RscTitles
                        }; 
                }; 
        }; 
-       class TotalPOVLTitle 
+       class DefConTitle 
        { 
            idd = 2; 
            duration = 999999;
-           onLoad = "uiNameSpace setVariable ['myUI_totalPOVL', (_this select 0) displayCtrl 102];";
+           onLoad = "uiNameSpace setVariable ['myUI_DefCon', (_this select 0) displayCtrl 102];";
            class controls 
            { 
-                   class TotalPOVLControl 
+                   class DefConControl 
                    { 
                            idc = 102; 
                            type = 0; 
@@ -69,7 +69,7 @@ class RscTitles
                            sizeEX = 0.05; 
                            colorBackground[] = {0,0,0,0}; 
                            colorText[] = {1,1,1,0.5}; 
-                           text = "Influence: 0"; 
+                           text = "DEFCON: 6"; 
                        }; 
                }; 
        }; 
@@ -129,7 +129,7 @@ class CfgFunctions
             class initGUI {};
             class makeAllSystemMarkersInvisible {};
             class updateManpowerGUI {};
-            class updateTotalPOVLGUI {};
+            class updateDefConGUI {};
         };
 
         class Init
@@ -143,6 +143,7 @@ class CfgFunctions
             class closestSectorIsOwnedByEast {};
             class getAllSectors {};
             class getClosestSectorToObject {};
+            class getRandomEastSectorName {};
             class getSectorController {};
             class getSectorName {};
             class getSectorsOwnedBySide {};
@@ -151,6 +152,7 @@ class CfgFunctions
             class getTownSectorsOwnedByEast {};
             class checkIfAllSectorsOwnedByEast {};
             class setSectorController {};
+            class setSectorMarkerColor {};
         };
         /*
         class Sector_old {

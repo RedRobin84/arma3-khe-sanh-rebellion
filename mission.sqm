@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=13385;
+		nextID=14441;
 	};
 	class Camera
 	{
@@ -9766,7 +9766,7 @@ class Mission
 				{
 					dataType="Marker";
 					position[]={14565.725,22.488001,2287.0071};
-					name="AdvSector_oldDebris";
+					name="AdvSector_sectorOldDebris";
 					markerType="ELLIPSE";
 					type="";
 					colorName="ColorBlue";

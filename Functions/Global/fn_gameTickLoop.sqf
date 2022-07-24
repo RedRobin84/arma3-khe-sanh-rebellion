@@ -7,8 +7,8 @@ while {true} do // loops for entire duration that mission/server is running.
         totalTicks = totalTicks + 1;
         _totalPOVL = call REB_fnc_calculateTotalPOVL;
         _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
+        _currentDefcon call REB_fnc_updateDefConGUI;
         call REB_fnc_generateManpower;
-        sleep 5;
         if (nextAttackedSectorName != "") then {
             _nextAttackedSector = missionNamespace getVariable [nextAttackedSectorName, objNull];
             if ((_nextAttackedSector call REB_fnc_getSectorController) == EAST) then {
@@ -22,14 +22,14 @@ while {true} do // loops for entire duration that mission/server is running.
             nextAttackedSectorName = "";
         };
         if (totalTicks >= _currentDefcon) then {
-            nextAttackedSectorName = call getRandomEastSectorName;
+            nextAttackedSectorName = call REB_fnc_getRandomEastSectorName;
             if (nextAttackedSectorName != "") then {
                  _msg = format["We have a report of incoming attack on sector %1.", nextAttackedSectorName];
                 [_msg, MSG_TYPE_WARNING] call REB_fnc_displayMessage;
                 totalTicks = 0;
             };
         };
-        _totalPOVL call populateEnemySectors;
+        _totalPOVL call REB_fnc_populateEnemySectors;
         sleep 5;
        _currentDefcon call REB_fnc_displayCurrentDefCon;
 

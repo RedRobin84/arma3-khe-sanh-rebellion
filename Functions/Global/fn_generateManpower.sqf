@@ -2,6 +2,7 @@ _MANPOWER_SECTOR_DEFAULT_VALUE = 0;
 _MANPOWER_SECTOR_DEFAULT_INCREMENT = 1;
 
 _capturedTownSectors = call REB_fnc_getTownSectorsOwnedByEast;
+diag_log(format["DEBUG::generateManpower: capturedTownSectors: %1", _capturedTownSectors]);
 if (count _capturedTownSectors != 0) then {
     {
         _currentManpower = _x getVariable[MANPOWER_VAR_NAME, _MANPOWER_SECTOR_DEFAULT_VALUE];

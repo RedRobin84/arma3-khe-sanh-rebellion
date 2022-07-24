@@ -5,7 +5,7 @@ _totalPOVL = 0;
         }
     } forEach (call REB_fnc_getAllSectors);
     diag_log(format["DEBUG::calculateTotalPOVL: New totalPOVL: %1", _totalPOVL]);
-    _totalPOVL call REB_fnc_updateTotalPOVLGUI;
+    //_totalPOVL call REB_fnc_updateTotalPOVLGUI;
     //RETURN
     _totalPOVL;
     

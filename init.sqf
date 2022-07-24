@@ -14,7 +14,7 @@ MAX_NUMBER_OF_BOAT_CREW = 5;
 
 //STRING CONSTANTS
 INTRO_INFO_MSG = "Capture all settlements to win. The main objective is Nabo Camp military outpost.";
-INTRO_INFO_MSG2 = "Begin with capturing ruins to the north.";
+INTRO_INFO_MSG2 = "Begin with capturing ruins to the north-east.";
 INTRO_HINT = "You may find some equipment in your shack.";
 
 MANPOWER_VAR_NAME = "manpower";

@@ -15,6 +15,7 @@
     hint(INTRO_HINT);
     sleep 6;
     _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
+    _currentDefcon call REB_fnc_updateDefConGUI;
     _currentDefcon call REB_fnc_displayCurrentDefCon;
 };
 
@@ -84,19 +85,6 @@ diag_log(format["INFO::attackRandomSettlement: Creating attack on POI %1 at posi
 [_totalPOVL, _randomOwnedSectorName, _nextAttackedSectorPos] call distributeAttackInGroups;
 };
 
-getRandomEastSectorName = {
-_ownedSectors = east call REB_fnc_getSectorsOwnedBySide;
-if (count _ownedSectors == 0) exitwith {
-    diag_log("INFO::getRandomEastSectorName: No sectors owned by EAST. Exiting.");
-    //RETURN
-    ""
-    };
-_randomOwnedSector = selectRandom _ownedSectors;
-_randomOwnedSectorName = _randomOwnedSector call BIS_fnc_objectVar;
-//RETURN
-_randomOwnedSectorName
-};
-
 distributeAttackInGroups = {
 params["_totalPOVL", "_randomOwnedSectorName", "_randomOwnedSectorPos"];
 _nrOfAttackGroups = _totalPOVL call getNumberOfAttackGroups;
@@ -107,6 +95,7 @@ for "_i" from 1 to _nrOfAttackGroups do {
     diag_log(format["DEBUG::distributeAttackInGroups: Random spawn point selected: %1 at position %2", _randomlySelectedSpawnPoint, _randomSpawnPointNamePos]);
     _soldiersPerGroup = ceil(_totalPOVL / _nrOfAttackGroups);
     _currentDefConLevel = _totalPOVL call REB_fnc_calculateDefCon;
+    _currentDefConLevel call REB_fnc_updateDefConGUI;
     _groupFaction = _currentDefConLevel call REB_fnc_getBLUEFORattackFactionBasedOnDefConLevel;
     if (surfaceIsWater _randomSpawnPointNamePos) then {
        _grp = [_randomSpawnPointNamePos, _soldiersPerGroup, _groupFaction] call createEnemyInfantryBoatGroup;
