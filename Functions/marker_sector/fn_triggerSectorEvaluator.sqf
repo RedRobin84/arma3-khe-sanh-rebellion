@@ -1,6 +1,6 @@
 _trigger = _this;
 _triggerName = _trigger call BIS_fnc_objectVar;
-private _sectorController = _trigger getVariable ["sector_" + _triggerName + "_controller", west];
+private _sectorController = _trigger call REB_fnc_getSectorController;
 
 /*******************************************************************************************************************/
 /*                                         Unit Counting of Sector Area                                            */

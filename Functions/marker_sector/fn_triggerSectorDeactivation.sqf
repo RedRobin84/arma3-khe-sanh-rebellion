@@ -1,6 +1,7 @@
 _trigger = _this;
-_triggerName = _trigger call BIS_fnc_objectVar;
-private _sectorController = _trigger getVariable ["sector_" + _triggerName + "_controller", west];
+_triggerVarName = _trigger call REB_fnc_getSectorVarName;
+_sectorName = _trigger call REB_fnc_getSectorName;
+private _sectorController = _trigger call REB_fnc_getSectorController;
 /*******************************************************************************************************************/
 /*                                         Unit Counting of Sector Area                                            */
 /*******************************************************************************************************************/
@@ -75,40 +76,45 @@ for [{_count3 = 0}, { _count3 < (count _enemyArray)}, { _count3 = _count3 + 1}] 
 // evaluates new controller
 if(_enemyCount > 0) then
 {
-    _manpowerMarker = _triggerName + "_manpowerMarker";
+    _manpowerMarker = _triggerVarName
+ + "_manpowerMarker";
     if((_blufor >= _indfor) && (_blufor >= _opfor)) then 
     {
-        _manpowerMarker setMarkerAlpha 0;
+        _manpowerMarker setMarkerAlpha 0; systemChat("test");
         _trigger call REB_fnc_resetSectorManpower;
-         _sectorInventory = missionNamespace getVariable [_triggerName + SECTOR_INVENTORY_VAR_SUFFIX, objNull];
+         _sectorInventory = missionNamespace getVariable [_triggerVarName
+         + SECTOR_INVENTORY_VAR_SUFFIX, objNull];
             if (!(isNull _sectorInventory)) then {
                 _sectorInventory setVariable[CONTAINER_GENERATOR_FLAG, false];
             };          
-        [("AdvSector_" + (_triggerName)), "ColorWEST"] spawn BIS_fnc_changeColorMarker;
-        _trigger setVariable [("sector_" + (_triggerName) + "_controller"), west];
-        _msg = format["Sector %1 was captured by enemy.", _triggerName];
+        [("AdvSector_" + (_triggerVarName
+    )), "ColorWEST"] spawn BIS_fnc_changeColorMarker;
+        [_trigger, west] call REB_fnc_setSectorController;
+        _msg = format["Sector %1 was captured by enemy.", _sectorName];
         [_msg, MSG_TYPE_WARNING] call REB_fnc_displayMessage;
     };
     if((_opfor >= _indfor) && (_opfor > _blufor)) then 
     {
          call checkIfAllSectorsOwnedByEast;
         _manpowerMarker setMarkerAlpha 100;
-        [("AdvSector_" + (_triggerName)), "ColorEAST"] spawn BIS_fnc_changeColorMarker;
-        _trigger setVariable [("sector_" + (_triggerName) + "_controller"), east];
-        _msg = format["We've captured sector %1.", _triggerName];
+        [("AdvSector_" + (_triggerVarName
+    )), "ColorEAST"] spawn BIS_fnc_changeColorMarker;
+        [_trigger, east] call REB_fnc_setSectorController;
+        _msg = format["We've captured sector %1.", _sectorName];
         [_msg, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
     };
     if((_indfor > _opfor) && (_indfor > _blufor)) then 
     {
-        [("AdvSector_" + (_triggerName)), "ColorGUER"] spawn BIS_fnc_changeColorMarker;
-        _trigger setVariable [("sector_" + (_triggerName) + "_controller"), independent];
+        [("AdvSector_" + (_triggerVarName
+    )), "ColorGUER"] spawn BIS_fnc_changeColorMarker;
+        [_trigger, independent] call REB_fnc_setSectorController;
     };
 };
 //resets the friend present
-_trigger setVariable ["friend_present_" + _triggerName, true];
+_trigger setVariable ["friend_present_" + _triggerVarName, true];
 
 /*
 The Below area can contain any and all code you want to be triggered whenever a sector becomes deactivated.
-Because you will likely be utilizing multiple sectors, make sure to adapt your code to utilize the _triggerName
+Because you will likely be utilizing multiple sectors, make sure to adapt your code to utilize the _triggerVarName
 to specify to any functions the specific sector that is calling it.
 */

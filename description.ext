@@ -139,13 +139,18 @@ class CfgFunctions
         };
 
         class Sector {
-            class checkIfAllSectorsOwnedByEast {};
+           
             class closestSectorIsOwnedByEast {};
             class getAllSectors {};
             class getClosestSectorToObject {};
+            class getSectorController {};
+            class getSectorName {};
             class getSectorsOwnedBySide {};
             class getSectorValue {};
+            class getSectorVarName {};
             class getTownSectorsOwnedByEast {};
+            class checkIfAllSectorsOwnedByEast {};
+            class setSectorController {};
         };
         /*
         class Sector_old {

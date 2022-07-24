@@ -5,7 +5,7 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=129;
+	toggles=1;
 	class ItemIDProvider
 	{
 		nextID=1049;
@@ -16,14 +16,13 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=13121;
+		nextID=13385;
 	};
 	class Camera
 	{
-		pos[]={15164.655,37.065399,4693.8809};
-		dir[]={-0.13395943,-0.56371427,0.81503439};
-		up[]={-0.091425657,0.82596987,0.55625093};
-		aside[]={0.9867605,-7.4505806e-009,0.16218439};
+		pos[]={15005.718,53.543129,4489.8057};
+		dir[]={0,-0.70710683,0.70710683};
+		up[]={0,0.70710671,0.70710683};
 	};
 };
 binarizationWanted=0;
@@ -277,7 +276,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={14437.836,105.81629,2062.6926};
-						angles[]={0,6.1938801,-0};
+						angles[]={0,6.1938801,0};
 					};
 					side="East";
 					flags=7;
@@ -9337,7 +9336,7 @@ class Mission
 					position[]={15005.522,32,4507.1152};
 					class Attributes
 					{
-						name="sector_recruit_10";
+						name="sectorNaboFarms_recruitArea";
 						onActivation="if (thisTrigger call REB_fnc_closestSectorIsOwnedByEast) then" \n "{" \n "    player addaction [""Recruit volunteer"", REB_fnc_recruitUnit];" \n "};";
 						onDeactivation="removeAllActions player;";
 						sizeA=15;
@@ -9654,7 +9653,6 @@ class Mission
 				condition="thisTrigger call llama_fnc_triggerSectorEvaluator;";
 				onActivation="thisTrigger call llama_fnc_triggerSectorActivation;";
 				onDeactivation="thisTrigger call llama_fnc_triggerSectorDeactivation;";
-				repeatable=1;
 				triggerInterval=3;
 			};
 			id=1013;
@@ -9863,7 +9861,7 @@ class Mission
 					colorName="ColorBlue";
 					a=40;
 					b=60;
-					angle=216.6998;
+					angle=216.69977;
 					id=1031;
 				};
 			};
@@ -10039,7 +10037,7 @@ class Mission
 				{
 					dataType="Trigger";
 					position[]={14566.418,12.176041,859.86902};
-					angle=3.8665991;
+					angle=3.8665981;
 					class Attributes
 					{
 						name="sectorThat";
