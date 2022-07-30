@@ -1,8 +1,4 @@
-while {true} do // loops for entire duration that mission/server is running.
-{
-    ticksBegin = round(diag_TickTime); // tick time begin.
-    if (realTickTime >= executeTime) then // check _realTickTime against executeTime.
-    {
+       diag_log(format["INFO::gameTickLoop: Executing regular computations. currentTimeStamp: %1, running every %2 seconds, iteration: %3", currentTimeStamp, executeTime, floor(currentTimeStamp / executeTime)]);
         totalTicks = totalTicks + 1;
         _totalPOVL = call REB_fnc_calculateTotalPOVL;
         _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
@@ -35,10 +31,4 @@ while {true} do // loops for entire duration that mission/server is running.
        _currentDefcon call REB_fnc_displayCurrentDefCon;
 
        realTickTime = 0; // reset the timer back to 0 to allow counting to 300 again.
-       diag_log(format["INFO::gameTickLoop: Executed regular computations. TotalTicks: %1, DEFCON: %2, _totalPOVL: %3", totalTicks, _currentDefcon, _totalPOVL]);
-    };
-    uiSleep 1; // sleep for one second.
-    ticksEnd = round(diag_TickTime); // tick time end.
-    ticksEndLoop = round(ticksEnd - ticksBegin); // get 'real' (rounded) tick time due to loop latency/calls.
-    realTickTime = realTickTime + ticksEndLoop; // increase the tick counter.
-};
+       diag_log(format["INFO::gameTickLoop: Finished. TotalTicks: %1, DEFCON: %2, _totalPOVL: %3", totalTicks, _currentDefcon, _totalPOVL]);

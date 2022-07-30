@@ -1,13 +1,11 @@
-
-
 //CONSTANTS
-executeTime = 600; // 600 seconds, aka 10 minutes. Used in fn_gameTickLoop
+executeTime = 40; // 600 seconds, aka 10 minutes. Used in fn_gameTickLoop
+currentTimestamp = round(time);
 MAX_SOLDIERS_MULTIPLIER = 4; //Default multiplier for max soldiers per sector value
 
 //PRIVATE GLOBALS
 totalTicks = 3; //Storing gameticks. Resets after AI attack.
 nextAttackedSectorName = "";
-realTickTime = 0; // declare the local variable for the loop compare.
 NUMBER_OF_ATTACK_SPAWN_POINTS = 3; //Number of spawn markers for AI per gametick attacking
 SECTOR_MANPOWER_DEFAULT_DECREMENT = 1;
 MAX_NUMBER_OF_BOAT_CREW = 5;

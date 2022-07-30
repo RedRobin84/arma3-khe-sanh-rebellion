@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=1065;
+		nextID=1066;
 	};
 	class MarkerIDProvider
 	{
@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=16327;
+		nextID=16867;
 	};
 	class Camera
 	{
@@ -197,7 +197,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=297;
+		items=298;
 		class Item0
 		{
 			dataType="Object";
@@ -10531,6 +10531,23 @@ class Mission
 			};
 			id=1063;
 			atlOffset=0.017000198;
+		};
+		class Item297
+		{
+			dataType="Trigger";
+			position[]={14946.284,32.497448,5511.3579};
+			class Attributes
+			{
+				name="gameLoopTrigger";
+				condition="((round(time) - currentTimestamp) > executeTime);";
+				onActivation="0 spawn REB_fnc_gameTickLoop;" \n "currentTimeStamp = round(time);";
+				sizeA=0;
+				sizeB=0;
+				repeatable=1;
+				triggerInterval=2;
+			};
+			id=1065;
+			type="EmptyDetector";
 		};
 	};
 	class Connections
