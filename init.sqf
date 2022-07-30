@@ -1,5 +1,5 @@
 //CONSTANTS
-executeTime = 40; // 600 seconds, aka 10 minutes. Used in fn_gameTickLoop
+executeTime = 600; // 600 seconds, aka 10 minutes. Used in fn_gameTickLoop
 currentTimestamp = round(time);
 MAX_SOLDIERS_MULTIPLIER = 4; //Default multiplier for max soldiers per sector value
 
