@@ -5,10 +5,10 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=1;
+	toggles=129;
 	class ItemIDProvider
 	{
-		nextID=1066;
+		nextID=1068;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=16867;
+		nextID=17677;
 	};
 	class Camera
 	{
-		pos[]={15116.396,102.24001,4656.6836};
-		dir[]={0.63344991,-0.62392133,0.4576717};
-		up[]={0.50573182,0.78148717,0.36539453};
-		aside[]={0.58564198,0,-0.81056988};
+		pos[]={14473.762,30.551569,2459.7358};
+		dir[]={0.7144407,-0.64866906,-0.2623032};
+		up[]={0.60892594,0.76107055,-0.22356398};
+		aside[]={-0.34465027,1.4901161e-008,-0.93873119};
 	};
 };
 binarizationWanted=0;
@@ -39,15 +39,13 @@ addons[]=
 	"wheeled_f_vietnam_02_c",
 	"boat_f_vietnam_c",
 	"static_f_vietnam_c",
-	"objects_f_vietnam_c",
-	"A3_Weapons_F",
-	"A3_Weapons_F_Enoch"
+	"objects_f_vietnam_c"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=12;
+		items=10;
 		class Item0
 		{
 			className="weapons_f_vietnam_c";
@@ -118,20 +116,6 @@ class AddonsMetaData
 			author="Savage Game Design";
 			url="https://www.arma3.com";
 		};
-		class Item10
-		{
-			className="A3_Weapons_F";
-			name="Arma 3 Alpha - Weapons and Accessories";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item11
-		{
-			className="A3_Weapons_F_Enoch";
-			name="Arma 3 Contact Platform - Weapons and Accessories";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
 	};
 };
 dlcs[]=
@@ -197,7 +181,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=298;
+		items=295;
 		class Item0
 		{
 			dataType="Object";
@@ -423,11 +407,11 @@ class Mission
 		class Item8
 		{
 			dataType="Marker";
-			position[]={14149.855,56.148998,2027.983};
+			position[]={14609.095,47.510254,3014.8298};
 			name="sectorOldDebris2";
 			type="mil_start";
 			id=106;
-			atlOffset=47.510338;
+			atlOffset=55.923508;
 		};
 		class Item9
 		{
@@ -2203,6 +2187,8 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
+				ammo=0;
+				fuel=0.61050677;
 				presence=0.50283277;
 			};
 			id=317;
@@ -2220,6 +2206,8 @@ class Mission
 			side="Empty";
 			class Attributes
 			{
+				ammo=0;
+				fuel=0.6048398;
 				presence=0.50000018;
 			};
 			id=323;
@@ -2267,17 +2255,19 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14593.328,1.3506271,923.65802};
-				angles[]={0,4.7112999,0};
+				position[]={14593.328,1.3510592,923.65802};
+				angles[]={0,4.7113066,0};
 			};
 			side="Empty";
 			class Attributes
 			{
+				ammo=0;
+				fuel=0.19114821;
 				presence=0.34986156;
 			};
 			id=359;
 			type="vn_c_boat_01_03";
-			atlOffset=0.62937331;
+			atlOffset=0.62980545;
 		};
 		class Item62
 		{
@@ -9673,64 +9663,6 @@ class Mission
 		};
 		class Item271
 		{
-			dataType="Trigger";
-			position[]={9618.1357,231.59253,6651.5532};
-			class Attributes
-			{
-				name="sectorTest";
-				text="sec";
-				condition="thisTrigger call llama_fnc_triggerSectorEvaluator;";
-				onActivation="thisTrigger call llama_fnc_triggerSectorActivation;";
-				onDeactivation="thisTrigger call llama_fnc_triggerSectorDeactivation;";
-				triggerInterval=3;
-			};
-			id=1013;
-			type="EmptyDetectorAreaR50";
-		};
-		class Item272
-		{
-			dataType="Group";
-			side="West";
-			class Entities
-			{
-				items=1;
-				class Item0
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={9603.6045,231.58105,6644.9873};
-						angles[]={0,4.735671,0};
-					};
-					side="West";
-					flags=7;
-					class Attributes
-					{
-					};
-					id=1015;
-					type="vn_b_men_sog_08";
-				};
-			};
-			class Attributes
-			{
-			};
-			id=1014;
-		};
-		class Item273
-		{
-			dataType="Marker";
-			position[]={9617.3154,231.591,6652.2139};
-			name="AdvSector_sectorTest";
-			markerType="ELLIPSE";
-			type="";
-			colorName="ColorBlue";
-			a=50;
-			b=50;
-			id=1017;
-			atlOffset=0.00024414063;
-		};
-		class Item274
-		{
 			dataType="Layer";
 			name="Advanced sector";
 			class Entities
@@ -9760,14 +9692,14 @@ class Mission
 			id=1020;
 			atlOffset=1.9073486e-006;
 		};
-		class Item275
+		class Item272
 		{
 			dataType="Layer";
 			name="Sector capture area";
 			id=1022;
 			atlOffset=-36.689999;
 		};
-		class Item276
+		class Item273
 		{
 			dataType="Layer";
 			name="Sector Area Marker";
@@ -9791,7 +9723,7 @@ class Mission
 			id=1024;
 			atlOffset=-0.00042724609;
 		};
-		class Item277
+		class Item274
 		{
 			dataType="Layer";
 			name="Advanced sector";
@@ -9818,7 +9750,7 @@ class Mission
 			};
 			id=1026;
 		};
-		class Item278
+		class Item275
 		{
 			dataType="Layer";
 			name="Sector Area Marker";
@@ -9842,7 +9774,7 @@ class Mission
 			id=1028;
 			atlOffset=0.00028991699;
 		};
-		class Item279
+		class Item276
 		{
 			dataType="Layer";
 			name="Advanced sector";
@@ -9872,7 +9804,7 @@ class Mission
 			};
 			id=1030;
 		};
-		class Item280
+		class Item277
 		{
 			dataType="Layer";
 			name="Sector Area Marker";
@@ -9895,7 +9827,7 @@ class Mission
 			};
 			id=1032;
 		};
-		class Item281
+		class Item278
 		{
 			dataType="Layer";
 			name="Advanced sector";
@@ -9924,7 +9856,7 @@ class Mission
 			};
 			id=1034;
 		};
-		class Item282
+		class Item279
 		{
 			dataType="Layer";
 			name="Sector Area Marker";
@@ -9946,7 +9878,7 @@ class Mission
 			};
 			id=1036;
 		};
-		class Item283
+		class Item280
 		{
 			dataType="Layer";
 			name="Advanced sector";
@@ -9976,7 +9908,7 @@ class Mission
 			};
 			id=1038;
 		};
-		class Item284
+		class Item281
 		{
 			dataType="Layer";
 			name="Sector Area Marker";
@@ -9999,7 +9931,7 @@ class Mission
 			};
 			id=1040;
 		};
-		class Item285
+		class Item282
 		{
 			dataType="Layer";
 			name="Advanced sector";
@@ -10029,7 +9961,7 @@ class Mission
 			};
 			id=1042;
 		};
-		class Item286
+		class Item283
 		{
 			dataType="Layer";
 			name="Sector Area Marker";
@@ -10054,7 +9986,7 @@ class Mission
 			id=1044;
 			atlOffset=0.00022125244;
 		};
-		class Item287
+		class Item284
 		{
 			dataType="Layer";
 			name="Advanced sector";
@@ -10084,7 +10016,7 @@ class Mission
 			};
 			id=1046;
 		};
-		class Item288
+		class Item285
 		{
 			dataType="Layer";
 			name="Sector Area Marker";
@@ -10107,7 +10039,7 @@ class Mission
 			};
 			id=1048;
 		};
-		class Item289
+		class Item286
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -10200,7 +10132,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item290
+		class Item287
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -10293,7 +10225,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item291
+		class Item288
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -10386,40 +10318,7 @@ class Mission
 				nAttributes=4;
 			};
 		};
-		class Item292
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={9678.291,232.32121,6635.6299};
-				angles[]={0.010664274,0,0};
-			};
-			side="Empty";
-			flags=4;
-			class Attributes
-			{
-			};
-			id=1053;
-			type="Item_ItemMap";
-			atlOffset=3.0517578e-005;
-		};
-		class Item293
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={9678.5557,231.6264,6639.1982};
-				angles[]={0.0079935296,0,0};
-			};
-			side="Empty";
-			flags=4;
-			class Attributes
-			{
-			};
-			id=1054;
-			type="Weapon_arifle_AK12_arid_f";
-		};
-		class Item294
+		class Item289
 		{
 			dataType="Layer";
 			name="Manpower marker";
@@ -10430,27 +10329,14 @@ class Mission
 				{
 					dataType="Layer";
 					name="Manpower marker_1";
-					class Entities
-					{
-						items=1;
-						class Item0
-						{
-							dataType="Marker";
-							position[]={9628.3281,231.57899,6663.686};
-							name="sectorTest_manpowerMarker";
-							type="vn_flag_vc";
-							id=1056;
-							atlOffset=-0.0011749268;
-						};
-					};
 					id=1055;
-					atlOffset=-0.0011749268;
+					atlOffset=-36.689999;
 				};
 			};
 			id=1057;
-			atlOffset=-0.0011749268;
+			atlOffset=-36.689999;
 		};
-		class Item295
+		class Item290
 		{
 			dataType="Layer";
 			name="Recruit unit trigger";
@@ -10461,37 +10347,14 @@ class Mission
 				{
 					dataType="Layer";
 					name="Recruit unit trigger_1";
-					class Entities
-					{
-						items=1;
-						class Item0
-						{
-							dataType="Trigger";
-							position[]={9614.0947,231.60457,6650.2798};
-							class Attributes
-							{
-								name="sectorTest_recruitArea";
-								onActivation="if (thisTrigger call REB_fnc_closestSectorIsOwnedByEast) then" \n "{" \n "    player addaction [""Recruit volunteer"", REB_fnc_recruitUnit];" \n "};";
-								onDeactivation="removeAllActions player;";
-								sizeA=40;
-								sizeB=40;
-								repeatable=1;
-								activationBy="ANYPLAYER";
-								triggerInterval=5;
-							};
-							id=1059;
-							type="EmptyDetector";
-							atlOffset=0.016983032;
-						};
-					};
 					id=1058;
-					atlOffset=0.016983032;
+					atlOffset=-36.689999;
 				};
 			};
 			id=1060;
-			atlOffset=0.016983032;
+			atlOffset=-36.689999;
 		};
-		class Item296
+		class Item291
 		{
 			dataType="Layer";
 			name="Recruit unit trigger";
@@ -10532,7 +10395,7 @@ class Mission
 			id=1063;
 			atlOffset=0.017000198;
 		};
-		class Item297
+		class Item292
 		{
 			dataType="Trigger";
 			position[]={14946.284,32.497448,5511.3579};
@@ -10548,6 +10411,35 @@ class Mission
 			};
 			id=1065;
 			type="EmptyDetector";
+		};
+		class Item293
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={14494.654,7.5233541,2456.4121};
+				angles[]={0,0.29166198,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+				ammo=0;
+				fuel=0.36399168;
+				presence=0.50000018;
+			};
+			id=1066;
+			type="vn_c_boat_01_01";
+			atlOffset=7.4229999;
+		};
+		class Item294
+		{
+			dataType="Marker";
+			position[]={14494.952,0.63200003,2450.874};
+			name="sectorOldDebris_coastWP";
+			text="sectorOldDebris_coastWP";
+			type="mil_end";
+			id=1067;
+			atlOffset=1.2646581;
 		};
 	};
 	class Connections

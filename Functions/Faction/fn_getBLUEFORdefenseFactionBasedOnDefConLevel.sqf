@@ -6,7 +6,7 @@ switch (_currentDefCon) do
     case DEFCON_FIVE:   { _faction = BLUEFOR_CIDG };
     case DEFCON_FOUR:   { _faction = BLUEFOR_ARVN };
     case DEFCON_THREE:  { _faction = BLUEFOR_ARVN };
-    case DEFCON_TWO:    { _faction = BLUEFOR_ARVN };
+    case DEFCON_TWO:    { _faction = BLUEFOR_SOG };
     case DEFCON_ONE:    { _faction = BLUEFOR_SOG };
     default { throw "invalid DEFCON level" };
 };

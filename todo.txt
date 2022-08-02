@@ -15,9 +15,17 @@ audio warning enemy is attacking
 after mission load, game loop stopped working - testing
 ~~move proper code to init.sqf instead of init.sqf (may be loaded in advance)~~
 ~~New volunteers message still occuring (non manpower generating POIs not excluded)~~
-Defcon in UI + warning if defcon changes only
 revealing 80 % of enemy units without making noise = show all static units
 ~~implement lamas sector control~~
 ~~add getSectorName helper~~
 ~~add name var to sector inits~~
 set initial task to take weapons from shed
+~~hide boat spawn marker~~
+remove test sector
+bug 2x recruit volunteer action in scroll menu
+optimize getAllSectors call?
+Optimize setBLUEFORunitSkillBasedOnFaction call
+~~vehicle in naxok 100 probability? No~~
+~~Do not decrement Defcon - set defcon threshold variable~~
+time lapse? After each tick + 1 hour?
+~~add boat attack type for oldDebris~~

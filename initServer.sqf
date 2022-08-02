@@ -1,3 +1,5 @@
+defconThreshold = DEFCON_SIX;
+
 0 spawn {
     diag_log("DEBUG::Starting init script...");
     call REB_fnc_initSectorVars;
@@ -15,9 +17,7 @@
     sleep 10;
     hint(INTRO_HINT);
     sleep 6;
-    _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
-    _currentDefcon call REB_fnc_updateDefConGUI;
-    _currentDefcon call REB_fnc_displayCurrentDefCon;
+    _totalPOVL call REB_fnc_calculateDefCon;
     diag_log(format["DEBUG::Init script done."]);
 };
 
@@ -82,8 +82,7 @@ distributeAttackInGroups = {
 params["_totalPOVL", "_randomOwnedSectorName", "_randomOwnedSectorPos"];
 _nrOfAttackGroups = _totalPOVL call getNumberOfAttackGroups;
 _sectorSpawnPointsArray = _randomOwnedSectorName call createSectorSpawnPointsArray;
-_currentDefConLevel = _totalPOVL call REB_fnc_calculateDefCon;
-_currentDefConLevel call REB_fnc_updateDefConGUI;
+_currentDefConLevel = defconThreshold;
 _groupFaction = _currentDefConLevel call REB_fnc_getBLUEFORattackFactionBasedOnDefConLevel;
 for "_i" from 1 to _nrOfAttackGroups do {
     _randomlySelectedSpawnPoint = selectRandom _sectorSpawnPointsArray;

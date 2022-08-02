@@ -38,6 +38,54 @@ class cfgMusic
         name = "Khe Sanh Sector Captured";
         sound[] = {"music\khe_sanh_sector_captured.ogg", db+5, 1};
     };
+
+    class KheSanhSectorLost
+    {
+        name = "Khe Sanh Sector Lost";
+        sound[] = {"music\khe_sanh_sector_lost.ogg", db+5, 1};
+    };
+
+    class KheSanhAttackBegins
+    {
+        name = "Khe Sanh Attack Begins";
+        sound[] = {"music\khe_sanh_attack_begins.ogg", db+5, 1};
+    };
+
+    class KheSanhAttackSoon
+    {
+        name = "Khe Sanh Attack Soon";
+        sound[] = {"music\khe_sanh_attac_soon.ogg", db+5, 1};
+    };
+
+    class KheSanhDefconFive
+    {
+        name = "Khe Sanh DEFCON 5";
+        sound[] = {"music\khe_sanh_defcon_5.ogg", db+5, 1};
+    };
+
+    class KheSanhDefconFour
+    {
+        name = "Khe Sanh DEFCON 4";
+        sound[] = {"music\khe_sanh_defcon_4.ogg", db+5, 1};
+    };
+
+    class KheSanhDefconThree
+    {
+        name = "Khe Sanh DEFCON 3";
+        sound[] = {"music\khe_sanh_defcon_3.ogg", db+5, 1};
+    };
+
+    class KheSanhDefconTwo
+    {
+        name = "Khe Sanh DEFCON 2";
+        sound[] = {"music\khe_sanh_defcon_2.ogg", db+5, 1};
+    };
+
+    class KheSanhDefconOne
+    {
+        name = "Khe Sanh DEFCON 1";
+        sound[] = {"music\khe_sanh_defcon_1.ogg", db+5, 1};
+    };
 };
 
 class RscTitles 

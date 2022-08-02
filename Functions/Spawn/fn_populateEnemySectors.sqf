@@ -3,8 +3,7 @@ _totalPOVL = _this;
     if (count(_enemySectors) == 0) exitwith {
         diag_log("ERROR::populateEnemySectors: No enemy sectors found. The game should be finished already.");
     };
-    _currentDefConLevel = _totalPOVL call REB_fnc_calculateDefCon;
-    _currentDefConLevel call REB_fnc_updateDefConGUI;
+    _currentDefConLevel = defconThreshold;
     _unitFaction = _currentDefConLevel call REB_fnc_getBLUEFORdefenseFactionBasedOnDefConLevel;
     _typesCount = _unitFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount;
     {
