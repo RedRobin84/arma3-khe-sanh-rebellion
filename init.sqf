@@ -1,5 +1,5 @@
 //CONSTANTS
-executeTime = 40; // 600 seconds, aka 10 minutes. Used in fn_gameTickLoop
+executeTime = 600; // 600 seconds, aka 10 minutes. Used in fn_gameTickLoop
 MAX_SOLDIERS_MULTIPLIER = 4; //Default multiplier for max soldiers per sector value
 NUMBER_OF_ATTACK_SPAWN_POINTS = 3; //Number of spawn markers for AI per gametick attacking
 DEFAULT_DEFCON = 6;

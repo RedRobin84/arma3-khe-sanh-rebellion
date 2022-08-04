@@ -31,3 +31,4 @@ Optimize setBLUEFORunitSkillBasedOnFaction call
 GUI not loaded after load (check init method that should be called on load)
 optimize enemy units loadouts (too strong loadouts) ->
 -> time lapse? After each tick + 1 hour? Add flashlights for troopers (50% chance) to enemy loadouts
+add dead bodies and US leaving helicopter in the intro
