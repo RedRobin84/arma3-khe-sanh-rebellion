@@ -1,12 +1,14 @@
 //CONSTANTS
-executeTime = 600; // 600 seconds, aka 10 minutes. Used in fn_gameTickLoop
-currentTimestamp = round(time);
+executeTime = 40; // 600 seconds, aka 10 minutes. Used in fn_gameTickLoop
 MAX_SOLDIERS_MULTIPLIER = 4; //Default multiplier for max soldiers per sector value
+NUMBER_OF_ATTACK_SPAWN_POINTS = 3; //Number of spawn markers for AI per gametick attacking
+DEFAULT_DEFCON = 6;
+SECTOR_ENEMY_UNITS_DEFAULT_INCREASE = 1;
 
 //PRIVATE GLOBALS
+currentTimestamp = round(time);
 totalTicks = 3; //Storing gameticks. Resets after AI attack.
 nextAttackedSectorName = "";
-NUMBER_OF_ATTACK_SPAWN_POINTS = 3; //Number of spawn markers for AI per gametick attacking
 SECTOR_MANPOWER_DEFAULT_DECREMENT = 1;
 MAX_NUMBER_OF_BOAT_CREW = 5;
 
@@ -45,4 +47,5 @@ MSG_TYPE_WARNING = "Warning";
 
 0 spawn {
     call REB_fnc_makeAllSystemMarkersInvisible;
+    call REB_fnc_registerOnGameLoadScripts;
 };

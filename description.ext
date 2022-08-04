@@ -7,7 +7,7 @@ class CfgNotifications {
         sound = "defaultNotification";
         soundClose = "defaultNotificationClose";
         title = "Warning";
-        duration = 10;
+        duration = 8;
     };
 
     class ScoreAdded
@@ -17,7 +17,7 @@ class CfgNotifications {
         iconText = "intel";
         priority = 0;
         difficulty[] = {"scoreTable"};
-        duration = 10;
+        duration = 8;
         sound = "scoreAdded";
     };
 

@@ -1,4 +1,5 @@
-defconThreshold = DEFCON_SIX;
+defconThreshold = DEFAULT_DEFCON;
+diag_log(format["initServer: defconThreshold = %1 (DEFAULT_DEFCON %2)", defconThreshold, DEFAULT_DEFCON]);
 
 0 spawn {
     diag_log("DEBUG::Starting init script...");
@@ -12,22 +13,13 @@ defconThreshold = DEFCON_SIX;
     call REB_fnc_initGUI;
     sleep 7;
     [INTRO_INFO_MSG, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
-    sleep 10;
+    sleep 8;
     [INTRO_INFO_MSG2, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
-    sleep 10;
+    sleep 8;
     hint(INTRO_HINT);
     sleep 6;
     _totalPOVL call REB_fnc_calculateDefCon;
     diag_log(format["DEBUG::Init script done."]);
-};
-
-//DEPRECATED
-addResumeGameLoopOnGameLoadHandler = {
-addMissionEventHandler ["Loaded", {
-    params ["_saveType"];
-    
-    0 spawn {call REB_fnc_gameTickLoop;};
-}];
 };
 
 getDefaultMaxSoldiers = {

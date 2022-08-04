@@ -3,6 +3,7 @@
         _totalPOVL = call REB_fnc_calculateTotalPOVL;
         _totalPOVL call REB_fnc_calculateDefCon;
         call REB_fnc_generateManpower;
+        sleep 10;
         if (nextAttackedSectorName != "") then {
             diag_log(format["DEBUG::gameTickLoop: Commencing attack on sector %1", nextAttackedSectorName]);
             _nextAttackedSector = missionNamespace getVariable [nextAttackedSectorName, objNull];

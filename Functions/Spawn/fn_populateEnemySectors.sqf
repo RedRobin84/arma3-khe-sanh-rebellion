@@ -30,7 +30,7 @@ _totalPOVL = _this;
             if (count(_allStaticspawnPointsinEnemySector) == 0) exitwith {
                 diag_log(format ["ERROR::populateEnemySectors: No spawn points set for sector %1", _enemySectorname]);
             };
-            _numberOfUnitsToSpawn = [_totalPOVL, _enemySector, _numberOfEnemyunitsinSector] call REB_fnc_getNumberUnitsToSpawn;
+            _numberOfUnitsToSpawn = [_enemySector, _numberOfEnemyunitsinSector] call REB_fnc_getNumberUnitsToSpawn;
             _maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
             _routeGroupName = _enemySectorName + "_route_group";
             _routeGroup = allGroups select { groupId _x == _routeGroupName };
