@@ -1,9 +1,9 @@
 diag_log("DEBUG::fn_displayCurrentDefCon: executing...");
 _defcon = _this;
-_msgAddonBasedOnDefconLevel = switch (_defcon) do {
+_msgAddonBasedOnDefconLevel = "";
+switch (_defcon) do {
     case DEFCON_SIX:  { 
         _msgAddonBasedOnDefconLevel = "CIDG is guarding our villages. Death to traitors!" ;
-        playMusic "KheSanhDefconSix";
         };
     case DEFCON_FIVE: { 
         _msgAddonBasedOnDefconLevel = "We've spotted enemy patrols around our towns!";
@@ -27,5 +27,5 @@ _msgAddonBasedOnDefconLevel = switch (_defcon) do {
         };
     default { throw "Illegal defcon type." };
 };
-_msg = format["DEFCON at level %1. %2", defcon, _msgAddonBasedOnDefconLevel];
+_msg = format["DEFCON at level %1. %2", _defcon, _msgAddonBasedOnDefconLevel];
 [_msg, MSG_TYPE_WARNING] call REB_fnc_displayMessage;

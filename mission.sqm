@@ -5,7 +5,7 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=129;
+	toggles=1;
 	class ItemIDProvider
 	{
 		nextID=1068;
@@ -16,13 +16,13 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=18217;
+		nextID=19567;
 	};
 	class Camera
 	{
 		pos[]={14473.762,30.551569,2459.7358};
-		dir[]={0.71444094,-0.64866889,-0.26230291};
-		up[]={0.60892582,0.76107073,-0.22356364};
+		dir[]={0.714441,-0.64866889,-0.26230294};
+		up[]={0.60892582,0.76107067,-0.22356364};
 		aside[]={-0.34464985,0,-0.93873131};
 	};
 };
