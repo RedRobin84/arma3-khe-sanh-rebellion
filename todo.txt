@@ -20,6 +20,7 @@ revealing 80 % of enemy units without making noise = show all static units
 ~~add name var to sector inits~~
 set initial task to take weapons from shed
 second task to chest in old debris. Make some basic hints about game
+make next task player go to shore and check if there is a boat (randomness)
 ~~hide boat spawn marker~~
 ~~remove test sector~~
 ~~bug 2x recruit volunteer action in scroll menu~~
@@ -28,7 +29,11 @@ Optimize setBLUEFORunitSkillBasedOnFaction call
 ~~vehicle in naxok 100 probability? No~~
 ~~Do not decrement Defcon - set defcon threshold variable~~
 ~~add boat attack type for oldDebris~~
-GUI not loaded after load (check init method that should be called on load)
+~~GUI not loaded after load (check init method that should be called on load)~~
 optimize enemy units loadouts (too strong loadouts) ->
 -> time lapse? After each tick + 1 hour? Add flashlights for troopers (50% chance) to enemy loadouts
 add dead bodies and US leaving helicopter in the intro
+We have report of incoming attack - sector name instead of var
+~~We have report of incoming attack - no music?~~
+~~Sector captured by enemy message + music infinite loop~~
+some troops wont respect orders? AI bug?

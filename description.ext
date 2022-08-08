@@ -59,7 +59,7 @@ class cfgMusic
     class KheSanhAttackSoon
     {
         name = "Khe Sanh Attack Soon";
-        sound[] = {"music\khe_sanh_attac_soon.ogg", db+5, 1};
+        sound[] = {"music\khe_sanh_attack_soon.ogg", db+5, 1};
     };
 
     class KheSanhDefconFive
