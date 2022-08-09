@@ -214,7 +214,7 @@ class CfgFunctions
             class closestSectorIsOwnedByEast {};
             class getAllSectors {};
             class getClosestSectorToObject {};
-            class getRandomEastSectorName {};
+            class getRandomEastSector {};
             class getSectorController {};
             class getSectorManpower {};
             class getSectorName {};

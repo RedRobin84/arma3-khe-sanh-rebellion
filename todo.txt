@@ -33,7 +33,7 @@ Optimize setBLUEFORunitSkillBasedOnFaction call
 optimize enemy units loadouts (too strong loadouts) ->
 -> time lapse? After each tick + 1 hour? Add flashlights for troopers (50% chance) to enemy loadouts
 add dead bodies and US leaving helicopter in the intro
-We have report of incoming attack - sector name instead of var
+~~We have report of incoming attack - sector name instead of var~~
 ~~We have report of incoming attack - no music?~~
 ~~Sector captured by enemy message + music infinite loop~~
-some troops wont respect orders? AI bug?
+some troops wont respect orders? AI bug? Probably too much retarded - increase AI skill

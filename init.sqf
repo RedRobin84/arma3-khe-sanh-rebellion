@@ -8,7 +8,7 @@ SECTOR_ENEMY_UNITS_DEFAULT_INCREASE = 1;
 //PRIVATE GLOBALS
 currentTimestamp = round(time);
 totalTicks = 3; //Storing gameticks. Resets after AI attack.
-nextAttackedSectorName = "";
+nextAttackedSectorVar = "";
 SECTOR_MANPOWER_DEFAULT_DECREMENT = 1;
 MAX_NUMBER_OF_BOAT_CREW = 5;
 
