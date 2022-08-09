@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=1068;
+		nextID=1072;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=19837;
+		nextID=20379;
 	};
 	class Camera
 	{
 		pos[]={14473.762,30.551569,2459.7358};
-		dir[]={0.714441,-0.64866889,-0.26230294};
-		up[]={0.60892582,0.76107067,-0.22356364};
-		aside[]={-0.34464985,0,-0.93873131};
+		dir[]={0.71444106,-0.64866877,-0.26230296};
+		up[]={0.6089257,0.76107085,-0.22356361};
+		aside[]={-0.34464985,-1.4901161e-008,-0.93873131};
 	};
 };
 binarizationWanted=0;
@@ -181,7 +181,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=295;
+		items=296;
 		class Item0
 		{
 			dataType="Object";
@@ -1565,17 +1565,6 @@ class Mission
 		{
 			dataType="Layer";
 			name="Conquer sector";
-			class Entities
-			{
-				items=1;
-				class Item0
-				{
-					dataType="Layer";
-					name="Conquer sector_1";
-					id=246;
-					atlOffset=-36.689999;
-				};
-			};
 			id=248;
 			atlOffset=-36.689999;
 		};
@@ -9540,7 +9529,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15061.731,55.709576,2861.5144};
+				position[]={15061.731,55.70956,2861.5144};
 				angles[]={0.045308746,0,6.2725215};
 			};
 			side="Empty";
@@ -9552,7 +9541,6 @@ class Mission
 			};
 			id=1001;
 			type="vn_o_ammobox_wpn_10";
-			atlOffset=1.5258789e-005;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -10440,6 +10428,35 @@ class Mission
 			type="mil_end";
 			id=1067;
 			atlOffset=1.2646581;
+		};
+		class Item295
+		{
+			dataType="Layer";
+			name="Conquer sector";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Layer";
+					name="Conquer sector_4";
+					class Entities
+					{
+						items=1;
+						class Item0
+						{
+							dataType="Layer";
+							name="Conquer sector_1";
+							id=246;
+							atlOffset=-36.689999;
+						};
+					};
+					id=1068;
+					atlOffset=-36.689999;
+				};
+			};
+			id=1070;
+			atlOffset=-36.689999;
 		};
 	};
 	class Connections

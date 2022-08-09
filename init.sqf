@@ -11,6 +11,8 @@ totalTicks = 3; //Storing gameticks. Resets after AI attack.
 nextAttackedSectorVar = "";
 SECTOR_MANPOWER_DEFAULT_DECREMENT = 1;
 MAX_NUMBER_OF_BOAT_CREW = 5;
+CONTAINER_GENERATOR_FLAG = "generated";
+CONTAINER_GENERATOR_FLAG_DEFAULT_VALUE = false;
 
 //STRING CONSTANTS
 INTRO_INFO_MSG = "Capture all settlements to win. The main objective is Nabo Camp military outpost.";
@@ -18,7 +20,6 @@ INTRO_INFO_MSG2 = "Begin with capturing ruins to the north-east.";
 INTRO_HINT = "You may find some equipment in your shack.";
 
 MANPOWER_VAR_NAME = "manpower";
-CONTAINER_GENERATOR_FLAG = "generated";
 SECTOR_INVENTORY_VAR_SUFFIX = "_inventory";
 
 //BLUEFOR FACTIONS PREFIXES

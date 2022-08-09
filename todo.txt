@@ -37,3 +37,4 @@ add dead bodies and US leaving helicopter in the intro
 ~~We have report of incoming attack - no music?~~
 ~~Sector captured by enemy message + music infinite loop~~
 some troops wont respect orders? AI bug? Probably too much retarded - increase AI skill
+add finishing waypoints for villagers
