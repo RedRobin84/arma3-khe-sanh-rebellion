@@ -24,7 +24,6 @@ switch (true) do {
 };
 diag_log(format["DEBUG::calculateDefCon: _calculatedDefcon = %1", _calculatedDefcon]);
 
-
 if (defconThreshold > _calculatedDefcon) then {
     diag_log(format["DEBUG::calculateDefCon: new defcon threshold = %1, advanced from %2", _calculatedDefcon, defconThreshold]);
     defconThreshold = _calculatedDefcon;

@@ -119,8 +119,7 @@ getNumberOfAttackGroups = {
 doLandAttack = { 
 params["_grp", "_randomOwnedSectorPos"];
 diag_log(format["DEBUG::doLandAttack: With group: %1", _grp]);
-captureWP = _grp addWaypoint [_randomOwnedSectorPos, 0];
-captureWP setWaypointType "GUARD";
+[_grp, _randomOwnedSectorPos] call BIS_fnc_taskDefend;
 };
 
 doNavalAttack = { 
@@ -137,8 +136,7 @@ if (_coastWaypointPos call markerNotExist) then {
 };
 unloadWP = _grp addWaypoint [_coastWaypointPos, 0];
 unloadWP setWaypointType "GETOUT";
-captureWP = _grp addWaypoint [_randomOwnedSectorPos, 0];
-captureWP setWaypointType "GUARD";
+[_grp, _randomOwnedSectorPos] call BIS_fnc_taskDefend;
 };
 
 createEnemyInfantryGroup = {
