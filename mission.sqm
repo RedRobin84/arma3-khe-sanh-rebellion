@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=21195;
+		nextID=21467;
 	};
 	class Camera
 	{
@@ -181,7 +181,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=297;
+		items=296;
 		class Item0
 		{
 			dataType="Object";
@@ -10458,34 +10458,6 @@ class Mission
 			};
 			id=1070;
 			atlOffset=-36.689999;
-		};
-		class Item296
-		{
-			dataType="Group";
-			side="East";
-			class Entities
-			{
-				items=1;
-				class Item0
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={15052.943,56.459354,2848.7986};
-					};
-					side="East";
-					flags=7;
-					class Attributes
-					{
-					};
-					id=1074;
-					type="vn_o_men_nva_43";
-				};
-			};
-			class Attributes
-			{
-			};
-			id=1073;
 		};
 	};
 };

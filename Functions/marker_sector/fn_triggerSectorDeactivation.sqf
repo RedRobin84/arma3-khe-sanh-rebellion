@@ -93,7 +93,7 @@ if(_enemyCount > 0) then
     };
     if((_opfor >= _indfor) && (_opfor > _blufor)) then 
     {
-        call checkIfAllSectorsOwnedByEast;
+        call REB_fnc_checkIfAllSectorsOwnedByEast;
         _manpowerMarker setMarkerAlpha 100;
         [_trigger, "ColorRed"] call REB_fnc_setSectorMarkerColor;
         [_trigger, east] call REB_fnc_setSectorController;
