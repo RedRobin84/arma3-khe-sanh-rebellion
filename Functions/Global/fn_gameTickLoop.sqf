@@ -26,7 +26,7 @@
             diag_log(format["DEBUG::gameTickLoop: Generating sector for attack in next game tick: %1", nextAttackedSectorVar]);
             if (nextAttackedSectorVar != "") then {
 
-                _msg = format["We have a report of incoming attack on sector %1.", nextAttackedSectorVar];
+                _msg = format["We have a report of incoming attack on sector %1.", _nextAttackedSectorName];
                 [_msg, MSG_TYPE_WARNING] call REB_fnc_displayMessage;
                 playMusic "KheSanhAttackSoon";
                 totalTicks = 0;
