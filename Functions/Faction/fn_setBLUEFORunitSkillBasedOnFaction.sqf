@@ -69,6 +69,17 @@ switch (_faction) do
     _unit setSkill ["general", 0.9];
     _skillType = "SpecOps";
     };
+    case CIVILIAN_TYPE:  { // Rebels low skill
+    _unit setSkill ["aimingspeed", 0.1];
+    _unit setSkill ["spotdistance", 0.1];
+    _unit setSkill ["aimingaccuracy", 0.05];
+    _unit setSkill ["aimingshake", 0.05];
+    _unit setSkill ["spottime", 0.2];
+    _unit setSkill ["spotdistance", 0.4];
+    _unit setSkill ["commanding", 0.4];
+    _unit setSkill ["general", 0.3];
+    _skillType = "Rebel low skill";
+    };
     default { throw "invalid BLUEFOR faction type" };
 };
 diag_log(format["DEBUG::fn_setBLUEFORunitSkillBasedOnFaction: unit: %1, skill: %2, faction: %3", _unit, _skillType, _faction]);

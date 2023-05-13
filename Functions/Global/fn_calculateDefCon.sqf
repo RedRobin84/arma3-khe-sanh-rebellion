@@ -1,24 +1,33 @@
 diag_log("DEBUG::calculateDefCon: executing...");
 _totalPOVL = _this;
-if (_totalPOVL < 2) exitWith {
-    //RETURN
-    DEFCON_SIX //enum located in init.sqf
+_calculatedDefcon = 0; // located in init.sqf
+
+switch (true) do {
+    case (_totalPOVL < 2): { 
+        _calculatedDefcon = DEFCON_SIX;
+    };
+    case (_totalPOVL < 4): {
+         _calculatedDefcon = DEFCON_FIVE;
+    };
+    case (_totalPOVL <= 6): {
+        _calculatedDefcon = DEFCON_FOUR;
+    };
+    case (_totalPOVL <= 8): {
+        _calculatedDefcon = DEFCON_THREE;
+    };
+    case (_totalPOVL <= 10): {
+        _calculatedDefcon = DEFCON_TWO;
+    };
+    default { 
+        _calculatedDefcon = DEFCON_ONE;
+    };
 };
-if (_totalPOVL < 4) exitWith {
-    //RETURN
-    DEFCON_FIVE
+diag_log(format["DEBUG::calculateDefCon: _calculatedDefcon = %1", _calculatedDefcon]);
+
+if (defconThreshold > _calculatedDefcon) then {
+    diag_log(format["DEBUG::calculateDefCon: new defcon threshold = %1, advanced from %2", _calculatedDefcon, defconThreshold]);
+    defconThreshold = _calculatedDefcon;
+    defconThreshold call REB_fnc_updateDefConGUI;
+    defconThreshold call REB_fnc_displayCurrentDefCon;
 };
-if (_totalPOVL < 6) exitWith {
-    //RETURN
-    DEFCON_FOUR
-};
-if (_totalPOVL < 8) exitWith {
-    //RETURN
-    DEFCON_THREE
-};
-if (_totalPOVL < 10) exitWith {
-    //RETURN
-    DEFCON_TWO
-};
-//ELSE RETURN
-DEFCON_ONE
+//VOID

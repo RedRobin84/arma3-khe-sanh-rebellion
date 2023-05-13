@@ -3,7 +3,7 @@ _villager setVariable["homeSector", _sectorVar];
 _unitType = (CIVILIAN_TYPE + (CIVILIAN_TYPES_COUNT call REB_fnc_getRandomNumberWithLessThanTenZeroPrefix));
 _unitLoadout = getUnitLoadout(_unitType);
 _villager setUnitLoadout (_unitLoadout);
-diag_log(format["DEBUG::fn_villagerInit: Created villager %1 with homeSector %2 and loadout %3", _villager, _unitType, _unitLoadout]);
+diag_log(format["DEBUG::fn_villagerInit: Created villager type %1 with homeSector %2", _unitType, _sectorVar]);
 _villager addEventHandler ["Killed", { 
     _killed = _this select 0; 
     _killer = _this select 1;

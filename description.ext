@@ -1,3 +1,8 @@
+briefingName = "Khe Sanh Rebellion";
+overviewText = "Dynamic single player sector control mission for Arma 3 (SOG Prairie Fire required)";
+author = "RedRobin84";
+
+
 class CfgNotifications {
 
     class Warning {
@@ -7,7 +12,7 @@ class CfgNotifications {
         sound = "defaultNotification";
         soundClose = "defaultNotificationClose";
         title = "Warning";
-        duration = 10;
+        duration = 8;
     };
 
     class ScoreAdded
@@ -17,7 +22,7 @@ class CfgNotifications {
         iconText = "intel";
         priority = 0;
         difficulty[] = {"scoreTable"};
-        duration = 10;
+        duration = 8;
         sound = "scoreAdded";
     };
 
@@ -37,6 +42,54 @@ class cfgMusic
     {
         name = "Khe Sanh Sector Captured";
         sound[] = {"music\khe_sanh_sector_captured.ogg", db+5, 1};
+    };
+
+    class KheSanhSectorLost
+    {
+        name = "Khe Sanh Sector Lost";
+        sound[] = {"music\khe_sanh_sector_lost.ogg", db+5, 1};
+    };
+
+    class KheSanhAttackBegins
+    {
+        name = "Khe Sanh Attack Begins";
+        sound[] = {"music\khe_sanh_attack_begins.ogg", db+5, 1};
+    };
+
+    class KheSanhAttackSoon
+    {
+        name = "Khe Sanh Attack Soon";
+        sound[] = {"music\khe_sanh_attack_soon.ogg", db+5, 1};
+    };
+
+    class KheSanhDefconFive
+    {
+        name = "Khe Sanh DEFCON 5";
+        sound[] = {"music\khe_sanh_defcon_5.ogg", db+5, 1};
+    };
+
+    class KheSanhDefconFour
+    {
+        name = "Khe Sanh DEFCON 4";
+        sound[] = {"music\khe_sanh_defcon_4.ogg", db+5, 1};
+    };
+
+    class KheSanhDefconThree
+    {
+        name = "Khe Sanh DEFCON 3";
+        sound[] = {"music\khe_sanh_defcon_3.ogg", db+5, 1};
+    };
+
+    class KheSanhDefconTwo
+    {
+        name = "Khe Sanh DEFCON 2";
+        sound[] = {"music\khe_sanh_defcon_2.ogg", db+5, 1};
+    };
+
+    class KheSanhDefconOne
+    {
+        name = "Khe Sanh DEFCON 1";
+        sound[] = {"music\khe_sanh_defcon_1.ogg", db+5, 1};
     };
 };
 
@@ -152,6 +205,7 @@ class CfgFunctions
         class Init
         {
             class initSectorVars {};
+            class registerOnGameLoadScripts {};
             class villagerInit {};
         };
 
@@ -160,7 +214,7 @@ class CfgFunctions
             class closestSectorIsOwnedByEast {};
             class getAllSectors {};
             class getClosestSectorToObject {};
-            class getRandomEastSectorName {};
+            class getRandomEastSector {};
             class getSectorController {};
             class getSectorManpower {};
             class getSectorName {};
@@ -185,6 +239,7 @@ class CfgFunctions
         };
         */
         class Spawn {
+            class getNumberUnitsToSpawn {};
             class populateEnemySectors {};
             class recruitUnit {};
         };

@@ -1,6 +1,8 @@
+defconThreshold = DEFAULT_DEFCON;
+diag_log(format["initServer: defconThreshold = %1 (DEFAULT_DEFCON %2)", defconThreshold, DEFAULT_DEFCON]);
+
 0 spawn {
     diag_log("DEBUG::Starting init script...");
-    0 spawn {call REB_fnc_gameTickLoop;};
     call REB_fnc_initSectorVars;
     sleep 2;
     playMusic "KheSanhIntro";
@@ -11,33 +13,13 @@
     call REB_fnc_initGUI;
     sleep 7;
     [INTRO_INFO_MSG, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
-    sleep 10;
+    sleep 8;
     [INTRO_INFO_MSG2, MSG_TYPE_SCORE_ADDED] call REB_fnc_displayMessage;
-    sleep 10;
+    sleep 8;
     hint(INTRO_HINT);
     sleep 6;
-    _currentDefcon = _totalPOVL call REB_fnc_calculateDefCon;
-    _currentDefcon call REB_fnc_updateDefConGUI;
-    _currentDefcon call REB_fnc_displayCurrentDefCon;
+    _totalPOVL call REB_fnc_calculateDefCon;
     diag_log(format["DEBUG::Init script done."]);
-};
-
-//DEPRECATED
-addResumeGameLoopOnGameLoadHandler = {
-addMissionEventHandler ["Loaded", {
-    params ["_saveType"];
-    
-    0 spawn {call REB_fnc_gameTickLoop;};
-}];
-};
-
-getNumberUnitsToSpawn = {
-params["_enemySector", "_numberOfEnemyunitsinSector"];
-_sectorValue = _enemySector call REB_fnc_getSectorValue;
-_minEnemySectorunits = _enemySector getVariable["min", _sectorValue];
-_difference = _minEnemySectorunits - _numberOfEnemyunitsinSector;
-//RETURN
-if (_difference > 0) then [{_difference}, {0}];
 };
 
 getDefaultMaxSoldiers = {
@@ -92,14 +74,13 @@ distributeAttackInGroups = {
 params["_totalPOVL", "_randomOwnedSectorName", "_randomOwnedSectorPos"];
 _nrOfAttackGroups = _totalPOVL call getNumberOfAttackGroups;
 _sectorSpawnPointsArray = _randomOwnedSectorName call createSectorSpawnPointsArray;
+_currentDefConLevel = defconThreshold;
+_groupFaction = _currentDefConLevel call REB_fnc_getBLUEFORattackFactionBasedOnDefConLevel;
 for "_i" from 1 to _nrOfAttackGroups do {
     _randomlySelectedSpawnPoint = selectRandom _sectorSpawnPointsArray;
     _randomSpawnPointNamePos = getMarkerPos(_randomlySelectedSpawnPoint);
     diag_log(format["DEBUG::distributeAttackInGroups: Random spawn point selected: %1 at position %2", _randomlySelectedSpawnPoint, _randomSpawnPointNamePos]);
     _soldiersPerGroup = ceil(_totalPOVL / _nrOfAttackGroups);
-    _currentDefConLevel = _totalPOVL call REB_fnc_calculateDefCon;
-    _currentDefConLevel call REB_fnc_updateDefConGUI;
-    _groupFaction = _currentDefConLevel call REB_fnc_getBLUEFORattackFactionBasedOnDefConLevel;
     if (surfaceIsWater _randomSpawnPointNamePos) then {
        _grp = [_randomSpawnPointNamePos, _soldiersPerGroup, _groupFaction] call createEnemyInfantryBoatGroup;
       [_grp, _randomOwnedSectorName, _randomOwnedSectorPos] call doNavalAttack;
@@ -138,8 +119,7 @@ getNumberOfAttackGroups = {
 doLandAttack = { 
 params["_grp", "_randomOwnedSectorPos"];
 diag_log(format["DEBUG::doLandAttack: With group: %1", _grp]);
-captureWP = _grp addWaypoint [_randomOwnedSectorPos, 0];
-captureWP setWaypointType "GUARD";
+[_grp, _randomOwnedSectorPos] call BIS_fnc_taskDefend;
 };
 
 doNavalAttack = { 
@@ -156,15 +136,15 @@ if (_coastWaypointPos call markerNotExist) then {
 };
 unloadWP = _grp addWaypoint [_coastWaypointPos, 0];
 unloadWP setWaypointType "GETOUT";
-captureWP = _grp addWaypoint [_randomOwnedSectorPos, 0];
-captureWP setWaypointType "GUARD";
+[_grp, _randomOwnedSectorPos] call BIS_fnc_taskDefend;
 };
 
 createEnemyInfantryGroup = {
     params["_randomSpawnPointNamePos", "_soldiersPerGroup", "_groupFaction"];
     _grp = createGroup [west,true];
+    _typesCount = (_groupFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount);
     for "_i" from 1 to _soldiersPerGroup do {
-        _unitType = (_groupFaction + ((_groupFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount) call REB_fnc_getRandomNumberWithLessThanTenZeroPrefix));
+        _unitType = (_groupFaction + (_typesCount call REB_fnc_getRandomNumberWithLessThanTenZeroPrefix));
         _unitType createUnit [_randomSpawnPointNamePos, _grp, "[this, _groupFaction] call REB_fnc_setBLUEFORunitSkillBasedOnFaction;"];
     };
     _grp;
@@ -174,8 +154,9 @@ createEnemyInfantryBoatGroup = {
     params["_randomSpawnPointNamePos", "_soldiersPerGroup", "_groupFaction"];
     _grp = createGroup [west,true];
     _boatCrewNr = if (_soldiersPerGroup > MAX_NUMBER_OF_BOAT_CREW) then [{MAX_NUMBER_OF_BOAT_CREW},{_soldiersPerGroup}];
+    _typesCount = (_groupFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount);
     for "_i" from 1 to _boatCrewNr do {
-        _unitType = (_groupFaction + ((_groupFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount) call REB_fnc_getRandomNumberWithLessThanTenZeroPrefix));
+        _unitType = (_groupFaction + (_typesCount call REB_fnc_getRandomNumberWithLessThanTenZeroPrefix));
         _unitType createUnit [_randomSpawnPointNamePos, _grp, "[this, _groupFaction] call REB_fnc_setBLUEFORunitSkillBasedOnFaction"];
     };
     _grp;

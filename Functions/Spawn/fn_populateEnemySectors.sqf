@@ -3,6 +3,9 @@ _totalPOVL = _this;
     if (count(_enemySectors) == 0) exitwith {
         diag_log("ERROR::populateEnemySectors: No enemy sectors found. The game should be finished already.");
     };
+    _currentDefConLevel = defconThreshold;
+    _unitFaction = _currentDefConLevel call REB_fnc_getBLUEFORdefenseFactionBasedOnDefConLevel;
+    _typesCount = _unitFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount;
     {
         _enemySector = _x;
         _enemySectorname = _enemySector call BIS_fnc_objectVar;
@@ -27,10 +30,8 @@ _totalPOVL = _this;
             if (count(_allStaticspawnPointsinEnemySector) == 0) exitwith {
                 diag_log(format ["ERROR::populateEnemySectors: No spawn points set for sector %1", _enemySectorname]);
             };
-            _numberOfUnitsToSpawn = [_enemySector, _numberOfEnemyunitsinSector] call getNumberUnitsToSpawn;
+            _numberOfUnitsToSpawn = [_enemySector, _numberOfEnemyunitsinSector] call REB_fnc_getNumberUnitsToSpawn;
             _maxEnemySectorStaticUnits = _enemySector getVariable["maxStatic", 0];
-            _currentDefConLevel = _totalPOVL call REB_fnc_calculateDefCon;
-            _currentDefConLevel call REB_fnc_updateDefConGUI;
             _routeGroupName = _enemySectorName + "_route_group";
             _routeGroup = allGroups select { groupId _x == _routeGroupName };
             _routeGroupNumber = count(_routeGroup);
@@ -53,7 +54,6 @@ _totalPOVL = _this;
             } else {
                 _routeGroup = _routeGroup select 0;
             };
-            _unitFaction = _currentDefConLevel call REB_fnc_getBLUEFORdefenseFactionBasedOnDefConLevel;
             _i = 0;
             while {_i  < _numberOfUnitsToSpawn} do {
                 _allUnoccupiedStaticspawnPointsinEnemySector = [_allStaticspawnPointsinEnemySector, {
@@ -61,7 +61,7 @@ _totalPOVL = _this;
                 }] call BIS_fnc_conditionalselect;
                 _unoccupiedStaticUnitNumber = count(_allUnoccupiedStaticspawnPointsinEnemySector);
                 _occupiedStaticUnitNumber = _numberOfEnemyunitsinSector - _unoccupiedStaticUnitNumber;
-                _unitType = (_unitFaction + ((_unitFaction call REB_fnc_getBLUEFORfactionSoldierTypesCount) call REB_fnc_getRandomNumberWithLessThanTenZeroPrefix));
+                _unitType = (_unitFaction + (_typesCount call REB_fnc_getRandomNumberWithLessThanTenZeroPrefix));
                 if (_maxEnemySectorStaticUnits > _occupiedStaticUnitNumber && _unoccupiedStaticUnitNumber != 0) then {
                     _chosenspawnPoint = selectRandom _allUnoccupiedStaticspawnPointsinEnemySector;
                     _chosenspawnPointPos = getmarkerPos(_chosenspawnPoint);
